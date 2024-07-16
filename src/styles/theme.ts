@@ -25,7 +25,7 @@ const FONT = ({ font, weight, size, lineHeight }: Font): string => {
   return `
         font-family : "${font}";
         font-weight : ${weight};
-        font-size : ${size}rem;
+        font-size : ${size}px;
         line-height : ${lineHeight}%;
         `
 }
@@ -34,14 +34,14 @@ export const fonts = {
   // 제목
   title1: FONT({
     font: 'SUITE-Regular',
-    weight: 700,
-    size: 2.4,
+    weight: 900,
+    size: 24,
     lineHeight: 32,
   }),
   title2: FONT({
     font: 'SUITE-Regular',
     weight: 700,
-    size: 2.0,
+    size: 20,
     lineHeight: 28,
   }),
 
@@ -49,37 +49,37 @@ export const fonts = {
   body1: FONT({
     font: 'SUITE-Regular',
     weight: 700,
-    size: 2.0,
+    size: 20,
     lineHeight: 25,
   }),
   body2: FONT({
     font: 'SUITE-Regular',
     weight: 500,
-    size: 1.5,
+    size: 15,
     lineHeight: 26,
   }),
   body3: FONT({
     font: 'SUITE-Regular',
     weight: 500,
-    size: 1.4,
+    size: 14,
     lineHeight: 24,
   }),
   body4: FONT({
     font: 'SUITE-Regular',
     weight: 700,
-    size: 1.3,
+    size: 13,
     lineHeight: 22,
   }),
   body5: FONT({
     font: 'SUITE-Regular',
     weight: 700,
-    size: 1.2,
+    size: 12,
     lineHeight: 20,
   }),
   body6: FONT({
     font: 'SUITE-Regular',
     weight: 500,
-    size: 1.1,
+    size: 11,
     lineHeight: 18,
   }),
 }
