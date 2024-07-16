@@ -3,8 +3,15 @@ import { DefaultTheme } from 'styled-components'
 export const colors = {
   orange: '#f87f01',
   yellow: '#fdd100',
+  lightYellow: '#FFEE9C',
   mintGreen: '#e7f0ed',
   navy: '#435969',
+  gray1: '#767676',
+  gray2: '#FFEE9C',
+  idGray: '#9A9A9A',
+  lightGray: '#E7E7E7',
+  black: '#000000',
+  white: '#FFFFFF',
 }
 
 interface Font {
