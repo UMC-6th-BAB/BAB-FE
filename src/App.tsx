@@ -1,7 +1,8 @@
 import './App.css'
 
-import styled from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import GlobalStyle from './styles/GlobalStyle'
+import { theme } from './styles/theme'
 
 const Container = styled.div`
   display: flex;
@@ -15,8 +16,10 @@ const Container = styled.div`
 export default function App() {
   return (
     <>
-      <GlobalStyle />
-      <Container>화면 적용</Container>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Container>화면 적용</Container>
+      </ThemeProvider>
     </>
   )
 }
