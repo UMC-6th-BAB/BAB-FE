@@ -1,8 +1,10 @@
-import './App.css'
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import styled, { ThemeProvider } from 'styled-components'
 import GlobalStyle from './styles/GlobalStyle'
 import { theme } from './styles/theme'
+import ManagerPage from './pages/ManagerPage/ManagerPage'
+import Footer from './components/Footer/Footer'
+import StatusBar from './components/StatusBar/StatusBar'
 
 const Container = styled.div`
   display: flex;
@@ -15,11 +17,17 @@ const Container = styled.div`
 
 export default function App() {
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <Container>화면 적용</Container>
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Router>
+        <StatusBar />
+        <Routes>
+          <Route path="/" element={<Container>임시 메인 페이지</Container>} />
+          <Route path="/manager" element={<ManagerPage />} />
+        </Routes>
+        //
+        <Footer />
+      </Router>
+    </ThemeProvider>
   )
 }
