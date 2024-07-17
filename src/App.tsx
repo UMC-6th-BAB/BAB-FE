@@ -25,7 +25,6 @@ export default function App() {
           <Route path="/" element={<Container>임시 메인 페이지</Container>} />
           <Route path="/manager" element={<ManagerPage />} />
         </Routes>
-        //
         <Footer />
       </Router>
     </ThemeProvider>
