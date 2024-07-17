@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     flex-direction: column;
     max-width: 400px;
-    background-color: #f9faff;
+    background-color: #F8F8F8;
     border-color: black;
     align-items: center;
   }
