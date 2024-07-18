@@ -1,6 +1,9 @@
+import RegistrationPrompt from '../../components/RegistrationPrompt'
+import registerInfoStore from '../../stores/managerRegisterInfoStore'
 import {
   ManagerPageContainer,
   Title,
+  TitleText,
   Card,
   CardImage,
   CardTitle,
@@ -8,17 +11,28 @@ import {
   AccountInfo,
   AccountDetail,
   AccountActions,
+  NotifyIcon,
 } from './ManagerPage.style'
 import icon from '@assets/icons/등록증 아이콘.png'
+import bellIcon from '@assets/bell.png'
 
 export default function ManagerPage() {
+  const { isRegistered, setIsRegistered } = registerInfoStore()
   return (
     <ManagerPageContainer>
-      <Title>마이페이지</Title>
+      <Title>
+        <TitleText>마이페이지</TitleText>
+        <NotifyIcon src={bellIcon} />
+      </Title>
       <Card>
-        <CardTitle>정준영 사장님! 사업자 등록증을 등록해주세요.</CardTitle>
+        <CardTitle>
+          <RegistrationPrompt isRegistered={isRegistered} />
+        </CardTitle>
         <CardImage src={icon} alt="등록증 아이콘" />
-        <Button>가게 등록</Button>
+        <Button onClick={() => setIsRegistered(!isRegistered)}>
+          {isRegistered ? '정보 등록' : '가게 등록'}
+        </Button>
+        {/* 가게 등록 버튼 누르면 나중애 라우팅 해주기*/}
       </Card>
       <AccountInfo>
         <AccountDetail className="title">계정</AccountDetail>
