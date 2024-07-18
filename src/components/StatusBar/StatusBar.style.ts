@@ -7,7 +7,7 @@ export const StatusBarContainer = styled.div`
   width: 100%;
   max-width: 400px;
   height: 35px;
-  padding: 10px 10px;
+  padding: 10px 15px;
   box-sizing: border-box;
   position: absolute;
   top: 0;

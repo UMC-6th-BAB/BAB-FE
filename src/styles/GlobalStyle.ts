@@ -20,7 +20,6 @@ const GlobalStyle = createGlobalStyle`
     background-color: #F8F8F8;
     border-color: black;
     align-items: center;
-    padding-top: 24px; /* 상태바 높이만큼 상단 여백 추가 */
   }
 `
 
