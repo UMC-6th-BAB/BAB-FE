@@ -1,15 +1,19 @@
+import { BusinessInfo } from '../mocks/businessInfo'
+
 interface RegistrationPromptProps {
   isRegistered: boolean
+  businessData: BusinessInfo | null
 }
 
 export default function RegistrationPrompt({
   isRegistered,
+  businessData,
 }: RegistrationPromptProps) {
   return (
     <>
       <span>고서현 사장님!</span>
       <br />
-      {isRegistered ? (
+      {isRegistered && businessData ? (
         <>
           <span>심사가 완료되었습니다</span>
           <br />
