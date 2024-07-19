@@ -14,6 +14,7 @@ import {
   NotifyIcon,
 } from './ManagerPage.style'
 import icon from '@assets/icons/등록증 아이콘.png'
+import menuIcon from '@assets/icons/메뉴아이콘.png'
 import bellIcon from '@assets/bell.png'
 
 export default function ManagerPage() {
@@ -28,9 +29,13 @@ export default function ManagerPage() {
         <CardTitle>
           <RegistrationPrompt isRegistered={isRegistered} />
         </CardTitle>
-        <CardImage src={icon} alt="등록증 아이콘" />
+        {isRegistered ? (
+          <CardImage src={menuIcon} alt="등록증 아이콘" />
+        ) : (
+          <CardImage src={icon} alt="등록증 아이콘" />
+        )}
         <Button onClick={() => setIsRegistered(!isRegistered)}>
-          {isRegistered ? '정보 등록' : '가게 등록'}
+          {isRegistered ? '가게 등록' : '정보 등록'}
         </Button>
         {/* 가게 등록 버튼 누르면 나중애 라우팅 해주기*/}
       </Card>
