@@ -21,16 +21,8 @@ export const Title = styled.div`
     margin-top: 30px;
 `;
 
-export const SignupButton = styled.button`
-    border-radius: 20px;
-    border: none;
+export const SignupButton = styled.img`
     width: 311px;
-    height: 53px;
     margin-top: 250px;
-    font-size: 15px;
-    font-weight: 500;
-    color: #424242;
-    background-color: #F7E600;
     cursor: pointer;
-    transition: border-color 0.25s;
 `;

@@ -1,12 +1,18 @@
 import React from 'react';
+import {useNavigate} from 'react-router-dom'
 import { LogoContainer, Logo, Title, SignupButton } from './Signup.style';
+import {Kakao_Auth_Url} from '../../components/OAuthUrl'
 
 export const Signup: React.FC = () => {
+
     return (
         <LogoContainer>
             <Logo src="src/assets/bablogo.png" alt="Logo" />
             <Title>밥이득</Title>
-            <SignupButton>카카오톡으로 간편 가입</SignupButton>
+            <a href = {Kakao_Auth_Url}>
+            <SignupButton 
+                src="src/assets/kakao_login_large_wide.png"/>
+            </a>
         </LogoContainer>
     );
 };
