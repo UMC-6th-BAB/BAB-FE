@@ -1,4 +1,7 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
+import {Splash} from './pages/Splash/Splash'
+import {MemberType} from './pages/MemberType/MemberType'
 
 import styled, { ThemeProvider } from 'styled-components'
 import GlobalStyle from './styles/GlobalStyle'
@@ -15,11 +18,14 @@ const Container = styled.div`
 
 export default function App() {
   return (
-    <>
+    <BrowserRouter>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Container>화면 적용</Container>
-      </ThemeProvider>
-    </>
+        <Routes>
+          <Route path="/" element={<Splash/>} />
+          <Route path="/membertype" element={<MemberType/>} />
+        </Routes>
+        </ThemeProvider>
+    </BrowserRouter>
   )
 }
