@@ -13,12 +13,12 @@ export const SplashContainer = styled.div`
 `;
 
 export const Logo = styled.img`
-    width: 120px;
+    width: 130px;
 `;
 
 export const Title = styled.p`
-    font-family: 'SUN SUITE';
     font-size: 50px;
     font-weight: 900;
     letter-spacing: 68;
+    margin-top: 30px;
 `;
