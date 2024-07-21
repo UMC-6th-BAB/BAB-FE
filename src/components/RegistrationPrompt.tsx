@@ -1,8 +1,8 @@
-import { BusinessInfo } from '../mocks/businessInfo'
+import { BusinessInfo } from '@mocks/businessInfo'
 
 interface RegistrationPromptProps {
   isRegistered: boolean
-  businessData: BusinessInfo | null
+  businessData: BusinessInfo[] | null
 }
 
 export default function RegistrationPrompt({

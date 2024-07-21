@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import styled, { ThemeProvider } from 'styled-components'
-import GlobalStyle from './styles/GlobalStyle'
-import { theme } from './styles/theme'
-import ManagerPage from './pages/ManagerPage/ManagerPage'
-import Footer from './components/Footer/Footer'
-import StatusBar from './components/StatusBar/StatusBar'
+import GlobalStyle from '@styles/GlobalStyle'
+import { theme } from '@styles/theme'
+import ManagerPage from '@pages/ManagerPage/ManagerPage'
+import Footer from '@components/Footer/Footer'
+import StatusBar from '@components/StatusBar/StatusBar'
 
 const Container = styled.div`
   display: flex;

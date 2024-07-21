@@ -8,6 +8,7 @@
       "@hooks/*": ["hooks/*"],
       "@mocks/*": ["mocks/*"],
       "@pages/*": ["pages/*"],
+      "@stores/*": ["src/stores/*"],
       "@styles/*": ["styles/*"],
       "@icons/*": ["assets/icons/*"]
     }

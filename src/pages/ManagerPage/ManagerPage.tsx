@@ -1,5 +1,5 @@
-import RegistrationPrompt from '../../components/RegistrationPrompt'
-import registerInfoStore from '../../stores/managerRegisterInfoStore'
+import RegistrationPrompt from '@components/RegistrationPrompt'
+import registerInfoStore from '@stores/managerRegisterInfoStore'
 import {
   ManagerPageContainer,
   Title,
@@ -16,12 +16,15 @@ import {
 import icon from '@assets/icons/등록증 아이콘.png'
 import menuIcon from '@assets/icons/메뉴아이콘.png'
 import bellIcon from '@assets/bell.png'
-import { BusinessInfo, businessInfo } from '../../mocks/businessInfo'
+import useModalStore from '@stores/modalStore'
+import { BusinessInfo, businessInfo } from '@mocks/businessInfo'
 import { useEffect, useState } from 'react'
+import RegisterModal from '@components/Modal/RegisterModal'
 
 export default function ManagerPage() {
   const { isRegistered, setIsRegistered } = registerInfoStore()
-  const [businessData, setBusinessData] = useState<BusinessInfo | null>(null)
+  const [businessData, setBusinessData] = useState<BusinessInfo[] | null>(null)
+  const { openModal, closeModal, isModalOpen } = useModalStore()
 
   useEffect(() => {
     if (isRegistered) {
@@ -30,6 +33,14 @@ export default function ManagerPage() {
       setBusinessData(null)
     }
   }, [isRegistered])
+
+  const handleRegisterClick = (): void => {
+    if (isRegistered && businessData) {
+      openModal()
+    } else {
+      setIsRegistered(true)
+    }
+  }
 
   return (
     <ManagerPageContainer>
@@ -49,7 +60,7 @@ export default function ManagerPage() {
         ) : (
           <CardImage src={icon} alt="등록증 아이콘" />
         )}
-        <Button onClick={() => setIsRegistered(!isRegistered)}>
+        <Button onClick={handleRegisterClick}>
           {isRegistered && businessData ? '가게 등록' : '정보 등록'}
         </Button>
         {/* 가게 등록 버튼 누르면 나중애 라우팅 해주기*/}
@@ -66,6 +77,7 @@ export default function ManagerPage() {
           <span>이메일 변경</span>
         </AccountActions>
       </AccountInfo>
+      {isModalOpen && <RegisterModal />}
     </ManagerPageContainer>
   )
 }
