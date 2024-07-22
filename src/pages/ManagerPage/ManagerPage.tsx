@@ -20,11 +20,15 @@ import useModalStore from '@stores/modalStore'
 import { BusinessInfo, businessInfo } from '@mocks/businessInfo'
 import { useEffect, useState } from 'react'
 import RegisterModal from '@components/Modal/RegisterModal'
+import ManagerCompletedCard from '@components/ManagerCompletedCard/ManagerCompletedCard'
+import restaurantInfoStore from '@stores/restaurantInfoStore'
 
 export default function ManagerPage() {
   const { isRegistered, setIsRegistered } = registerInfoStore()
+  const { isRestaurantRegistered, setRestaurantRegistered } =
+    restaurantInfoStore()
+  const { openModal } = useModalStore()
   const [businessData, setBusinessData] = useState<BusinessInfo[] | null>(null)
-  const { openModal, closeModal, isModalOpen } = useModalStore()
 
   useEffect(() => {
     if (isRegistered) {
@@ -35,11 +39,13 @@ export default function ManagerPage() {
   }, [isRegistered])
 
   const handleRegisterClick = (): void => {
-    if (isRegistered && businessData) {
-      openModal()
-    } else {
-      setIsRegistered(true)
-    }
+    setIsRegistered(true)
+    setBusinessData(businessData) // 등록 후에 사업자 정보 설정
+  }
+
+  const handleRestaurantRegisterdClick = (): void => {
+    setRestaurantRegistered(true)
+    openModal()
   }
 
   return (
@@ -48,23 +54,31 @@ export default function ManagerPage() {
         <TitleText>마이페이지</TitleText>
         <NotifyIcon src={bellIcon} />
       </Title>
-      <Card>
-        <CardTitle>
-          <RegistrationPrompt
-            isRegistered={isRegistered}
-            businessData={businessData}
-          />
-        </CardTitle>
-        {isRegistered && businessData ? (
-          <CardImage src={menuIcon} alt="메뉴 아이콘" />
-        ) : (
-          <CardImage src={icon} alt="등록증 아이콘" />
-        )}
-        <Button onClick={handleRegisterClick}>
-          {isRegistered && businessData ? '가게 등록' : '정보 등록'}
-        </Button>
-        {/* 가게 등록 버튼 누르면 나중애 라우팅 해주기*/}
-      </Card>
+      {isRestaurantRegistered ? (
+        <ManagerCompletedCard />
+      ) : (
+        <Card>
+          <CardTitle>
+            <RegistrationPrompt
+              isRegistered={isRegistered}
+              businessData={businessData}
+            />
+          </CardTitle>
+          {isRegistered && businessData ? (
+            <CardImage src={menuIcon} alt="메뉴 아이콘" />
+          ) : (
+            <CardImage src={icon} alt="등록증 아이콘" />
+          )}
+          {isRegistered && businessData ? (
+            <Button onClick={handleRestaurantRegisterdClick}>
+              가게 등록하러 가기
+            </Button>
+          ) : (
+            <Button onClick={handleRegisterClick}>사업자 정보 등록하기</Button>
+          )}
+        </Card>
+      )}
+
       <AccountInfo>
         <AccountDetail className="title">계정</AccountDetail>
         <AccountDetail className="subtitle">
@@ -77,7 +91,7 @@ export default function ManagerPage() {
           <span>이메일 변경</span>
         </AccountActions>
       </AccountInfo>
-      {isModalOpen && <RegisterModal />}
+      {isRestaurantRegistered ? <RegisterModal /> : null}
     </ManagerPageContainer>
   )
 }

@@ -52,27 +52,30 @@ export const Card = styled.div`
 `
 
 export const CardImage = styled.img`
-  width: 98px;
-  height: auto;
+  min-width: 68px;
+  max-width: 115px;
+  min-height: 73px;
+  max-height: 80px;
 `
 
 export const CardTitle = styled.h2`
   text-align: left;
   font-size: 1.2rem;
   color: #333;
-  margin-bottom: 10px;
+  margin: 0px;
   font-weight: bold;
   min-width: 242px;
   min-height: 84px;
 `
 
 export const Button = styled.button`
+  width: 199px;
+  height: 47px;
   background: #ffc107;
   border: none;
-  border-radius: 15px;
-  padding: 10px 20px;
+  border-radius: 25px;
   font-size: 1rem;
-  margin-top: 10px;
+  margin-top: 15px;
   color: white;
   cursor: pointer;
 `

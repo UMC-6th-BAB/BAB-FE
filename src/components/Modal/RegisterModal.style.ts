@@ -14,7 +14,7 @@ export const ModalBackground = styled.div`
   z-index: 1000;
 `
 
-export const ModalText = styled.p`
+export const ModalTextWrapper = styled.div`
   font-size: 1rem;
   color: #333;
   margin: 0 0 10px;
@@ -40,7 +40,7 @@ export const ModalContainer = styled.div`
   text-align: center;
 `
 
-export const Button = styled.button<{ gray?: boolean }>`
+export const Button = styled.button<{ gray?: string }>`
   width: 203px;
   height: 41px;
   background: ${({ gray }) => (gray ? '#EEEEEE' : '#ffc107')};

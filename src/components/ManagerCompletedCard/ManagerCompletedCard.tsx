@@ -1,6 +1,31 @@
+import React from 'react'
+
+import restaurantInfoStore from '@stores/restaurantInfoStore'
+import {
+  CardContainer,
+  CardTitle,
+  CardContent,
+  CardSubtitle,
+  CardButton,
+  EditButton,
+  ArrowIcon,
+} from './ManagerCompletedCard.style'
+
 export default function ManagerCompletedCard() {
-  return <div></div>
-  {
-    /* 모든 정보가 다 입력되면 zustand store에서 불러와서 해당 컴포넌트에 랜더링해주기*/
-  }
+  const { restaurantInfo } = restaurantInfoStore()
+
+  return (
+    <CardContainer>
+      <CardTitle>고서현 사장님의</CardTitle>
+      <CardSubtitle>{restaurantInfo.name}</CardSubtitle>
+      <CardContent>
+        <CardButton>할인행사 진행하기</CardButton>
+        <CardButton>진행했던 할인행사 보기</CardButton>
+      </CardContent>
+      <EditButton>
+        가게 정보 수정하기
+        <ArrowIcon>&gt;</ArrowIcon>
+      </EditButton>
+    </CardContainer>
+  )
 }
