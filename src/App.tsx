@@ -3,10 +3,12 @@ import './App.css'
 import styled, { ThemeProvider } from 'styled-components'
 import GlobalStyle from './styles/GlobalStyle'
 import { theme } from './styles/theme'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+
+import StudentPage from './pages/StudentPage'
 
 const Container = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
   width: 100%;
@@ -18,7 +20,13 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Container>화면 적용</Container>
+        <Container>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/studentPage" element={<StudentPage />} />
+            </Routes>
+          </BrowserRouter>
+        </Container>
       </ThemeProvider>
     </>
   )
