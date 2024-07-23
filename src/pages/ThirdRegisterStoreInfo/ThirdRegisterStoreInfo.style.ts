@@ -10,6 +10,7 @@ export const StyledContainer = styled.div`
   padding: 16px;
   box-sizing: border-box;
   height: 100vh;
+  overflow-y: auto;
 `
 
 export const StyledRow = styled.div`
@@ -39,6 +40,7 @@ export const StyledFormContainer = styled.div`
   flex-direction: column;
   padding: 5px;
   align-items: center;
+  padding-bottom: 70px;
 `
 
 export const StyledFormLabel = styled.label`
@@ -86,25 +88,6 @@ export const StyledLabel = styled.p`
   padding-left: 6px;
 `
 
-export const StyledUploadBox = styled.div`
-  box-sizing: border-box;
-  border: 0.4px solid #e7e7e7;
-  width: 93px;
-  height: 93px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #ffffff;
-  border-radius: 5px;
-  margin-right: 10px;
-`
-
-export const StyledUploadImg = styled.img`
-  height: 29px;
-  width: 29px;
-  /* padding-top: 5%; */
-`
-
 export const StyledUploadText = styled.p`
   align-self: flex-start;
   margin-left: 10px;
@@ -135,30 +118,6 @@ export const StyledMenuTable = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
-
-export const StyledMenuInput = styled.input`
-  width: 205px;
-  height: 36px;
-  padding-left: 10px;
-  margin-bottom: 10px;
-  border: 0.4px solid #e7e7e7;
-  border-radius: 5px;
-`
-
-export const StyledMenuRow = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  width: 100%;
-`
-export const StyledMenuInputContainer = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  width: calc(100% - 103px); */
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
 `
 
 export const StyledMenuAddButton = styled.button`
