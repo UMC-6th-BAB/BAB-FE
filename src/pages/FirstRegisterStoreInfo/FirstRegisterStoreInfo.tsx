@@ -1,4 +1,4 @@
-import Back from '../../assets/RegisterStoreInfo/Back.png'
+import Back from '../../assets/RegisterStoreInfo/back.png'
 import {
   StyledBackIcon,
   StyledButton,

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import Back from '../../assets/RegisterStoreInfo/Back.png'
+import Back from '../../assets/RegisterStoreInfo/back.png'
 import nav from '../../assets/RegisterStoreInfo/thirdstep.png'
 import {
   StyledBackIcon,
