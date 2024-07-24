@@ -13,13 +13,13 @@ import {
   AccountActions,
   NotifyIcon,
 } from './ManagerPage.style'
-import icon from '@assets/icons/등록증 아이콘.png'
-import menuIcon from '@assets/icons/메뉴아이콘.png'
-import bellIcon from '@assets/bell.png'
+import icon from '@assets/managerMypage/등록증 아이콘.png'
+import menuIcon from '@assets/managerMypage/메뉴아이콘.png'
+import bellIcon from '@assets/icons/bell.png'
 import useModalStore from '@stores/modalStore'
 import { BusinessInfo, businessInfo } from '@mocks/businessInfo'
 import { useEffect, useState } from 'react'
-import RegisterModal from '@components/Modal/RegisterModal'
+import DiscountModal from '@components/Modal/DiscountModal'
 import ManagerCompletedCard from '@components/ManagerCompletedCard/ManagerCompletedCard'
 import restaurantInfoStore from '@stores/restaurantInfoStore'
 
@@ -91,7 +91,7 @@ export default function ManagerPage() {
           <span>이메일 변경</span>
         </AccountActions>
       </AccountInfo>
-      {isRestaurantRegistered ? <RegisterModal /> : null}
+      {isRestaurantRegistered ? <DiscountModal /> : null}
     </ManagerPageContainer>
   )
 }
