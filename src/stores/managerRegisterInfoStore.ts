@@ -11,7 +11,10 @@ export interface ManagerRegisterState {
   setIsRegistered: (isRegistered: boolean) => void
   setManagerRegistrationInfo: (
     info: Partial<
-      Omit<ManagerRegisterState, 'setIsRegistered' | 'setRegistrationInfo'>
+      Omit<
+        ManagerRegisterState,
+        'setIsRegistered' | 'setManagerRegistrationInfo'
+      >
     >,
   ) => void
 }

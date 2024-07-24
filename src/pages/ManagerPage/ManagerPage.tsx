@@ -44,6 +44,8 @@ export default function ManagerPage() {
   const handleRegisterClick = (): void => {
     setIsRegistered(true)
     setManagerRegistrationInfo({
+      managerName: '고서현',
+      isRegistered: true,
       registrationNumber: 12345678,
       businessName: '예제 사업자명',
       businessAddress: '예제 주소',
