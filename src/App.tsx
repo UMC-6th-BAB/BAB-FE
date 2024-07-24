@@ -4,6 +4,7 @@ import {Splash} from './pages/Splash/Splash'
 import {MemberType} from './pages/MemberType/MemberType'
 import {Signup} from './pages/Signup/Signup'
 import {OAuth} from './pages/OAuth/OAuth'
+import {ShopDetail} from './pages/ShopDetail/ShopDetail'
 
 import styled, { ThemeProvider } from 'styled-components'
 import GlobalStyle from './styles/GlobalStyle'
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="/membertype" element={<MemberType/>} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/oauth" element={<OAuth/>} />
+          <Route path="/shopdetail" element={<ShopDetail/>}/>
         </Routes>
         </ThemeProvider>
     </BrowserRouter>
