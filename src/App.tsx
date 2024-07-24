@@ -5,6 +5,7 @@ import { theme } from '@styles/theme'
 import ManagerPage from '@pages/ManagerPage/ManagerPage'
 import Footer from '@components/Footer/Footer'
 import StatusBar from '@components/StatusBar/StatusBar'
+import DiscountEventPage from '@pages/DiscountEventPage/DiscountEventPage'
 
 const Container = styled.div`
   display: flex;
@@ -24,6 +25,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Container>임시 메인 페이지</Container>} />
           <Route path="/manager" element={<ManagerPage />} />
+          <Route path="/discount-event" element={<DiscountEventPage />} />
         </Routes>
         <Footer />
       </Router>

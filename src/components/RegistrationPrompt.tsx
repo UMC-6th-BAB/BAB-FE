@@ -1,9 +1,9 @@
-import { BusinessInfo } from '@mocks/businessInfo'
 import { styled } from 'styled-components'
+import { ManagerRegisterState } from '@stores/managerRegisterInfoStore'
 
 interface RegistrationPromptProps {
   isRegistered: boolean
-  businessData: BusinessInfo[] | null
+  businessData?: ManagerRegisterState[] | null
 }
 
 const PromptContainer = styled.div`
@@ -21,10 +21,12 @@ export default function RegistrationPrompt({
   isRegistered,
   businessData,
 }: RegistrationPromptProps) {
+  const managerName =
+    businessData && businessData.length > 0 ? businessData[0].managerName : ''
   return (
     <>
       <PromptContainer>
-        <PromptText>고서현 사장님!</PromptText>
+        <PromptText>{managerName} 사장님!</PromptText>
         {isRegistered && businessData ? (
           <>
             <PromptText>심사가 완료되었습니다</PromptText>

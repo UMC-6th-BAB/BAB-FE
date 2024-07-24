@@ -1,5 +1,6 @@
 import RegistrationPrompt from '@components/RegistrationPrompt'
-import registerInfoStore from '@stores/managerRegisterInfoStore'
+import { ManagerRegisterState } from '@stores/managerRegisterInfoStore'
+import managerRegisterInfoStore from '@stores/managerRegisterInfoStore'
 import {
   ManagerPageContainer,
   Title,
@@ -17,22 +18,24 @@ import icon from '@assets/managerMypage/등록증 아이콘.png'
 import menuIcon from '@assets/managerMypage/메뉴아이콘.png'
 import bellIcon from '@assets/icons/bell.png'
 import useModalStore from '@stores/modalStore'
-import { BusinessInfo, businessInfo } from '@mocks/businessInfo'
 import { useEffect, useState } from 'react'
 import DiscountModal from '@components/Modal/DiscountModal'
 import ManagerCompletedCard from '@components/ManagerCompletedCard/ManagerCompletedCard'
 import restaurantInfoStore from '@stores/restaurantInfoStore'
 
 export default function ManagerPage() {
-  const { isRegistered, setIsRegistered } = registerInfoStore()
+  const { isRegistered, setIsRegistered, setManagerRegistrationInfo } =
+    managerRegisterInfoStore()
   const { isRestaurantRegistered, setRestaurantRegistered } =
     restaurantInfoStore()
   const { openModal } = useModalStore()
-  const [businessData, setBusinessData] = useState<BusinessInfo[] | null>(null)
+  const [businessData, setBusinessData] = useState<ManagerRegisterState | null>(
+    null,
+  )
 
   useEffect(() => {
     if (isRegistered) {
-      setBusinessData(businessInfo)
+      setBusinessData(managerRegisterInfoStore.getState())
     } else {
       setBusinessData(null)
     }
@@ -40,10 +43,16 @@ export default function ManagerPage() {
 
   const handleRegisterClick = (): void => {
     setIsRegistered(true)
-    setBusinessData(businessData) // 등록 후에 사업자 정보 설정
+    setManagerRegistrationInfo({
+      registrationNumber: 12345678,
+      businessName: '예제 사업자명',
+      businessAddress: '예제 주소',
+      industry: '업태',
+      item: '종목',
+    })
   }
 
-  const handleRestaurantRegisterdClick = (): void => {
+  const handleRestaurantRegisterClick = (): void => {
     setRestaurantRegistered(true)
     openModal()
   }
@@ -61,7 +70,7 @@ export default function ManagerPage() {
           <CardTitle>
             <RegistrationPrompt
               isRegistered={isRegistered}
-              businessData={businessData}
+              businessData={businessData ? [businessData] : null}
             />
           </CardTitle>
           {isRegistered && businessData ? (
@@ -70,7 +79,7 @@ export default function ManagerPage() {
             <CardImage src={icon} alt="등록증 아이콘" />
           )}
           {isRegistered && businessData ? (
-            <Button onClick={handleRestaurantRegisterdClick}>
+            <Button onClick={handleRestaurantRegisterClick}>
               가게 등록하러 가기
             </Button>
           ) : (

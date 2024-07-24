@@ -8,9 +8,11 @@ interface BusinessHours {
 }
 
 interface MenuItem {
+  //할인된 가격 생각도 해야될듯
   image: string
   name: string
-  price: string
+  price: number
+  discountPrice?: number
 }
 
 interface restaurantInfo {
