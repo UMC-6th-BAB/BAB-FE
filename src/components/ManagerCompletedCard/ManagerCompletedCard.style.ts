@@ -42,7 +42,7 @@ export const CardButton = styled.button`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   width: 130px;
   min-height: 70px;
   background-color: #f8f8f8;
@@ -54,6 +54,11 @@ export const CardButton = styled.button`
   color: #000;
   font-weight: bold;
   white-space: normal; /* 줄바꿈 허용 */
+  line-height: 1.2; /* 줄 간격 조절 */
+
+  span {
+    display: block;
+  }
 `
 
 export const EditButton = styled.button`

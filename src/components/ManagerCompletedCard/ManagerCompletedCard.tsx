@@ -10,17 +10,25 @@ import {
   EditButton,
   ArrowIcon,
 } from './ManagerCompletedCard.style'
+import managerRegisterInfoStore from '@stores/managerRegisterInfoStore'
 
 export default function ManagerCompletedCard() {
   const { restaurantInfo } = restaurantInfoStore()
+  const { managerName } = managerRegisterInfoStore()
 
   return (
     <CardContainer>
-      <CardTitle>고서현 사장님의</CardTitle>
+      <CardTitle>{managerName} 사장님의</CardTitle>
       <CardSubtitle>{restaurantInfo.name}</CardSubtitle>
       <CardContent>
-        <CardButton>할인행사 진행하기</CardButton>
-        <CardButton>진행했던 할인행사 보기</CardButton>
+        <CardButton>
+          <span>할인행사</span>
+          <span>진행하기</span>
+        </CardButton>
+        <CardButton>
+          <span>진행했던</span>
+          <span>할인행사 보기</span>
+        </CardButton>
       </CardContent>
       <EditButton>
         가게 정보 수정하기
