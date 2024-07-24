@@ -41,7 +41,7 @@ export default function ManagerPage() {
     }
   }, [isRegistered])
 
-  const handleRegisterClick = (): void => {
+  const handleManagerRegisterClick = (): void => {
     setIsRegistered(true)
     setManagerRegistrationInfo({
       managerName: '고서현',
@@ -76,16 +76,19 @@ export default function ManagerPage() {
             />
           </CardTitle>
           {isRegistered && businessData ? (
-            <CardImage src={menuIcon} alt="메뉴 아이콘" />
+            <>
+              <CardImage src={menuIcon} alt="메뉴 아이콘" />
+              <Button onClick={handleRestaurantRegisterClick}>
+                가게 등록하러 가기
+              </Button>
+            </>
           ) : (
-            <CardImage src={icon} alt="등록증 아이콘" />
-          )}
-          {isRegistered && businessData ? (
-            <Button onClick={handleRestaurantRegisterClick}>
-              가게 등록하러 가기
-            </Button>
-          ) : (
-            <Button onClick={handleRegisterClick}>사업자 정보 등록하기</Button>
+            <>
+              <CardImage src={icon} alt="등록증 아이콘" />
+              <Button onClick={handleManagerRegisterClick}>
+                사업자 정보 등록하기
+              </Button>
+            </>
           )}
         </Card>
       )}
