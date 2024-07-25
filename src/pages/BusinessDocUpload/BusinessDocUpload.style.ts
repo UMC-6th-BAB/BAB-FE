@@ -48,7 +48,10 @@ export const StyledUploadBox = styled.div`
   box-sizing: border-box;
   width: 347px;
   height: 200px;
-  align-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background: #ffffff;
   border-radius: 5px;
   margin: 0 auto;
