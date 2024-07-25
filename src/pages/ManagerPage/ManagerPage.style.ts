@@ -26,6 +26,7 @@ export const TitleText = styled.div`
   flex: 1;
   margin-left: 25px;
   text-align: center;
+  font-weight: bold;
 `
 
 export const NotifyIcon = styled.img`
