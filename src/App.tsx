@@ -1,10 +1,11 @@
-import './App.css'
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import styled, { ThemeProvider } from 'styled-components'
-import GlobalStyle from './styles/GlobalStyle'
-import { theme } from './styles/theme'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-
+import GlobalStyle from '@styles/GlobalStyle'
+import { theme } from '@styles/theme'
+import ManagerPage from '@pages/ManagerPage/ManagerPage'
+import Footer from '@components/Footer/Footer'
+import StatusBar from '@components/StatusBar/StatusBar'
+import DiscountEventPage from '@pages/DiscountEventPage/DiscountEventPage'
 import StudentPage from './pages/StudentPage/StudentPage'
 
 const Container = styled.div`
@@ -17,15 +18,18 @@ const Container = styled.div`
 
 export default function App() {
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/studentPage" element={<StudentPage />} />
-          </Routes>
-        </BrowserRouter>
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Router>
+        <StatusBar />
+        <Routes>
+          <Route path="/" element={<Container>임시 메인 페이지</Container>} />
+          <Route path="/manager" element={<ManagerPage />} />
+          <Route path="/discount-event" element={<DiscountEventPage />} />
+          <Route path="/studentPage" element={<StudentPage />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </ThemeProvider>
   )
 }
