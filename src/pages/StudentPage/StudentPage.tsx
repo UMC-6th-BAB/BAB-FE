@@ -1,30 +1,30 @@
 import StudentPageCardTop from '../../components/MyPageCard/StudentPageCardTop/StudentPageCardTop'
 import StudentPageCardAccount from '../../components/MyPageCard/Account/StudentPageCardAccount'
 import DiscountInfo from '../../components/MyPageCard/DiscountInfo/DiscountInfo'
+import {
+  StudentPageContainer,
+  Content,
+  Title,
+  TitleText,
+  NotifyIcon,
+} from '../StudentPage/StudentPage.style'
+import bellIcon from '@assets/icons/bell.png'
 
-import styled from 'styled-components'
 import { useState } from 'react'
 
-const StudentPage = () => {
+export default function StudentPage() {
   const [isSchoolSet, setIsSchoolSet] = useState<boolean>(true)
   return (
-    <Container>
-      <StudentPageCardTop isSchoolSet={isSchoolSet} />
-      {isSchoolSet ? <DiscountInfo /> : null}
-      <StudentPageCardAccount />
-    </Container>
+    <StudentPageContainer>
+      <Title>
+        <TitleText>마이페이지</TitleText>
+        <NotifyIcon src={bellIcon} />
+      </Title>
+      <Content>
+        <StudentPageCardTop isSchoolSet={isSchoolSet} />
+        {isSchoolSet ? <DiscountInfo /> : null}
+        <StudentPageCardAccount />
+      </Content>
+    </StudentPageContainer>
   )
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 30px;
-  margin-top: 104px;
-  background-color: #f8f8f8;
-  padding-bottom: 20px;
-`
-
-export default StudentPage
