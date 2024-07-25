@@ -1,7 +1,8 @@
-import './App.css'
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import styled from 'styled-components'
 import GlobalStyle from './styles/GlobalStyle'
+import BusinessDocUpload from './pages/BusinessDocUpload/BusinessDocUpload'
+import RegisterSuccess from './pages/RegisterSuccess/RegisterSuccess'
 
 const Container = styled.div`
   display: flex;
@@ -16,7 +17,13 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-      <Container>화면 적용</Container>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Container>임시 메인 페이지</Container>} />
+          <Route path="/managerUpload" element={<BusinessDocUpload />} />
+          <Route path="/registerSuccess" element={<RegisterSuccess />} />
+        </Routes>
+      </Router>
     </>
   )
 }
