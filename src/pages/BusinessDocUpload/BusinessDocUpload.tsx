@@ -11,8 +11,8 @@ import {
   StyledUploadText,
 } from './BusinessDocUpload.style'
 
-import UploadImg from '../../assets/BusinessUploadPage/upload.png'
-import Back from '../../assets/BusinessUploadPage/backIcon.png'
+import UploadImg from '../../assets/BusinessUploadPage/upload.svg'
+import Back from '../../assets/BusinessUploadPage/backIcon.svg'
 import { useNavigate } from 'react-router-dom'
 import useImageUpload from '../../hooks/useImageUpload'
 

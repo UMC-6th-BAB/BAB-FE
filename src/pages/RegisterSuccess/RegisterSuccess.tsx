@@ -1,5 +1,5 @@
 //import { useNavigate } from 'react-router-dom'
-import Confetti from '../../assets/RegisterSuccess/Confetti.png'
+import Confetti from '../../assets/RegisterSuccess/Confetti.svg'
 import {
   StyledButton,
   StyledButtonContainer,
