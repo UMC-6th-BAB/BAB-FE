@@ -35,7 +35,7 @@ export const ModalContainer = styled.div`
   width: 252px;
   height: 300px;
   background: white;
-  border-radius: 20px;
+  border-radius: 15px;
   padding: 20px;
   text-align: center;
 `
