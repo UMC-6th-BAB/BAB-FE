@@ -1,6 +1,6 @@
-import StudentPageCardTop from '../../components/MyPageCard/StudentPageCardTop/StudentPageCardTop'
-import StudentPageCardAccount from '../../components/MyPageCard/Account/StudentPageCardAccount'
-import DiscountInfo from '../../components/MyPageCard/DiscountInfo/DiscountInfo'
+import StudentPageCardTop from '@components/MyPageCard/StudentPageCardTop/StudentPageCardTop'
+import StudentPageCardAccount from '@components/MyPageCard/Account/StudentPageCardAccount'
+import DiscountInfo from '@components/MyPageCard/DiscountInfo/DiscountInfo'
 import {
   StudentPageContainer,
   Content,
@@ -8,7 +8,7 @@ import {
   TitleText,
   NotifyIcon,
 } from '../StudentPage/StudentPage.style'
-import bellIcon from '@assets/icons/bell.png'
+import bellIcon from '@assets/icons/bell.svg'
 
 import { useState } from 'react'
 
