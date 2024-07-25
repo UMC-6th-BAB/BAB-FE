@@ -7,6 +7,7 @@
     "skipLibCheck": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true, // 추가
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
