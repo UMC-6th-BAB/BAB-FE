@@ -1,5 +1,5 @@
-//import { useNavigate } from 'react-router-dom'
-import Confetti from '../../assets/RegisterSuccess/Confetti.svg'
+import { useNavigate } from 'react-router-dom'
+import Confetti from '@assets/RegisterSuccess/Confetti.svg'
 import {
   StyledButton,
   StyledButtonContainer,
@@ -9,10 +9,9 @@ import {
 } from './RegisterSuccess.style'
 
 export default function RegisterSuccess() {
-  //const navigate = useNavigate()
+  const navigate = useNavigate()
   const handleMypage = () => {
-    // TODO: 마이페이지로 이동
-    console.log('마이페이지로 이동 버튼')
+    navigate('/manager')
   }
   const handleRegisterStore = () => {
     // navigate('/registerStoreInfo')

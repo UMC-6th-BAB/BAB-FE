@@ -11,10 +11,10 @@ import {
   StyledUploadText,
 } from './BusinessDocUpload.style'
 
-import UploadImg from '../../assets/BusinessUploadPage/upload.svg'
-import Back from '../../assets/BusinessUploadPage/backIcon.svg'
+import UploadImg from '@assets/BusinessUploadPage/upload.svg'
+import Back from '@assets/BusinessUploadPage/backIcon.svg'
 import { useNavigate } from 'react-router-dom'
-import useImageUpload from '../../hooks/useImageUpload'
+import useImageUpload from '@hooks/useImageUpload'
 
 export default function BusinessDocUpload() {
   const navigate = useNavigate()
