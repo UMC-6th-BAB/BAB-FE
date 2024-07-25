@@ -7,11 +7,17 @@ import {
   ModalTextWrapper,
   Button,
 } from '@components/Modal/DiscountModal.style'
+import { useNavigate } from 'react-router-dom'
 
 export default function DiscountModal() {
   const { isModalOpen, closeModal } = useModalStore()
+  const navigate = useNavigate();
 
   if (!isModalOpen) return null
+
+  const handleDiscountPageClick = () => {
+    navigate("/discount-event")
+  }
 
   return (
     <ModalBackground onClick={closeModal}>
@@ -22,7 +28,7 @@ export default function DiscountModal() {
           <p>천원 할인행사를 진행할까요?</p>
         </ModalTextWrapper>
         <img src={cloudIcon} alt="cloud" width="54" height="48" />
-        <Button onClick={closeModal}>좋아요!</Button>
+        <Button onClick={handleDiscountPageClick}>좋아요!</Button>
         {/* 좋아요 버튼 누르면 라우팅 해주면 됌*/}
         <Button gray="true" onClick={closeModal}>
           다음에 할게요

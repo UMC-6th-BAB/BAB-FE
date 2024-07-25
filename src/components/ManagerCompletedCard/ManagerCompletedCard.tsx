@@ -11,17 +11,19 @@ import {
   ArrowIcon,
 } from './ManagerCompletedCard.style'
 import managerRegisterInfoStore from '@stores/managerRegisterInfoStore'
+import { useNavigate } from 'react-router-dom'
 
 export default function ManagerCompletedCard() {
   const { restaurantInfo } = restaurantInfoStore()
   const { managerName } = managerRegisterInfoStore()
+  const navigate = useNavigate()
 
   return (
     <CardContainer>
       <CardTitle>{managerName} 사장님의</CardTitle>
       <CardSubtitle>{restaurantInfo.name}</CardSubtitle>
       <CardContent>
-        <CardButton>
+        <CardButton onClick={() => navigate('/discount-event')}>
           <span>할인행사</span>
           <span>진행하기</span>
         </CardButton>
