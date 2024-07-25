@@ -14,14 +14,12 @@ import {
 import UploadImg from '../../assets/BusinessUploadPage/upload.png'
 import Back from '../../assets/BusinessUploadPage/backIcon.png'
 import { useNavigate } from 'react-router-dom'
+import useImageUpload from '../../hooks/useImageUpload'
 
 export default function BusinessDocUpload() {
   const navigate = useNavigate()
-
-  const handleImgUpload = () => {
-    // TODO: 이미지 업로드
-    console.log('이미지 업로드 버튼')
-  }
+  const { selectedImage, handleImgUpload, openCamera, fileInputRef } =
+    useImageUpload()
 
   const handleNext = () => {
     navigate('/registerSuccess')
@@ -37,13 +35,31 @@ export default function BusinessDocUpload() {
         <StyledBackIcon onClick={handleBack} src={Back} />
         <StyledTitle>사업자 등록증 등록</StyledTitle>
       </StyledRow>
-      <StyledSection onClick={handleImgUpload}>
+      <StyledSection onClick={openCamera}>
         <StyledLabel>사진으로 등록하기</StyledLabel>
         <StyledUploadBox>
-          <StyledUploadImg src={UploadImg} alt="업로드 아이콘" />
-          <StyledUploadText>카메라로 등록</StyledUploadText>
+          {selectedImage ? (
+            <img
+              src={URL.createObjectURL(selectedImage)}
+              alt="미리보기"
+              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+            />
+          ) : (
+            <>
+              <StyledUploadImg src={UploadImg} alt="업로드 아이콘" />
+              <StyledUploadText>카메라로 등록</StyledUploadText>
+            </>
+          )}
         </StyledUploadBox>
       </StyledSection>
+      <input
+        type="file"
+        accept="image/*"
+        capture="environment"
+        ref={fileInputRef}
+        onChange={handleImgUpload}
+        style={{ display: 'none' }}
+      />
       <StyledButton onClick={handleNext}>다음</StyledButton>
     </StyledContainer>
   )
