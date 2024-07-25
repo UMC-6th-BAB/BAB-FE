@@ -22,6 +22,10 @@ export default function BusinessDocUpload() {
     useImageUpload()
 
   const handleNext = () => {
+    if (!selectedImage) {
+      alert('이미지를 업로드해주세요.')
+      return
+    }
     navigate('/registerSuccess')
   }
 
