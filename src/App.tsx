@@ -5,7 +5,7 @@ import GlobalStyle from './styles/GlobalStyle'
 import { theme } from './styles/theme'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import StudentPage from './pages/StudentPage'
+import StudentPage from './pages/StudentPage/StudentPage'
 
 const Container = styled.div`
   display: flex;
@@ -20,13 +20,11 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Container>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/studentPage" element={<StudentPage />} />
-            </Routes>
-          </BrowserRouter>
-        </Container>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/studentPage" element={<StudentPage />} />
+          </Routes>
+        </BrowserRouter>
       </ThemeProvider>
     </>
   )
