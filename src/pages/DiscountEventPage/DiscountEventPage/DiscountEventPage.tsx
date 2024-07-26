@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   PageContainer,
   Header,
@@ -20,9 +20,35 @@ import {
   CheckboxWrapper,
 } from '@pages/DiscountEventPage/DiscountEventPage/DiscountEventPage.style'
 import { useNavigate } from 'react-router-dom'
+import RestaurantInfoStore from '@stores/restaurantInfoStore'
+import DiscountEventStore from '@stores/discountEventStore'
 
 export default function DiscountEventPage() {
   const navigate = useNavigate()
+  const {
+    setEventPeriod,
+    setDiscountChecked,
+    setDiscountPrice,
+    initializeDiscounts,
+    discounts,
+    eventPeriod,
+  } = DiscountEventStore()
+  const { restaurantInfo, updateMenuDiscount } = RestaurantInfoStore()
+
+  useEffect(() => {
+    initializeDiscounts(restaurantInfo.menu)
+  }, [restaurantInfo.menu, initializeDiscounts])
+
+  const handleNextClick = () => {
+    discounts.forEach((discount) => {
+      if (discount.isChecked) {
+        const discountPrice = discount.originalPrice - discount.discountPrice
+        updateMenuDiscount(discount.id, discountPrice, discount.isChecked)
+      }
+    })
+    navigate('/discount-eventTwo')
+  }
+
   return (
     <>
       <PageContainer>
@@ -34,9 +60,19 @@ export default function DiscountEventPage() {
           <DateDataWrapper>
             <Label>행사 기간 선택</Label>
             <DateInputWrapper>
-              <DateInput type="date" />
+              <DateInput
+                type="date"
+                onChange={(e) =>
+                  setEventPeriod(e.target.value, eventPeriod.endDate)
+                }
+              />
               <SpanLabel>부터</SpanLabel>
-              <DateInput type="date" />
+              <DateInput
+                type="date"
+                onChange={(e) =>
+                  setEventPeriod(eventPeriod.startDate, e.target.value)
+                }
+              />
               <SpanLabel>까지</SpanLabel>
             </DateInputWrapper>
           </DateDataWrapper>
@@ -48,37 +84,32 @@ export default function DiscountEventPage() {
               <span>적용</span>
             </MenuTableHeader>
             <MenuTableBody>
-              <MenuRow>
-                <MenuLabel>김치찌개</MenuLabel>
-                <PriceInput type="text" defaultValue="1000" />
-                <CheckboxWrapper>
-                  <input type="checkbox" id="kimchi" />
-                  <label htmlFor="kimchi"></label>
-                </CheckboxWrapper>
-              </MenuRow>
-              <MenuRow>
-                <MenuLabel>된장찌개</MenuLabel>
-                <PriceInput type="text" defaultValue="1000" />
-                <CheckboxWrapper>
-                  <input type="checkbox" id="doenjang" />
-                  <label htmlFor="doenjang"></label>
-                </CheckboxWrapper>
-              </MenuRow>
-              <MenuRow>
-                <MenuLabel>계란말이</MenuLabel>
-                <PriceInput type="text" placeholder="가격 입력" />
-                <CheckboxWrapper>
-                  <input type="checkbox" id="egg" />
-                  <label htmlFor="egg"></label>
-                </CheckboxWrapper>
-              </MenuRow>
+              {restaurantInfo.menu.map((item) => (
+                <MenuRow key={item.id}>
+                  <MenuLabel>{item.name}</MenuLabel>
+                  <PriceInput
+                    type="text"
+                    onChange={(e) =>
+                      setDiscountPrice(item.id, Number(e.target.value))
+                    }
+                  />
+                  <CheckboxWrapper>
+                    <input
+                      type="checkbox"
+                      id={`menu${item.id}`}
+                      onChange={(e) =>
+                        setDiscountChecked(item.id, e.target.checked)
+                      }
+                    />
+                    <label htmlFor={`menu${item.id}`}></label>
+                  </CheckboxWrapper>
+                </MenuRow>
+              ))}
             </MenuTableBody>
           </MenuTable>
         </EventForm>
       </PageContainer>
-      <SubmitButton onClick={() => navigate('/discount-eventTwo')}>
-        다음
-      </SubmitButton>
+      <SubmitButton onClick={handleNextClick}>다음</SubmitButton>
     </>
   )
 }

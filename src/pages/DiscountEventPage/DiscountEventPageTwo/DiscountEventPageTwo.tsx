@@ -16,9 +16,22 @@ import {
   DiscountDataWrapper,
 } from '@pages/DiscountEventPage/DiscountEventPageTwo/DiscountEventPageTwo.style'
 import { useNavigate } from 'react-router-dom'
+import RestaurantInfoStore from '@stores/restaurantInfoStore'
+import DiscountEventStore from '@stores/discountEventStore'
 
 export default function DiscountEventPageTwo() {
   const navigate = useNavigate()
+  const { eventMessage, setEventMessage, addDiscountEvent, discounts } =
+    DiscountEventStore()
+  const { restaurantInfo } = RestaurantInfoStore()
+
+  const handleSubmit = () => {
+    addDiscountEvent()
+    console.log(discounts) // 할인 정보 콘솔에 출력
+    console.log(restaurantInfo.menu)
+    navigate('/manager')
+  }
+
   return (
     <>
       <PageContainer>
@@ -33,7 +46,11 @@ export default function DiscountEventPageTwo() {
           <EventForm>
             <Label>직접 입력하기</Label>
             <hr />
-            <Textarea placeholder="행사 안내 문구를 입력해주세요." />
+            <Textarea
+              placeholder="행사 안내 문구를 입력해주세요."
+              value={eventMessage}
+              onChange={(e) => setEventMessage(e.target.value)}
+            />
             <Label>선택하기</Label>
             <MenuTable>
               <MenuTableBody>
@@ -56,7 +73,7 @@ export default function DiscountEventPageTwo() {
           </EventForm>
         </DiscountDataWrapper>
       </PageContainer>
-      <SubmitButton onClick={() => navigate('/manager')}>
+      <SubmitButton onClick={handleSubmit}>
         근처 학생들에게 알림 보내기
       </SubmitButton>
     </>

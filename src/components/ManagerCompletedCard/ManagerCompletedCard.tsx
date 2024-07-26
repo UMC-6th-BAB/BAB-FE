@@ -27,7 +27,7 @@ export default function ManagerCompletedCard() {
           <span>할인행사</span>
           <span>진행하기</span>
         </CardButton>
-        <CardButton>
+        <CardButton onClick={() => navigate('/discountRecord')}>
           <span>진행했던</span>
           <span>할인행사 보기</span>
         </CardButton>

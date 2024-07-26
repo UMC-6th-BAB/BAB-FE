@@ -9,10 +9,12 @@ interface BusinessHours {
 
 interface MenuItem {
   //할인된 가격 생각도 해야될듯
+  id: number
   image: string
   name: string
   price: number
   discountPrice?: number
+  isDiscounted?: boolean // 추가된 필드
 }
 
 interface restaurantInfo {
@@ -27,12 +29,17 @@ interface restaurantInfo {
 
 interface restaurantStore {
   restaurantInfo: restaurantInfo
-  setrestaurantInfo: (info: restaurantInfo) => void
+  setRestaurantInfo: (info: restaurantInfo) => void
   isRestaurantRegistered: boolean
   setRestaurantRegistered: (registered: boolean) => void
+  updateMenuDiscount: (
+    id: number,
+    discountPrice?: number,
+    isDiscounted?: boolean,
+  ) => void
 }
 
-const restaurantInfoStore = create<restaurantStore>((set) => ({
+const RestaurantInfoStore = create<restaurantStore>((set) => ({
   restaurantInfo: {
     name: '밥이득 김치찌개',
     restaurantLink: '',
@@ -40,12 +47,46 @@ const restaurantInfoStore = create<restaurantStore>((set) => ({
     university: '',
     businessHours: [],
     breakTime: [],
-    menu: [],
+    menu: [
+      {
+        id: 0,
+        image: '',
+        name: '김치찌개',
+        price: 8000,
+        discountPrice: 0,
+        isDiscounted: false,
+      },
+      {
+        id: 1,
+        image: '',
+        name: '된장찌개',
+        price: 7500,
+        discountPrice: 0,
+        isDiscounted: false,
+      },
+      {
+        id: 2,
+        image: '',
+        name: '계란말이',
+        price: 5000,
+        discountPrice: 0,
+        isDiscounted: false,
+      },
+    ],
   },
-  setrestaurantInfo: (info) => set({ restaurantInfo: info }),
+  setRestaurantInfo: (info) => set({ restaurantInfo: info }),
   isRestaurantRegistered: false,
   setRestaurantRegistered: (registered) =>
     set({ isRestaurantRegistered: registered }),
+  updateMenuDiscount: (id, discountPrice, isDiscounted) =>
+    set((state) => ({
+      restaurantInfo: {
+        ...state.restaurantInfo,
+        menu: state.restaurantInfo.menu.map((item, index) =>
+          item.id === id ? { ...item, discountPrice, isDiscounted } : item,
+        ),
+      },
+    })),
 }))
 
-export default restaurantInfoStore
+export default RestaurantInfoStore
