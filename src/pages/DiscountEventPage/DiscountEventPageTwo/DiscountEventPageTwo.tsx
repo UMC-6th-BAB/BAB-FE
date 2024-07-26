@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   PageContainer,
   Header,
@@ -24,6 +24,17 @@ export default function DiscountEventPageTwo() {
   const { eventMessage, setEventMessage, addDiscountEvent, discounts } =
     DiscountEventStore()
   const { restaurantInfo } = RestaurantInfoStore()
+  const [selectedMessage, setSelectedMessage] = useState(eventMessage)
+
+  const handleSelectedMessage = (message: string) => {
+    setSelectedMessage(message)
+    setEventMessage(message)
+  }
+
+  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setSelectedMessage(e.target.value)
+    setEventMessage(e.target.value)
+  }
 
   const handleSubmit = () => {
     addDiscountEvent()
@@ -48,20 +59,30 @@ export default function DiscountEventPageTwo() {
             <hr />
             <Textarea
               placeholder="행사 안내 문구를 입력해주세요."
-              value={eventMessage}
-              onChange={(e) => setEventMessage(e.target.value)}
+              value={selectedMessage}
+              onChange={handleTextareaChange}
             />
             <Label>선택하기</Label>
             <MenuTable>
               <MenuTableBody>
-                <MenuRow>
+                <MenuRow
+                  onClick={() =>
+                    handleSelectedMessage('밥이득 김치찌개 전 메뉴 1000원 할인')
+                  }
+                >
                   <MenuLabel>밥이득 김치찌개 전 메뉴 1000원 할인</MenuLabel>
                   <CheckboxWrapper>
                     <input type="checkbox" id="discount1" />
                     <label htmlFor="discount1"></label>
                   </CheckboxWrapper>
                 </MenuRow>
-                <MenuRow>
+                <MenuRow
+                  onClick={() =>
+                    handleSelectedMessage(
+                      '밥이득 김치찌개에서 할인행사 합니다!',
+                    )
+                  }
+                >
                   <MenuLabel>밥이득 김치찌개에서 할인행사 합니다!</MenuLabel>
                   <CheckboxWrapper>
                     <input type="checkbox" id="discount2" />
