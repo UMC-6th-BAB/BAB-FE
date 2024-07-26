@@ -13,7 +13,7 @@ export default function RegisterSuccess() {
   const handleMypage = () => {
     navigate('/manager')
   }
-  const handleRegisterStore = () => {
+  const handleRegisterStoreInfoClick = () => {
     // navigate('/registerStoreInfo')
     console.log('가게 등록 페이지로 이동 버튼')
   }
@@ -34,7 +34,7 @@ export default function RegisterSuccess() {
           나중에 하기
         </StyledButton>
         <StyledButton
-          onClick={handleRegisterStore}
+          onClick={handleRegisterStoreInfoClick}
           $Color="#FFFFFF"
           $bgColor="#fdd100"
         >
