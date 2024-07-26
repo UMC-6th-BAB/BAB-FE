@@ -87,8 +87,10 @@ const RestaurantInfoStore = create<restaurantStore>((set) => ({
           item.id === id
             ? {
                 ...item,
-                price: item.price - (discountPrice || 0),
-                discountPrice: 0, //할인해주고 이거는 다시 0으로 초기화 해줌
+                price: isDiscounted
+                  ? item.price - (discountPrice || 0)
+                  : item.price,
+                discountPrice: isDiscounted ? discountPrice : 0,
                 isDiscounted: isDiscounted,
               }
             : item,

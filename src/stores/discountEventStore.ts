@@ -62,8 +62,8 @@ const DiscountEventStore = create<DiscountEventState>((set) => ({
       discounts: menu.map((item) => ({
         id: item.id,
         name: item.name,
-        discountPrice: item.discountPrice ?? 0,
-        isChecked: item.isDiscounted ?? false,
+        discountPrice: 0,
+        isChecked: false,
       })),
     }),
   addDiscountEvent: () =>
