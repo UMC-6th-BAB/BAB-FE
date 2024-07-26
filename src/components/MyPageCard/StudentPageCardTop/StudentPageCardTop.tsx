@@ -7,9 +7,9 @@ import {
   EditSchool,
 } from './StudentPageCardTop.style'
 
-import StudentIDCardImg from '../../../assets/StudentPage/studentIDCard.png'
+import StudentIDCardImg from '../../../assets/StudentPage/studentIDCard.svg'
 import ArrowImg from '../../../assets/StudentPage/arrow.svg'
-import PinImg from '../../../assets/StudentPage/pin.png'
+import PinImg from '../../../assets/StudentPage/pin.svg'
 
 interface Props {
   isSchoolSet: boolean
