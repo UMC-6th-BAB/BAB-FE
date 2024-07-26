@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
-import Back from '../../assets/RegisterStoreInfo/back.png'
-import nav from '../../assets/RegisterStoreInfo/thirdstep.png'
+import Back from '../../assets/RegisterStoreInfo/back.svg'
+import nav from '../../assets/RegisterStoreInfo/thirdstep.svg'
 import {
   StyledBackIcon,
   StyledButton,

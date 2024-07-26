@@ -1,4 +1,4 @@
-import Back from '../../assets/RegisterStoreInfo/back.png'
+import Back from '../../assets/RegisterStoreInfo/back.svg'
 import {
   StyledBackIcon,
   StyledButton,
@@ -17,8 +17,8 @@ import {
   StyledUploadImg,
   StyledUploadText,
 } from './FirstRegisterStoreInfo.style'
-import UploadImg from '../../assets/RegisterStoreInfo/upload.png'
-import nav from '../../assets/RegisterStoreInfo/firststep.png'
+import UploadImg from '../../assets/RegisterStoreInfo/upload.svg'
+import nav from '../../assets/RegisterStoreInfo/firststep.svg'
 import { useNavigate } from 'react-router-dom'
 
 export default function FirstRegisterStoreInfo() {

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
-import Back from '../../assets/RegisterStoreInfo/back.png'
-import nav from '../../assets/RegisterStoreInfo/secondstep.png'
+import Back from '../../assets/RegisterStoreInfo/back.svg'
+import nav from '../../assets/RegisterStoreInfo/secondstep.svg'
 
 import {
   StyledAddTimeButton,

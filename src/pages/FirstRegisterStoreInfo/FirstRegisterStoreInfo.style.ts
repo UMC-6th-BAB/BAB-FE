@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import search from '../../assets/RegisterStoreInfo/search.png'
+import search from '../../assets/RegisterStoreInfo/search.svg'
 
 export const StyledContainer = styled.div`
   display: flex;

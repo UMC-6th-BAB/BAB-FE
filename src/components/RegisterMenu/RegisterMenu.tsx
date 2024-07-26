@@ -1,4 +1,4 @@
-import Camera from '../../assets/RegisterStoreInfo/camera.png'
+import Camera from '../../assets/RegisterStoreInfo/camera.svg'
 import {
   StyledMenuInput,
   StyledMenuInputContainer,
