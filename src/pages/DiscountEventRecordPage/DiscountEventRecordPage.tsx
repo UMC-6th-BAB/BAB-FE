@@ -31,7 +31,9 @@ export default function DiscountEventRecordPage() {
             <EventTitle>{restaurantInfo.name}</EventTitle>
             <EventDescription>{event.eventMessage}</EventDescription>
             {event.discounts
-              .filter((discount) => discount.isChecked)
+              .filter(
+                (discount) => discount.isChecked && discount.discountPrice > 0,
+              )
               .map((discount) => (
                 <EventDescription key={discount.id}>
                   {discount.name} {discount.discountPrice}원 할인

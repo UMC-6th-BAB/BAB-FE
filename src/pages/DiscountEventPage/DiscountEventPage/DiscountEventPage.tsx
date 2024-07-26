@@ -41,9 +41,12 @@ export default function DiscountEventPage() {
 
   const handleNextClick = () => {
     discounts.forEach((discount) => {
-      if (discount.isChecked) {
-        const discountPrice = discount.originalPrice - discount.discountPrice
-        updateMenuDiscount(discount.id, discountPrice, discount.isChecked)
+      if (discount.isChecked && discount.discountPrice > 0) {
+        updateMenuDiscount(
+          discount.id,
+          discount.discountPrice,
+          discount.isChecked, //체크를 해야 할인이 적용되도록 함
+        )
       }
     })
     navigate('/discount-eventTwo')
@@ -90,7 +93,7 @@ export default function DiscountEventPage() {
                   <PriceInput
                     type="text"
                     onChange={(e) =>
-                      setDiscountPrice(item.id, Number(e.target.value))
+                      setDiscountPrice(item.id, Number(e.target.value) || 0)
                     }
                   />
                   <CheckboxWrapper>

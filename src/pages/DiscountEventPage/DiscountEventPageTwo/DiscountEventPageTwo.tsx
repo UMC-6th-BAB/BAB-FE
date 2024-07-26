@@ -24,7 +24,7 @@ export default function DiscountEventPageTwo() {
   const { eventMessage, setEventMessage, addDiscountEvent, discounts } =
     DiscountEventStore()
   const { restaurantInfo } = RestaurantInfoStore()
-  const [selectedMessage, setSelectedMessage] = useState(eventMessage)
+  const [selectedMessage, setSelectedMessage] = useState<string>(eventMessage)
 
   const handleSelectedMessage = (message: string) => {
     setSelectedMessage(message)
@@ -38,8 +38,8 @@ export default function DiscountEventPageTwo() {
 
   const handleSubmit = () => {
     addDiscountEvent()
-    console.log(discounts) // 할인 정보 콘솔에 출력
-    console.log(restaurantInfo.menu)
+    console.log(discounts) // 할인 정보 보기위해 콘솔 찍어보자
+    console.log(restaurantInfo.menu) // 할인된 가격만큼 가게 스토어에 반영됐는지 확인하자
     navigate('/manager')
   }
 

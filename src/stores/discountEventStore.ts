@@ -3,7 +3,6 @@ import { create } from 'zustand'
 interface Discount {
   id: number
   name: string
-  originalPrice: number
   discountPrice: number
   isChecked: boolean
 }
@@ -49,7 +48,7 @@ const DiscountEventStore = create<DiscountEventState>((set) => ({
   setDiscountChecked: (id, isChecked) =>
     set((state) => ({
       discounts: state.discounts.map((discount) =>
-        discount.id === id ? { ...discount, isChecked } : discount,
+        discount.id === id ? { ...discount, isChecked: isChecked } : discount,
       ),
     })),
   setDiscountPrice: (id, price) =>
@@ -63,7 +62,6 @@ const DiscountEventStore = create<DiscountEventState>((set) => ({
       discounts: menu.map((item) => ({
         id: item.id,
         name: item.name,
-        originalPrice: item.price,
         discountPrice: item.discountPrice ?? 0,
         isChecked: item.isDiscounted ?? false,
       })),

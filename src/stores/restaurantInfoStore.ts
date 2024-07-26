@@ -48,6 +48,7 @@ const RestaurantInfoStore = create<restaurantStore>((set) => ({
     businessHours: [],
     breakTime: [],
     menu: [
+      //임의로 메뉴 데이터가 있다고 가정
       {
         id: 0,
         image: '',
@@ -82,8 +83,15 @@ const RestaurantInfoStore = create<restaurantStore>((set) => ({
     set((state) => ({
       restaurantInfo: {
         ...state.restaurantInfo,
-        menu: state.restaurantInfo.menu.map((item, index) =>
-          item.id === id ? { ...item, discountPrice, isDiscounted } : item,
+        menu: state.restaurantInfo.menu.map((item) =>
+          item.id === id
+            ? {
+                ...item,
+                price: item.price - (discountPrice || 0),
+                discountPrice: 0, //할인해주고 이거는 다시 0으로 초기화 해줌
+                isDiscounted: isDiscounted,
+              }
+            : item,
         ),
       },
     })),
