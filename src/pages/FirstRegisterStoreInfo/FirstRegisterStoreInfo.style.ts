@@ -73,6 +73,10 @@ export const StyledSearchInput = styled.input`
 export const StyledSection = styled.div`
   width: 100%;
   margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 
 export const StyledLabel = styled.p`
@@ -93,6 +97,10 @@ export const StyledUploadBox = styled.div`
   background: #ffffff;
   border-radius: 5px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 
 export const StyledUploadImg = styled.img`
@@ -144,4 +152,9 @@ export const StyledNavText = styled.div`
   justify-content: space-around;
   width: 100%;
   padding: 0 10px;
+`
+export const ErrorMessage = styled.div`
+  color: red;
+  font-size: 12px;
+  margin-bottom: 10px;
 `
