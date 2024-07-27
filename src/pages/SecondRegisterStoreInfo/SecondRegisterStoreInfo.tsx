@@ -18,6 +18,7 @@ import {
   StyledNavImgWrapper,
   StyledNavText,
   StyledRow,
+  StyledScrollableContent,
   StyledTimeInput,
   StyledTimeRow,
   StyledTimeTable,
@@ -53,38 +54,40 @@ export default function SecondRegisterStoreInfo() {
           <div>메뉴 등록</div>
         </StyledNavText>
       </StyledNavImgWrapper>
-      <StyledFormContainer>
-        <StyledLabel>가게 운영 시간</StyledLabel>
-        <StyledTimeTable>
-          {['월', '화', '수', '목', '금', '토', '일'].map((day, index) => (
-            <StyledTimeRow key={index}>
-              <StyledDayLabel>{day}</StyledDayLabel>
+      <StyledScrollableContent>
+        <StyledFormContainer>
+          <StyledLabel>가게 운영 시간</StyledLabel>
+          <StyledTimeTable>
+            {['월', '화', '수', '목', '금', '토', '일'].map((day, index) => (
+              <StyledTimeRow key={index}>
+                <StyledDayLabel>{day}</StyledDayLabel>
+                <StyledTimeInput type="text" defaultValue="09:00" />
+                <StyledTimeText>부터</StyledTimeText>
+                <StyledTimeInput type="text" defaultValue="22:00" />
+                <StyledTimeText>까지</StyledTimeText>
+                <StyledCheckBox defaultChecked={index < 6} />
+              </StyledTimeRow>
+            ))}
+          </StyledTimeTable>
+          <StyledLabel>브레이크 타임</StyledLabel>
+          <StyledBreakTimeContainer>
+            <StyledBreakTimeRow>
+              {['월', '화', '수', '목', '금', '토', '일'].map((day, index) => (
+                <StyledDayButton key={index}>{day}</StyledDayButton>
+              ))}
+            </StyledBreakTimeRow>
+            <StyledTimeRow>
               <StyledTimeInput type="text" defaultValue="09:00" />
               <StyledTimeText>부터</StyledTimeText>
               <StyledTimeInput type="text" defaultValue="22:00" />
               <StyledTimeText>까지</StyledTimeText>
-              <StyledCheckBox defaultChecked={index < 6} />
+              <StyledToggle />
             </StyledTimeRow>
-          ))}
-        </StyledTimeTable>
-        <StyledLabel>브레이크 타임</StyledLabel>
-        <StyledBreakTimeContainer>
-          <StyledBreakTimeRow>
-            {['월', '화', '수', '목', '금', '토', '일'].map((day, index) => (
-              <StyledDayButton key={index}>{day}</StyledDayButton>
-            ))}
-          </StyledBreakTimeRow>
-          <StyledTimeRow>
-            <StyledTimeInput type="text" defaultValue="09:00" />
-            <StyledTimeText>부터</StyledTimeText>
-            <StyledTimeInput type="text" defaultValue="22:00" />
-            <StyledTimeText>까지</StyledTimeText>
-            <StyledToggle />
-          </StyledTimeRow>
-          <StyledAddTimeButton>다른 시간 추가 설정하기</StyledAddTimeButton>
-        </StyledBreakTimeContainer>
-        <StyledButton onClick={handleNext}>다음</StyledButton>
-      </StyledFormContainer>
+            <StyledAddTimeButton>다른 시간 추가 설정하기</StyledAddTimeButton>
+          </StyledBreakTimeContainer>
+          <StyledButton onClick={handleNext}>다음</StyledButton>
+        </StyledFormContainer>
+      </StyledScrollableContent>
     </StyledContainer>
   )
 }

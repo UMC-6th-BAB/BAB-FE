@@ -1,5 +1,6 @@
 import Back from '../../assets/RegisterStoreInfo/back.svg'
 import {
+  StyledScrollableContent,
   StyledBackIcon,
   StyledButton,
   StyledContainer,
@@ -48,22 +49,24 @@ export default function FirstRegisterStoreInfo() {
           <div>메뉴 등록</div>
         </StyledNavText>
       </StyledNavImgWrapper>
-      <StyledFormContainer>
-        <StyledLabel>가게 이름</StyledLabel>
-        <StyledFormInput type="text" placeholder="밥이득 김치찌개" />
-        <StyledLabel>가게 링크</StyledLabel>
-        <StyledFormInput type="text" placeholder="링크를 입력해 주세요." />
-        <StyledSection onClick={handleUpload}>
-          <StyledLabel>가게 배너 사진 등록</StyledLabel>
-          <StyledUploadBox>
-            <StyledUploadImg src={UploadImg} alt="업로드 아이콘" />
-            <StyledUploadText>갤러리에서 이미지 등록하기</StyledUploadText>
-          </StyledUploadBox>
-        </StyledSection>
-        <StyledLabel>학교 선택</StyledLabel>
-        <StyledSearchInput type="text" placeholder="학교 선택" />
-        <StyledButton onClick={handleNext}>다음</StyledButton>
-      </StyledFormContainer>
+      <StyledScrollableContent>
+        <StyledFormContainer>
+          <StyledLabel>가게 이름</StyledLabel>
+          <StyledFormInput type="text" placeholder="밥이득 김치찌개" />
+          <StyledLabel>가게 링크</StyledLabel>
+          <StyledFormInput type="text" placeholder="링크를 입력해 주세요." />
+          <StyledSection onClick={handleUpload}>
+            <StyledLabel>가게 배너 사진 등록</StyledLabel>
+            <StyledUploadBox>
+              <StyledUploadImg src={UploadImg} alt="업로드 아이콘" />
+              <StyledUploadText>갤러리에서 이미지 등록하기</StyledUploadText>
+            </StyledUploadBox>
+          </StyledSection>
+          <StyledLabel>학교 선택</StyledLabel>
+          <StyledSearchInput type="text" placeholder="학교 선택" />
+          <StyledButton onClick={handleNext}>다음</StyledButton>
+        </StyledFormContainer>
+      </StyledScrollableContent>
     </StyledContainer>
   )
 }

@@ -9,6 +9,12 @@ export const StyledContainer = styled.div`
   padding: 16px;
   box-sizing: border-box;
   height: 100vh;
+  position: relative;
+  padding-bottom: 80px;
+`
+export const StyledScrollableContent = styled.div`
+  flex: 1;
+  overflow-y: auto;
 `
 export const StyledRow = styled.div`
   display: flex;
