@@ -7,6 +7,9 @@ import Footer from '@components/Footer/Footer'
 import StatusBar from '@components/StatusBar/StatusBar'
 import DiscountEventPage from '@pages/DiscountEventPage/DiscountEventPage'
 import StudentPage from './pages/StudentPage/StudentPage'
+import BusinessDocUpload from './pages/BusinessDocUpload/BusinessDocUpload'
+import RegisterSuccess from './pages/RegisterSuccess/RegisterSuccess'
+
 
 const Container = styled.div`
   display: flex;
@@ -27,6 +30,8 @@ export default function App() {
           <Route path="/manager" element={<ManagerPage />} />
           <Route path="/discount-event" element={<DiscountEventPage />} />
           <Route path="/studentPage" element={<StudentPage />} />
+          <Route path="/managerUpload" element={<BusinessDocUpload />} />
+          <Route path="/registerSuccess" element={<RegisterSuccess />} />
         </Routes>
         <Footer />
       </Router>
