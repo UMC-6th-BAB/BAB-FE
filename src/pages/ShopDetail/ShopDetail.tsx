@@ -1,22 +1,25 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import {DetailContainer, CategoryHeader, MenuHeader, BkImg, ShopTitle, EventContainer, Event, LinkBtn, MenuBody,
     TodayEvent, Coupon, CouponImg, CouponInfoContainer, CouponInfoTitle, CouponInfoBody, MenuContainer, Line
 } from './ShopDetail.style'
-import {ShopMenu} from '../../components/ShopMenu/ShopMenu'
-import slowcalyImg from '../../assets/slowcalyImg.svg';
-import couponImg from '../../assets/coupon.svg';
+import {ShopMenu} from '@components/ShopMenu/ShopMenu'
+import slowcalyImg from '@assets/ShopDetailPage/slowcalyImg.svg';
+import couponImg from '@assets/icons/coupon.svg';
+import shopmenu1 from '@assets/ShopDetailPage/shopmenu1.svg'
 
 export const ShopDetail: React.FC = () => {
+    const navigate = useNavigate();
 
     return (
         <DetailContainer>
-            <CategoryHeader>{`<`} 포케</CategoryHeader>
+            <CategoryHeader onClick={()=>navigate(-1)}>{`<`} 포케</CategoryHeader>
             <MenuHeader>
                 <BkImg $imgsrc={slowcalyImg}>
                     <ShopTitle>슬로우 캘리 숭실대점</ShopTitle>
                     <EventContainer>
                         <Event>통신사 행사</Event>
-                        <LinkBtn>링크 바로가기{` >`}</LinkBtn>
+                        <LinkBtn onClick={()=>navigate("행사페이지")}>링크 바로가기{` >`}</LinkBtn>
                     </EventContainer>
                 </BkImg>
             </MenuHeader>
@@ -31,7 +34,13 @@ export const ShopDetail: React.FC = () => {
                 </Coupon>
                 <Line/>
                 <MenuContainer>
-                    <ShopMenu/>
+                    <ShopMenu
+                    img={shopmenu1}
+                    title="스파이시 참치포케"
+                    fixprice={11500}
+                    discountrate="43%"
+                    saleprice={6500}
+                    />
                 </MenuContainer>
             </MenuBody>
         </DetailContainer>

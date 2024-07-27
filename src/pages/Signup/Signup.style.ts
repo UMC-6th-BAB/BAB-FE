@@ -19,10 +19,10 @@ export const Title = styled.div`
     font-weight: 900;
     letter-spacing: 68;
     margin-top: 30px;
+    margin-bottom: 250px;
 `;
 
 export const SignupButton = styled.img`
     width: 311px;
-    margin-top: 250px;
     cursor: pointer;
 `;
