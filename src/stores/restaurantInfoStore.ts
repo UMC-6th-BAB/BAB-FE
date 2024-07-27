@@ -13,7 +13,6 @@ interface MenuItem {
   image: string
   name: string
   price: number
-  discountPrice?: number
   isDiscounted?: boolean // 추가된 필드
 }
 
@@ -54,7 +53,6 @@ const RestaurantInfoStore = create<restaurantStore>((set) => ({
         image: '',
         name: '김치찌개',
         price: 8000,
-        discountPrice: 0,
         isDiscounted: false,
       },
       {
@@ -62,7 +60,6 @@ const RestaurantInfoStore = create<restaurantStore>((set) => ({
         image: '',
         name: '된장찌개',
         price: 7500,
-        discountPrice: 0,
         isDiscounted: false,
       },
       {
@@ -70,7 +67,6 @@ const RestaurantInfoStore = create<restaurantStore>((set) => ({
         image: '',
         name: '계란말이',
         price: 5000,
-        discountPrice: 0,
         isDiscounted: false,
       },
     ],
@@ -90,7 +86,6 @@ const RestaurantInfoStore = create<restaurantStore>((set) => ({
                 price: isDiscounted
                   ? item.price - (discountPrice || 0)
                   : item.price,
-                discountPrice: isDiscounted ? discountPrice : 0,
                 isDiscounted: isDiscounted,
               }
             : item,
