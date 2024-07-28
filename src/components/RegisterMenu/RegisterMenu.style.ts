@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const StyledMenuRow = styled.div`
   display: flex;
@@ -7,9 +7,6 @@ export const StyledMenuRow = styled.div`
   width: 100%;
 `
 export const StyledMenuInputContainer = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  width: calc(100% - 103px); */
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -25,12 +22,21 @@ export const StyledUploadBox = styled.div`
   background: #ffffff;
   border-radius: 5px;
   margin-right: 10px;
+  overflow: hidden;
 `
 
-export const StyledUploadImg = styled.img`
-  height: 29px;
-  width: 29px;
-  /* padding-top: 5%; */
+export const StyledUploadImg = styled.img<{ $isthumbnail: number }>`
+  ${({ $isthumbnail }) =>
+    $isthumbnail
+      ? css`
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        `
+      : css`
+          width: 29px;
+          height: 29px;
+        `}
 `
 export const StyledMenuInput = styled.input`
   width: 205px;
