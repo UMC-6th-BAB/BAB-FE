@@ -16,14 +16,14 @@ import {
   DiscountDataWrapper,
 } from '@pages/DiscountEventPage/DiscountEventPageTwo/DiscountEventPageTwo.style'
 import { useNavigate } from 'react-router-dom'
-import RestaurantInfoStore from '@stores/restaurantInfoStore'
-import DiscountEventStore from '@stores/discountEventStore'
+import storeInfoStore from '@stores/storeInfoStore'
+import discountEventStore from '@stores/discountEventStore'
 
 export default function DiscountEventPageTwo() {
   const navigate = useNavigate()
   const { eventMessage, setEventMessage, addDiscountEvent, discounts } =
-    DiscountEventStore()
-  const { restaurantInfo } = RestaurantInfoStore()
+    discountEventStore()
+  const { storeInfo } = storeInfoStore()
   const [selectedMessage, setSelectedMessage] = useState<string>(eventMessage)
 
   const handleSelectedMessage = (message: string) => {
@@ -39,7 +39,7 @@ export default function DiscountEventPageTwo() {
   const handleSubmit = () => {
     addDiscountEvent()
     console.log(discounts) // 할인 정보 보기위해 콘솔 찍어보자
-    console.log(restaurantInfo.menu) // 할인된 가격만큼 가게 스토어에 반영됐는지 확인하자
+    console.log(storeInfo.menu) // 할인된 가격만큼 가게 스토어에 반영됐는지 확인하자
     navigate('/manager')
   }
 

@@ -16,9 +16,9 @@ interface MenuItem {
   isDiscounted?: boolean // 추가된 필드
 }
 
-interface restaurantInfo {
+interface storeInfo {
   name: string
-  restaurantLink: string
+  storeLink: string
   image: string
   university: string
   businessHours: BusinessHours[]
@@ -26,11 +26,11 @@ interface restaurantInfo {
   menu: MenuItem[]
 }
 
-interface restaurantStore {
-  restaurantInfo: restaurantInfo
-  setRestaurantInfo: (info: restaurantInfo) => void
-  isRestaurantRegistered: boolean
-  setRestaurantRegistered: (registered: boolean) => void
+interface storeInfoState {
+  storeInfo: storeInfo
+  setStoreInfo: (info: storeInfo) => void
+  isStoreRegistered: boolean
+  setStoreRegistered: (registered: boolean) => void
   updateMenuDiscount: (
     id: number,
     discountPrice?: number,
@@ -38,10 +38,10 @@ interface restaurantStore {
   ) => void
 }
 
-const RestaurantInfoStore = create<restaurantStore>((set) => ({
-  restaurantInfo: {
+const storeInfoStore = create<storeInfoState>((set) => ({
+  storeInfo: {
     name: '밥이득 김치찌개',
-    restaurantLink: '',
+    storeLink: '',
     image: '',
     university: '',
     businessHours: [],
@@ -71,15 +71,14 @@ const RestaurantInfoStore = create<restaurantStore>((set) => ({
       },
     ],
   },
-  setRestaurantInfo: (info) => set({ restaurantInfo: info }),
-  isRestaurantRegistered: false,
-  setRestaurantRegistered: (registered) =>
-    set({ isRestaurantRegistered: registered }),
+  setStoreInfo: (info) => set({ storeInfo: info }),
+  isStoreRegistered: false,
+  setStoreRegistered: (registered) => set({ isStoreRegistered: registered }),
   updateMenuDiscount: (id, discountPrice, isDiscounted) =>
     set((state) => ({
-      restaurantInfo: {
-        ...state.restaurantInfo,
-        menu: state.restaurantInfo.menu.map((item) =>
+      storeInfo: {
+        ...state.storeInfo,
+        menu: state.storeInfo.menu.map((item) =>
           item.id === id
             ? {
                 ...item,
@@ -94,4 +93,4 @@ const RestaurantInfoStore = create<restaurantStore>((set) => ({
     })),
 }))
 
-export default RestaurantInfoStore
+export default storeInfoStore

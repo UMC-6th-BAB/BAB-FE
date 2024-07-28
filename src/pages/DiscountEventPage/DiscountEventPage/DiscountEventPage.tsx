@@ -20,8 +20,8 @@ import {
   CheckboxWrapper,
 } from '@pages/DiscountEventPage/DiscountEventPage/DiscountEventPage.style'
 import { useNavigate } from 'react-router-dom'
-import RestaurantInfoStore from '@stores/restaurantInfoStore'
-import DiscountEventStore from '@stores/discountEventStore'
+import storeInfoStore from '@stores/storeInfoStore'
+import discountEventStore from '@stores/discountEventStore'
 
 export default function DiscountEventPage() {
   const navigate = useNavigate()
@@ -32,12 +32,12 @@ export default function DiscountEventPage() {
     initializeDiscounts,
     discounts,
     eventPeriod,
-  } = DiscountEventStore()
-  const { restaurantInfo, updateMenuDiscount } = RestaurantInfoStore()
+  } = discountEventStore()
+  const { storeInfo, updateMenuDiscount } = storeInfoStore()
 
   useEffect(() => {
-    initializeDiscounts(restaurantInfo.menu)
-  }, [restaurantInfo.menu, initializeDiscounts])
+    initializeDiscounts(storeInfo.menu)
+  }, [storeInfo.menu, initializeDiscounts])
 
   const handleNextClick = () => {
     discounts.forEach((discount) => {
@@ -87,7 +87,7 @@ export default function DiscountEventPage() {
               <span>적용</span>
             </MenuTableHeader>
             <MenuTableBody>
-              {restaurantInfo.menu.map((item) => (
+              {storeInfo.menu.map((item) => (
                 <MenuRow key={item.id}>
                   <MenuLabel>{item.name}</MenuLabel>
                   <PriceInput

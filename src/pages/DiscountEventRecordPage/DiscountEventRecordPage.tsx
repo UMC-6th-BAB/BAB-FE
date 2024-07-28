@@ -11,13 +11,13 @@ import {
   EventPeriod,
 } from '@pages/DiscountEventRecordPage/DiscountEventRecordPage.style'
 import { useNavigate } from 'react-router-dom'
-import RestaurantInfoStore from '@stores/restaurantInfoStore'
-import DiscountEventStore from '@stores/discountEventStore'
+import storeInfoStore from '@stores/storeInfoStore'
+import discountEventStore from '@stores/discountEventStore'
 
 export default function DiscountEventRecordPage() {
   const navigate = useNavigate()
-  const { restaurantInfo } = RestaurantInfoStore()
-  const { discountEvents } = DiscountEventStore()
+  const { storeInfo } = storeInfoStore()
+  const { discountEvents } = discountEventStore()
 
   return (
     <PageContainer>
@@ -28,7 +28,7 @@ export default function DiscountEventRecordPage() {
       <EventList>
         {discountEvents.map((event) => (
           <EventItem key={event.id}>
-            <EventTitle>{restaurantInfo.name}</EventTitle>
+            <EventTitle>{storeInfo.name}</EventTitle>
             <EventDescription>{event.eventMessage}</EventDescription>
             {event.discounts
               .filter(

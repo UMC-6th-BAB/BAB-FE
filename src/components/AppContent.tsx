@@ -6,6 +6,7 @@ import StatusBar from '@components/StatusBar/StatusBar'
 import DiscountEventPage from '@pages/DiscountEventPage/DiscountEventPage/DiscountEventPage'
 import DiscountEventPageTwo from '@pages/DiscountEventPage/DiscountEventPageTwo/DiscountEventPageTwo'
 import DiscountEventRecordPage from '@pages/DiscountEventRecordPage/DiscountEventRecordPage'
+import StoreInfoEditPage from '@pages/StoreInfoEditPage/StoreInfoEditPage'
 
 const Container = styled.div`
   display: flex;
@@ -32,7 +33,8 @@ export default function AppContent() {
         <Route path="/manager" element={<ManagerPage />} />
         <Route path="/discount-event" element={<DiscountEventPage />} />
         <Route path="/discount-eventTwo" element={<DiscountEventPageTwo />} />
-        <Route path="/discountRecord" element={<DiscountEventRecordPage />} />
+        <Route path="/discount-record" element={<DiscountEventRecordPage />} />
+        <Route path="/storeInfo-edit" element={<StoreInfoEditPage />} />
       </Routes>
       {showFooter && <Footer />}
     </>
