@@ -13,6 +13,7 @@ import {
   StyledNavImgWrapper,
   StyledNavText,
   StyledRow,
+  StyledScrollableContent,
   StyledTitle,
   StyledUploadText,
 } from './ThirdRegisterStoreInfo.style'
@@ -65,44 +66,28 @@ export default function ThirdRegisterStoreInfo() {
           <div>메뉴 등록</div>
         </StyledNavText>
       </StyledNavImgWrapper>
-      <StyledFormContainer>
-        <StyledLabel>메뉴 정보</StyledLabel>
-        <StyledMenuTable>
-          <StyledUploadText>
-            * 가격은 1인분 기준으로 입력해주세요.
-          </StyledUploadText>
-          {menus.map((menu, index) => (
-            <RegisterMenu
-              key={index}
-              index={index}
-              menu={menu}
-              onChange={handleMenuChange}
-            />
-          ))}
-          {/* <StyledMenuRow>
-            <StyledUploadBox>
-              <StyledUploadImg src={Camera} alt="업로드 아이콘" />
-            </StyledUploadBox>
-            <StyledMenuInputContainer>
-              <StyledMenuInput type="text" placeholder="메뉴 이름" />
-              <StyledMenuInput type="text" placeholder="가격" />
-            </StyledMenuInputContainer>
-          </StyledMenuRow>
-          <StyledMenuRow>
-            <StyledUploadBox>
-              <StyledUploadImg src={Camera} alt="업로드 아이콘" />
-            </StyledUploadBox>
-            <StyledMenuInputContainer>
-              <StyledMenuInput type="text" placeholder="메뉴 이름" />
-              <StyledMenuInput type="text" placeholder="가격" />
-            </StyledMenuInputContainer>
-          </StyledMenuRow> */}
-          <StyledMenuAddButton onClick={handleAddMenu}>
-            메뉴 추가하기
-          </StyledMenuAddButton>
-        </StyledMenuTable>
-        <StyledButton onClick={handleNext}>다음</StyledButton>
-      </StyledFormContainer>
+      <StyledScrollableContent>
+        <StyledFormContainer>
+          <StyledLabel>메뉴 정보</StyledLabel>
+          <StyledMenuTable>
+            <StyledUploadText>
+              * 가격은 1인분 기준으로 입력해주세요.
+            </StyledUploadText>
+            {menus.map((menu, index) => (
+              <RegisterMenu
+                key={index}
+                index={index}
+                menu={menu}
+                onChange={handleMenuChange}
+              />
+            ))}
+            <StyledMenuAddButton onClick={handleAddMenu}>
+              메뉴 추가하기
+            </StyledMenuAddButton>
+          </StyledMenuTable>
+          <StyledButton onClick={handleNext}>다음</StyledButton>
+        </StyledFormContainer>
+      </StyledScrollableContent>
     </StyledContainer>
   )
 }
