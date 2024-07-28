@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Back from '../../assets/RegisterStoreInfo/back.svg'
 import nav from '../../assets/RegisterStoreInfo/secondstep.svg'
@@ -6,11 +7,9 @@ import {
   StyledAddTimeButton,
   StyledBackIcon,
   StyledBreakTimeContainer,
-  StyledBreakTimeRow,
   StyledButton,
   StyledCheckBox,
   StyledContainer,
-  StyledDayButton,
   StyledDayLabel,
   StyledFormContainer,
   StyledLabel,
@@ -24,22 +23,30 @@ import {
   StyledTimeTable,
   StyledTimeText,
   StyledTitle,
-  StyledToggle,
 } from './SecondRegisterStoreInfo.style'
+import { BreakTime } from '../../components/BreakTime/BreakTime'
 
 export default function SecondRegisterStoreInfo() {
   const navigate = useNavigate()
+  const [breakTimes, setBreakTimes] = useState([
+    {
+      start: '09:00',
+      end: '22:00',
+    },
+  ])
+
   const handleNext = () => {
     navigate('/thirdRegisterStoreInfo')
   }
+
   const handleBack = () => {
     navigate(-1)
-    console.log('f')
   }
-  //   const handleUpload = () => {
-  //     // TODO: 갤러리에서 이미지 등록하기
-  //     console.log('갤러리에서 이미지 등록하기 버튼')
-  //   }
+
+  const handleAddBreakTime = () => {
+    setBreakTimes([...breakTimes, { start: '09:00', end: '22:00' }])
+  }
+
   return (
     <StyledContainer>
       <StyledRow>
@@ -71,19 +78,12 @@ export default function SecondRegisterStoreInfo() {
           </StyledTimeTable>
           <StyledLabel>브레이크 타임</StyledLabel>
           <StyledBreakTimeContainer>
-            <StyledBreakTimeRow>
-              {['월', '화', '수', '목', '금', '토', '일'].map((day, index) => (
-                <StyledDayButton key={index}>{day}</StyledDayButton>
-              ))}
-            </StyledBreakTimeRow>
-            <StyledTimeRow>
-              <StyledTimeInput type="text" defaultValue="09:00" />
-              <StyledTimeText>부터</StyledTimeText>
-              <StyledTimeInput type="text" defaultValue="22:00" />
-              <StyledTimeText>까지</StyledTimeText>
-              <StyledToggle />
-            </StyledTimeRow>
-            <StyledAddTimeButton>다른 시간 추가 설정하기</StyledAddTimeButton>
+            {breakTimes.map((time, index) => (
+              <BreakTime key={index} time={time} index={index} />
+            ))}
+            <StyledAddTimeButton onClick={handleAddBreakTime}>
+              다른 시간 추가 설정하기
+            </StyledAddTimeButton>
           </StyledBreakTimeContainer>
           <StyledButton onClick={handleNext}>다음</StyledButton>
         </StyledFormContainer>
