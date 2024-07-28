@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Back from '../../assets/RegisterStoreInfo/back.svg'
 import nav from '../../assets/RegisterStoreInfo/secondstep.svg'
+import errorIcon from '../../assets/RegisterStoreInfo/warnning.svg'
 
 import {
   StyledAddTimeButton,
@@ -11,7 +12,9 @@ import {
   StyledCheckBox,
   StyledContainer,
   StyledDayLabel,
+  StyledErrorMessage,
   StyledFormContainer,
+  StyledInputContainer,
   StyledLabel,
   StyledNavImg,
   StyledNavImgWrapper,
@@ -25,6 +28,7 @@ import {
   StyledTitle,
 } from './SecondRegisterStoreInfo.style'
 import { BreakTime } from '../../components/BreakTime/BreakTime'
+import { useErrorInput } from '../../hooks/useErrorInput'
 
 export default function SecondRegisterStoreInfo() {
   const navigate = useNavigate()
@@ -35,8 +39,17 @@ export default function SecondRegisterStoreInfo() {
     },
   ])
 
+  const operatingHours = useErrorInput('')
+  const [checkedDays, setCheckedDays] = useState<boolean[]>(
+    Array(7).fill(false),
+  )
+
   const handleNext = () => {
-    navigate('/thirdRegisterStoreInfo')
+    if (!checkedDays.includes(true)) {
+      operatingHours.setError('운영 시간을 작성해 주세요.')
+    } else {
+      navigate('/thirdRegisterStoreInfo')
+    }
   }
 
   const handleBack = () => {
@@ -45,6 +58,12 @@ export default function SecondRegisterStoreInfo() {
 
   const handleAddBreakTime = () => {
     setBreakTimes([...breakTimes, { start: '09:00', end: '22:00' }])
+  }
+
+  const handleCheckboxChange = (index: number) => {
+    const newCheckedDays = [...checkedDays]
+    newCheckedDays[index] = !newCheckedDays[index]
+    setCheckedDays(newCheckedDays)
   }
 
   return (
@@ -63,8 +82,16 @@ export default function SecondRegisterStoreInfo() {
       </StyledNavImgWrapper>
       <StyledScrollableContent>
         <StyledFormContainer>
-          <StyledLabel>가게 운영 시간</StyledLabel>
-          <StyledTimeTable>
+          <StyledInputContainer>
+            <StyledLabel>가게 운영 시간</StyledLabel>
+            {operatingHours.error && (
+              <StyledErrorMessage>
+                <img src={errorIcon} alt="Error icon" />
+                {operatingHours.error}
+              </StyledErrorMessage>
+            )}
+          </StyledInputContainer>
+          <StyledTimeTable className={operatingHours.error ? 'invalid' : ''}>
             {['월', '화', '수', '목', '금', '토', '일'].map((day, index) => (
               <StyledTimeRow key={index}>
                 <StyledDayLabel>{day}</StyledDayLabel>
@@ -72,7 +99,10 @@ export default function SecondRegisterStoreInfo() {
                 <StyledTimeText>부터</StyledTimeText>
                 <StyledTimeInput type="text" defaultValue="22:00" />
                 <StyledTimeText>까지</StyledTimeText>
-                <StyledCheckBox defaultChecked={index < 6} />
+                <StyledCheckBox
+                  checked={checkedDays[index]}
+                  onChange={() => handleCheckboxChange(index)}
+                />
               </StyledTimeRow>
             ))}
           </StyledTimeTable>

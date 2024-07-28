@@ -87,6 +87,10 @@ export const StyledTimeTable = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  &.invalid {
+    border: 0.4px solid #ff4d4d;
+    background-color: #fff0f0;
+  }
 `
 
 export const StyledTimeRow = styled.div`
@@ -233,4 +237,22 @@ export const StyledNavText = styled.div`
   justify-content: space-around;
   width: 100%;
   padding: 0 10px;
+`
+export const StyledErrorMessage = styled.div`
+  color: #ff5757;
+  font-size: 10px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  img {
+    margin-right: 5px;
+    height: 13px;
+    width: 13px;
+  }
+`
+export const StyledInputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
 `

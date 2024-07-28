@@ -1,4 +1,5 @@
 import Back from '../../assets/RegisterStoreInfo/back.svg'
+import errorIcon from '../../assets/RegisterStoreInfo/warnning.svg'
 import {
   StyledScrollableContent,
   StyledBackIcon,
@@ -17,20 +18,32 @@ import {
   StyledUploadBox,
   StyledUploadImg,
   StyledUploadText,
+  StyledErrorMessage,
+  StyledInputContainer,
+  StyledSearchInputContainer,
 } from './FirstRegisterStoreInfo.style'
 import UploadImg from '../../assets/RegisterStoreInfo/upload.svg'
 import nav from '../../assets/RegisterStoreInfo/firststep.svg'
 import { useNavigate } from 'react-router-dom'
-import { useRef } from 'react'
+import { ChangeEvent, useRef } from 'react'
 import useImageUploader from '../../hooks/useImageUpload'
+import { useErrorInput } from '../../hooks/useErrorInput'
 
 export default function FirstRegisterStoreInfo() {
   const navigate = useNavigate()
   const fileInputRef = useRef<HTMLInputElement>(null)
   const { selectedImage, handleUpload } = useImageUploader()
 
+  const storeLink = useErrorInput('')
+  const school = useErrorInput('')
+
   const handleNext = () => {
-    navigate('/secondRegisterStoreInfo')
+    const isStoreLinkValid = storeLink.validate('링크를 입력해 주세요.')
+    const isSchoolValid = school.validate('학교를 선택해 주세요.')
+
+    if (isStoreLinkValid && isSchoolValid) {
+      navigate('/secondRegisterStoreInfo')
+    }
   }
 
   const handleBack = () => {
@@ -55,8 +68,22 @@ export default function FirstRegisterStoreInfo() {
         <StyledFormContainer>
           <StyledLabel>가게 이름</StyledLabel>
           <StyledFormInput type="text" placeholder="밥이득 김치찌개" />
-          <StyledLabel>가게 링크</StyledLabel>
-          <StyledFormInput type="text" placeholder="링크를 입력해 주세요." />
+          <StyledInputContainer>
+            <StyledLabel>가게 링크</StyledLabel>
+            {storeLink.error && (
+              <StyledErrorMessage>
+                <img src={errorIcon} alt="Error icon" />
+                {storeLink.error}
+              </StyledErrorMessage>
+            )}
+          </StyledInputContainer>
+          <StyledFormInput
+            type="text"
+            placeholder="링크를 입력해 주세요."
+            value={storeLink.value}
+            onChange={storeLink.onChange}
+            className={storeLink.error ? 'invalid' : ''}
+          />
           <StyledSection>
             <StyledLabel>가게 배너 사진 등록</StyledLabel>
             <StyledUploadBox onClick={() => fileInputRef.current?.click()}>
@@ -79,11 +106,27 @@ export default function FirstRegisterStoreInfo() {
               type="file"
               ref={fileInputRef}
               style={{ display: 'none' }}
-              onChange={handleUpload}
+              onChange={
+                handleUpload as (e: ChangeEvent<HTMLInputElement>) => void
+              }
             />
           </StyledSection>
-          <StyledLabel>학교 선택</StyledLabel>
-          <StyledSearchInput type="text" placeholder="학교 선택" />
+          <StyledSearchInputContainer>
+            <StyledLabel>학교 선택</StyledLabel>
+            {school.error && (
+              <StyledErrorMessage>
+                <img src={errorIcon} alt="Error icon" />
+                {school.error}
+              </StyledErrorMessage>
+            )}
+          </StyledSearchInputContainer>
+          <StyledSearchInput
+            type="text"
+            placeholder="학교 선택"
+            value={school.value}
+            onChange={school.onChange}
+            className={school.error ? 'invalid' : ''}
+          />
           <StyledButton onClick={handleNext}>다음</StyledButton>
         </StyledFormContainer>
       </StyledScrollableContent>

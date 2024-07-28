@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import Back from '../../assets/RegisterStoreInfo/back.svg'
 import nav from '../../assets/RegisterStoreInfo/thirdstep.svg'
+import errorIcon from '../../assets/RegisterStoreInfo/warnning.svg'
+
 import {
   StyledBackIcon,
   StyledButton,
@@ -16,6 +18,8 @@ import {
   StyledScrollableContent,
   StyledTitle,
   StyledUploadText,
+  StyledErrorMessage,
+  StyledInputContainer,
 } from './ThirdRegisterStoreInfo.style'
 import { useState } from 'react'
 import { RegisterMenu } from '../../components/RegisterMenu/RegisterMenu'
@@ -26,8 +30,9 @@ interface Menu {
 }
 
 export default function ThirdRegisterStoreInfo() {
+  const [isError, setIsError] = useState<boolean>(false)
+
   const navigate = useNavigate()
-  const handleNext = () => {}
   const handleBack = () => {
     navigate(-1)
   }
@@ -52,6 +57,19 @@ export default function ThirdRegisterStoreInfo() {
     setMenus(updatedMenus)
   }
 
+  const handleNext = () => {
+    // const isNextButtonDisabled = !menus.every((menu) => menu.name && menu.price)
+    const isFormValid = menus.every((menu) => menu.name && menu.price)
+    if (isFormValid) {
+      setIsError(false)
+      console.log('폼 유효함')
+      // navigate('/nextpage')
+    } else {
+      setIsError(true)
+      console.log('모든 필드를 채워주세요.')
+    }
+  }
+
   return (
     <StyledContainer>
       <StyledRow>
@@ -68,8 +86,16 @@ export default function ThirdRegisterStoreInfo() {
       </StyledNavImgWrapper>
       <StyledScrollableContent>
         <StyledFormContainer>
-          <StyledLabel>메뉴 정보</StyledLabel>
-          <StyledMenuTable>
+          <StyledInputContainer>
+            <StyledLabel>메뉴 정보</StyledLabel>
+            {isError && (
+              <StyledErrorMessage>
+                <img src={errorIcon} alt="Error icon" />
+                모든 필드를 채워주세요.
+              </StyledErrorMessage>
+            )}
+          </StyledInputContainer>
+          <StyledMenuTable className={isError ? 'invalid' : ''}>
             <StyledUploadText>
               * 가격은 1인분 기준으로 입력해주세요.
             </StyledUploadText>

@@ -63,6 +63,10 @@ export const StyledFormInput = styled.input`
   margin-bottom: 10px;
   border: 0.4px solid #e7e7e7;
   border-radius: 5px;
+  &.invalid {
+    border: 0.4px solid #ff4d4d;
+    background-color: #fff0f0;
+  }
 `
 export const StyledSearchInput = styled.input`
   width: 342px;
@@ -75,6 +79,10 @@ export const StyledSearchInput = styled.input`
   background-position: right 10px center;
   background-repeat: no-repeat;
   background-size: 20px;
+  &.invalid {
+    border: 0.4px solid #ff4d4d;
+    background-color: #fff0f0;
+  }
 `
 
 export const StyledSection = styled.div`
@@ -160,8 +168,29 @@ export const StyledNavText = styled.div`
   width: 100%;
   padding: 0 10px;
 `
-export const ErrorMessage = styled.div`
-  color: red;
-  font-size: 12px;
-  margin-bottom: 10px;
+export const StyledErrorMessage = styled.div`
+  color: #ff5757;
+  font-size: 10px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  img {
+    margin-right: 5px;
+    height: 13px;
+    width: 13px;
+  }
+`
+export const StyledInputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  /* justify-content: space-between; */
+`
+
+export const StyledSearchInputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  /* justify-content: space-between; */
 `
