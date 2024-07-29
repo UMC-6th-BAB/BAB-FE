@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import AfterDiscountBar from './AfterDiscountBar'
+import AfterDiscountBar from '@components/MapCard/DiscountCard/AfterDiscountBar'
 import { IoIosArrowBack } from 'react-icons/io'
-import { SearchStore } from '../stores/searchStore'
-import restaurantInfoStore from '../stores/restaurentStore'
-import { useStore } from '../stores/mapStore'
+import { searchStore } from '@stores/searchStore'
+import restaurantInfoStore from '@stores/restaurentStore'
+import { mapStore } from '@stores/mapStore'
 const Container = styled.div`
   position: absolute;
   display: flex;
@@ -47,9 +47,9 @@ const DiscountStyle = styled.div`
   cursor: pointer;
 `
 export default function AfterSearchBar() {
-  const { searchValue, setSearchValue } = SearchStore()
+  const { searchValue, setSearchValue } = searchStore()
   const { tempInfos } = restaurantInfoStore()
-  const { markers, clearMarker } = useStore()
+  const { markers } = mapStore()
 
   function findPrice(id: string): number {
     let num = -1
@@ -63,7 +63,7 @@ export default function AfterSearchBar() {
   function filterDiscount() {
     if (markers.length) {
       markers.forEach((marker) => {
-        let num = findPrice(marker.id)
+        const num = findPrice(marker.id)
         if (num > 50) {
           marker.map = null
         }

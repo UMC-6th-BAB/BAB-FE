@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react'
-import DiscountBar from './DiscountBar'
+import { useState } from 'react'
+import DiscountBar from '@components/MapCard/DiscountCard/DiscountBar'
 import styled from 'styled-components'
 import { IoIosSearch } from 'react-icons/io'
-import { SearchStore } from '../stores/searchStore'
-import Debounce from './Debounce'
-import { filterDiscount } from './DiscountFunction'
-import restaurantInfoStore from '../stores/restaurentStore'
-import { useStore } from '../stores/mapStore'
+import { searchStore } from '@stores/searchStore'
+import restaurantInfoStore from '@stores/restaurentStore'
+import { mapStore } from '@stores/mapStore'
 
 const SearchBarContainer = styled.div`
   position: absolute;
@@ -72,12 +70,12 @@ const DiscountStyle = styled.div`
 `
 export default function SearchBar() {
   const [data, setData] = useState('')
-  const setSearchValue = SearchStore((state) => state.setSearchValue)
+  const { setSearchValue } = searchStore()
   const handleValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData(e.target.value)
   }
   const { tempInfos } = restaurantInfoStore()
-  const { markers, clearMarker } = useStore()
+  const { markers } = mapStore()
 
   function findPrice(id: string): number {
     let num = -1
@@ -91,7 +89,7 @@ export default function SearchBar() {
   function filterDiscount() {
     if (markers.length) {
       markers.forEach((marker) => {
-        let num = findPrice(marker.id)
+        const num = findPrice(marker.id)
         if (num > 50) {
           marker.map = null
         }

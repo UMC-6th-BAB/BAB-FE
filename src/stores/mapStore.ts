@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-interface mapSlice {
+interface MapStore {
   lat: number
   lng: number
   markers: google.maps.marker.AdvancedMarkerElement[]
@@ -12,7 +12,7 @@ interface mapSlice {
   clearMarker: () => void
 }
 
-export const useStore = create<mapSlice>((set) => ({
+export const mapStore = create<MapStore>((set) => ({
   markers: [],
   lat: 37.496336,
   lng: 126.95733,

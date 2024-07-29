@@ -1,6 +1,6 @@
-import greyLogo from '../assets/mapIcon/말풍선_회색.png'
+import yellowLogo from '@assets/mapIcon/yellow_webp/yellow_2x.webp'
 
-export default function greyIcon(price) {
+export default function yellowIcon(price: number) {
   const container = document.createElement('div')
   container.style.position = 'relative'
   container.style.display = 'inline-block'
@@ -12,7 +12,7 @@ export default function greyIcon(price) {
   container.style.fontWeight = 'bold'
 
   const img = document.createElement('img')
-  img.src = greyLogo
+  img.src = yellowLogo
   img.style.width = '100%'
   img.style.height = '100%'
   container.appendChild(img)

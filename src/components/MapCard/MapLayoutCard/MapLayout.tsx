@@ -1,16 +1,14 @@
 import React from 'react'
-import Header from './Header'
-import SearchBar from './SearchBar'
-import AfterSearchBar from './AfterSearchBar'
-import { SearchStore } from '../stores/searchStore'
+import SearchBar from '@components/MapCard/SearchCard/SearchBar'
+import AfterSearchBar from '@components/MapCard/SearchCard/AfterSearchBar'
+import { searchStore } from '@stores/searchStore'
 import { Outlet } from 'react-router-dom'
 
 const BasicLayout: React.FC = () => {
-  const { searchValue } = SearchStore()
+  const { searchValue } = searchStore()
 
   return (
     <>
-      <Header />
       {searchValue === '' ? <SearchBar /> : <AfterSearchBar />}
       <Outlet />
     </>

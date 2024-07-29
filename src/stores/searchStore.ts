@@ -1,11 +1,11 @@
 import { create } from 'zustand'
 
-interface searchSlice {
+interface SearchStore {
   searchValue: string
   setSearchValue: (value: string) => void
 }
 
-export const SearchStore = create<searchSlice>((set) => ({
+export const searchStore = create<SearchStore>((set) => ({
   searchValue: '',
   setSearchValue: (value) => set({ searchValue: value }),
 }))

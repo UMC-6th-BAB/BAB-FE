@@ -1,4 +1,4 @@
-import { create, State } from 'zustand'
+import { create } from 'zustand'
 import { produce } from 'immer'
 
 interface BusinessHours {
@@ -14,7 +14,7 @@ interface MenuItem {
   price: number
 }
 
-interface restaurantInfo {
+interface RestaurantInfo {
   name: string
   lat: number | null | undefined
   lng: number | null | undefined
@@ -28,10 +28,10 @@ interface restaurantInfo {
   menus: MenuItem[]
 }
 
-interface restaurantStore {
-  restaurantInfo: restaurantInfo
-  infos: restaurantInfo[]
-  tempInfos: restaurantInfo[]
+interface RestaurantStore {
+  restaurantInfo: RestaurantInfo
+  infos: RestaurantInfo[]
+  tempInfos: RestaurantInfo[]
   addTempInfo: (
     name: string | null | undefined,
     id: string,
@@ -44,7 +44,7 @@ interface restaurantStore {
     lat: number,
     lng: number,
   ) => void
-  setrestaurantInfo: (info: restaurantInfo) => void
+  setrestaurantInfo: (info: RestaurantInfo) => void
   setIsDiscount: (id: string) => void
   clearInfo: () => void
   clearTempInfo: () => void
@@ -54,7 +54,7 @@ interface restaurantStore {
   setRestaurantRegistered: (registered: boolean) => void
 }
 
-const restaurantInfoStore = create<restaurantStore>((set) => ({
+const restaurantInfoStore = create<RestaurantStore>((set) => ({
   infos: [],
   tempInfos: [],
   restaurantInfo: {
@@ -73,7 +73,7 @@ const restaurantInfoStore = create<restaurantStore>((set) => ({
   clearTempInfo: () => set({ tempInfos: [] }),
   addMenu: (id, name) =>
     set(
-      produce((state: restaurantStore) => {
+      produce((state: RestaurantStore) => {
         const restaurent = state.infos.find((info) => info.id === id)
         if (restaurent) {
           restaurent.menus.push({
@@ -87,7 +87,7 @@ const restaurantInfoStore = create<restaurantStore>((set) => ({
 
   addTempMenu: (id, name) =>
     set(
-      produce((state: restaurantStore) => {
+      produce((state: RestaurantStore) => {
         const realRestaurent = state.infos.find((info) => info.id === id)
         const restaurent = state.tempInfos.find((info) => info.id === id)
         if (restaurent) {
@@ -116,7 +116,7 @@ const restaurantInfoStore = create<restaurantStore>((set) => ({
           businessHours: [],
           breakTime: [],
           menus: [],
-        } as restaurantInfo,
+        } as RestaurantInfo,
       ],
     })),
 
@@ -137,12 +137,12 @@ const restaurantInfoStore = create<restaurantStore>((set) => ({
           businessHours: [],
           breakTime: [],
           menus: [],
-        } as restaurantInfo,
+        } as RestaurantInfo,
       ],
     })),
   setIsDiscount: (id) =>
     set(
-      produce((state: restaurantStore) => {
+      produce((state: RestaurantStore) => {
         const restaurent = state.infos.find((info) => info.id === id)
         if (restaurent) {
           if (restaurent.menus[0].price > 50) {

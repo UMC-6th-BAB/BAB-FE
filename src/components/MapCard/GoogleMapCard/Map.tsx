@@ -1,29 +1,39 @@
-import { GoogleMap } from '@react-google-maps/api'
-import { useEffect, useRef, useState } from 'react'
-import { useStore } from '../stores/mapStore'
-import { SearchStore } from '../stores/searchStore'
-import restaurantInfoStore from '../stores/restaurentStore'
-import styled, { ThemeProvider } from 'styled-components'
-import GlobalStyle from '../styles/GlobalStyle'
-import greyIcon from '../assets/greyIcon'
-import yellowIcon from '../assets/yellowIcon'
+//import { GoogleMap } from '@react-google-maps/api'
+import styled from 'styled-components'
+import { useEffect, useRef } from 'react'
+import { mapStore } from '@stores/mapStore'
+import { searchStore } from '@stores/searchStore'
+import restaurantInfoStore from '@stores/restaurentStore'
+import greyIcon from '@assets/mapIcon/greyIcon'
+import yellowIcon from '@assets/mapIcon/yellowIcon'
 
+const MapContainer = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 400px;
+  height: 100vh;
+  padding-top: 30px;
+  padding-bottom: 60px;
+  background-color: white;
+`
+
+const MapWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+`
 export default function Map() {
   const ref = useRef<HTMLDivElement>(null)
   const { lat, lng, googleMap, setGoogleMap, addMarker, clearMarker, markers } =
-    useStore()
-  const SearchValue = SearchStore((state) => state.searchValue)
+    mapStore()
+  const SearchValue = searchStore((state) => state.searchValue)
   const {
     infos,
     tempInfos,
-    setName,
-    setDiscount,
     addRestaurantInfo,
     addMenu,
-    clearInfo,
     clearTempInfo,
-    restaurantInfo,
-    setDisplayMarker,
     addTempInfo,
     addTempMenu,
     setIsDiscount,
@@ -114,9 +124,9 @@ export default function Map() {
     const { Place } = (await google.maps.importLibrary(
       'places',
     )) as google.maps.PlacesLibrary
-    const { LatLngBounds } = (await google.maps.importLibrary(
+    /*const { LatLngBounds } = (await google.maps.importLibrary(
       'core',
-    )) as google.maps.CoreLibrary
+    )) as google.maps.CoreLibrary*/
 
     const request = {
       textQuery: SearchValue,
@@ -158,8 +168,8 @@ export default function Map() {
   }
 
   return (
-    <>
-      <div ref={ref} id="map" style={{ minHeight: '97vh' }} />
-    </>
+    <MapContainer>
+      <MapWrapper ref={ref} id="map" />
+    </MapContainer>
   )
 }

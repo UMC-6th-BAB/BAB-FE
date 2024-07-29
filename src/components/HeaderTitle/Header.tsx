@@ -1,9 +1,10 @@
-import styled from 'styled-components'
+/*import { useEffect, useState } from 'react'
 import { MdOutlineWifi } from 'react-icons/md'
 import { HiChartBar } from 'react-icons/hi2'
 import { IoIosBatteryFull } from 'react-icons/io'
-import * as S from '../styles/Header.styled'
-import { useEffect, useState } from 'react'
+import * as S from '@styles/Header.styled'
+
+//임시 지도 헤더
 
 export default function Header() {
   const [timer, setTimer] = useState('00:00')
@@ -32,3 +33,4 @@ export default function Header() {
     </S.HeaderContainer>
   )
 }
+*/

@@ -1,6 +1,5 @@
-import restaurantInfoStore from '../stores/restaurentStore'
-import { useStore } from '../stores/mapStore'
-import { useEffect } from 'react'
+import restaurantInfoStore from '@stores/restaurentStore'
+import { useStore } from '@stores/mapStore'
 
 export function filterDiscount() {
   const { infos } = restaurantInfoStore()
@@ -18,7 +17,7 @@ export function filterDiscount() {
 
   if (markers.length) {
     markers.forEach((marker) => {
-      let num = findPrice(marker.id)
+      const num = findPrice(marker.id)
       if (num > 50) {
         marker.map = null
       }
