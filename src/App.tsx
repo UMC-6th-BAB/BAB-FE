@@ -1,53 +1,41 @@
-import './App.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import styled, { ThemeProvider } from 'styled-components'
-import GlobalStyle from './styles/GlobalStyle'
-import Map from './components/Map'
-import { SearchStore } from './stores/searchStore'
-import { Wrapper, Status } from '@googlemaps/react-wrapper'
-import { theme } from './styles/theme'
-import BasicLayout from './components/BasicLayout'
+import GlobalStyle from '@styles/GlobalStyle'
+import { theme } from '@styles/theme'
+import ManagerPage from '@pages/ManagerPage/ManagerPage'
+import Footer from '@components/Footer/Footer'
+import StatusBar from '@components/StatusBar/StatusBar'
+import DiscountEventPage from '@pages/DiscountEventPage/DiscountEventPage'
+import StudentPage from './pages/StudentPage/StudentPage'
+import BusinessDocUpload from './pages/BusinessDocUpload/BusinessDocUpload'
+import RegisterSuccess from './pages/RegisterSuccess/RegisterSuccess'
+import MapRender from '@pages/MapPage/MapRender'
 
 const Container = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
   width: 100%;
   height: 100%;
 `
 
-const render = (status: Status) => {
-  switch (status) {
-    case Status.LOADING:
-      return <>로딩중...</>
-    case Status.FAILURE:
-      return <>에러 발생</>
-    case Status.SUCCESS:
-      return <Map />
-  }
-}
 export default function App() {
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <BrowserRouter>
-          <Routes>
-            <Route element={<BasicLayout />}>
-              <Route
-                path="/map-page"
-                element={
-                  <Wrapper
-                    apiKey={import.meta.env.VITE_API_KEY}
-                    render={render}
-                  />
-                }
-              />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Router>
+        <StatusBar />
+        <Routes>
+          <Route path="/" element={<Container>임시 메인 페이지</Container>} />
+          <Route path="/manager" element={<ManagerPage />} />
+          <Route path="/discount-event" element={<DiscountEventPage />} />
+          <Route path="/studentPage" element={<StudentPage />} />
+          <Route path="/managerUpload" element={<BusinessDocUpload />} />
+          <Route path="/registerSuccess" element={<RegisterSuccess />} />
+          <Route path="/map" element={<MapRender />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </ThemeProvider>
   )
 }
