@@ -30,14 +30,13 @@ interface DiscountEventState {
       image: string
       name: string
       price: number
-      discountPrice?: number
       isDiscounted?: boolean
     }[],
   ) => void
   addDiscountEvent: () => void
 }
 
-const DiscountEventStore = create<DiscountEventState>((set) => ({
+const discountEventStore = create<DiscountEventState>((set) => ({
   eventPeriod: { startDate: '', endDate: '' },
   eventMessage: '',
   discounts: [],
@@ -81,4 +80,4 @@ const DiscountEventStore = create<DiscountEventState>((set) => ({
     })),
 }))
 
-export default DiscountEventStore
+export default discountEventStore
