@@ -14,7 +14,7 @@ export const StyledSpinner = styled.img`
 `
 
 export const StyledText = styled.p`
-  font-weight: 600px;
+  font-weight: 600;
   font-size: 22px;
   color: #000000;
 `
