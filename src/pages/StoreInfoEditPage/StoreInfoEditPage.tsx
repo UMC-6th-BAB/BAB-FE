@@ -29,7 +29,12 @@ export default function StoreInfoEditPage() {
         <OptionButton type="default">기본 정보</OptionButton>
         <OptionButton type="default">영업 시간</OptionButton>
         <OptionButton type="default">메뉴 등록</OptionButton>
-        <OptionButton type="destructive">가게 삭제</OptionButton>
+        <OptionButton
+          type="destructive"
+          onClick={() => navigate('/storeInfo-delete')}
+        >
+          가게 삭제
+        </OptionButton>
       </EditOptions>
       <NextButton onClick={() => navigate('/next-page')}>다음</NextButton>
     </PageContainer>

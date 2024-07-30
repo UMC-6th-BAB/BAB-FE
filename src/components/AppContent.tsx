@@ -7,6 +7,7 @@ import DiscountEventPage from '@pages/DiscountEventPage/DiscountEventPage/Discou
 import DiscountEventPageTwo from '@pages/DiscountEventPage/DiscountEventPageTwo/DiscountEventPageTwo'
 import DiscountEventRecordPage from '@pages/DiscountEventRecordPage/DiscountEventRecordPage'
 import StoreInfoEditPage from '@pages/StoreInfoEditPage/StoreInfoEditPage'
+import StoreInfoDeletePage from '@pages/StoreInfoDeletePage/StoreInfoDeletePage'
 
 const Container = styled.div`
   display: flex;
@@ -35,6 +36,7 @@ export default function AppContent() {
         <Route path="/discount-eventTwo" element={<DiscountEventPageTwo />} />
         <Route path="/discount-record" element={<DiscountEventRecordPage />} />
         <Route path="/storeInfo-edit" element={<StoreInfoEditPage />} />
+        <Route path="/storeInfo-delete" element={<StoreInfoDeletePage />} />
       </Routes>
       {showFooter && <Footer />}
     </>

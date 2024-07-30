@@ -59,11 +59,6 @@ export default function DiscountEventPage() {
 
     let hasValidDiscount = false
     for (const discount of currentEvent.discounts) {
-      if (discount.isChecked && !discount.discountPrice) {
-        discountError = '할인할 메뉴에 대해 가격을 입력해주세요.'
-        hasError = true
-        break
-      }
       if (discount.isChecked && discount.discountPrice) {
         hasValidDiscount = true
       }
