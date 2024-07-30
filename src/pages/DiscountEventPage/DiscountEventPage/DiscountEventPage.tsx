@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 import {
   PageContainer,
   Header,
@@ -19,6 +21,7 @@ import {
   MenuTableBody,
   CheckboxWrapper,
   ErrorMessage,
+  CustomDatePickerWrapper,
 } from '@pages/DiscountEventPage/DiscountEventPage/DiscountEventPage.style'
 import { useNavigate } from 'react-router-dom'
 import storeInfoStore from '@stores/storeInfoStore'
@@ -102,19 +105,39 @@ export default function DiscountEventPage() {
           <DateDataWrapper>
             <Label>행사 기간 선택</Label>
             <DateInputWrapper>
-              <DateInput
-                type="date"
-                onChange={(e) =>
-                  setEventPeriod(e.target.value, currentEvent.endDate)
-                }
-              />
+              <CustomDatePickerWrapper>
+                <DatePicker
+                  selected={
+                    currentEvent.startDate
+                      ? new Date(currentEvent.startDate)
+                      : null
+                  }
+                  onChange={(date) =>
+                    setEventPeriod(
+                      date ? date.toISOString().split('T')[0] : '',
+                      currentEvent.endDate,
+                    )
+                  }
+                  dateFormat="yyyy-MM-dd"
+                  placeholderText="연도.월.일"
+                />
+              </CustomDatePickerWrapper>
               <SpanLabel>부터</SpanLabel>
-              <DateInput
-                type="date"
-                onChange={(e) =>
-                  setEventPeriod(currentEvent.startDate, e.target.value)
-                }
-              />
+              <CustomDatePickerWrapper>
+                <DatePicker
+                  selected={
+                    currentEvent.endDate ? new Date(currentEvent.endDate) : null
+                  }
+                  onChange={(date) =>
+                    setEventPeriod(
+                      currentEvent.startDate,
+                      date ? date.toISOString().split('T')[0] : '',
+                    )
+                  }
+                  dateFormat="yyyy-MM-dd"
+                  placeholderText="연도.월.일"
+                />
+              </CustomDatePickerWrapper>
               <SpanLabel>까지</SpanLabel>
             </DateInputWrapper>
             {errorMessages.periodError && (

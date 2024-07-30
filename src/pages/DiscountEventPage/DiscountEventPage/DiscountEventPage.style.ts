@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 
 export const PageContainer = styled.div`
@@ -11,15 +10,6 @@ export const PageContainer = styled.div`
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-`
-
-export const DateDataWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  margin-bottom: 20px;
-  width: 100%;
-  height: auto;
 `
 
 export const Header = styled.div`
@@ -62,18 +52,67 @@ export const Label = styled.label`
   font-weight: bold;
   margin-bottom: 5px;
 `
+
 export const SpanLabel = styled.span`
   font-size: 0.8rem;
-  text-align: center;
-  margin-left: 2px;
+  font-weight: 400;
+`
+
+export const DateDataWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-bottom: 10px;
+  width: 100%;
+  height: auto;
+`
+
+//리액트 캘린더 픽커 이용..커스터마이징
+export const CustomDatePickerWrapper = styled.div`
+  .react-datepicker {
+    font-size: 14px; /* 글꼴 크기 조정 */
+  }
+  .react-datepicker__month-container {
+    width: auto; /* 달력 컨테이너 너비 조정 */
+  }
+  .react-datepicker__header {
+    background-color: #ffc107; /* 헤더 배경색 조정 */
+  }
+  .react-datepicker__day-name {
+    width: 1.1rem; /* 날짜와 요일의 너비 조정 */
+    line-height: 2rem; /* 날짜와 요일의 높이 조정 */
+    color: white;
+    font-weight: 400;
+  }
+  .react-datepicker__day,
+  .react-datepicker__time-name {
+    width: 1.1rem;
+    line-height: 2rem;
+  }
 `
 
 export const DateInputWrapper = styled.div`
   display: flex;
-  width: 100%;
-  height: auto;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  .react-datepicker-wrapper {
+    width: 125px;
+  }
+
+  .react-datepicker__input-container {
+    width: 100%;
+  }
+
+  input {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
 `
 
 export const DateInput = styled.input`
