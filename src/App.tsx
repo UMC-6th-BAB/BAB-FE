@@ -1,8 +1,10 @@
-import './App.css'
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import styled, { ThemeProvider } from 'styled-components'
 import GlobalStyle from './styles/GlobalStyle'
 import { theme } from './styles/theme'
+import FirstRegisterStoreInfo from './pages/FirstRegisterStoreInfo/FirstRegisterStoreInfo'
+import SecondRegisterStoreInfo from './pages/SecondRegisterStoreInfo/SecondRegisterStoreInfo'
+import ThirdRegisterStoreInfo from './pages/ThirdRegisterStoreInfo/ThirdRegisterStoreInfo'
 
 const Container = styled.div`
   display: flex;
@@ -18,7 +20,23 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Container>화면 적용</Container>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Container>임시 메인 페이지</Container>} />
+            <Route
+              path="/firstregisterstoreinfo"
+              element={<FirstRegisterStoreInfo />}
+            />
+            <Route
+              path="/secondregisterstoreinfo"
+              element={<SecondRegisterStoreInfo />}
+            />
+            <Route
+              path="/thirdregisterstoreinfo"
+              element={<ThirdRegisterStoreInfo />}
+            />
+          </Routes>
+        </Router>
       </ThemeProvider>
     </>
   )
