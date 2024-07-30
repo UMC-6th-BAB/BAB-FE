@@ -2,9 +2,9 @@ import { FooterContainer } from './Footer.style'
 import { FooterIcon } from './Footer.style'
 import { FooterLink } from './Footer.style'
 import { FooterText } from './Footer.style'
-import homeIcon from '@icons/아이콘_홈.png'
-import listIcon from '@icons/아이콘_할인가게.png'
-import myPageIcon from '@icons/아이콘_마이페이지.png'
+import homeIcon from '@icons/아이콘_홈.svg'
+import listIcon from '@icons/아이콘_할인가게.svg'
+import myPageIcon from '@icons/아이콘_마이페이지.svg'
 
 export default function Footer() {
   return (
