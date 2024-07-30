@@ -1,17 +1,20 @@
 import styled from 'styled-components'
+import { useEffect } from 'react'
 import AfterDiscountBar from '@components/MapCard/DiscountCard/AfterDiscountBar'
 import { IoIosArrowBack } from 'react-icons/io'
 import { searchStore } from '@stores/searchStore'
 import restaurantInfoStore from '@stores/restaurentStore'
 import { mapStore } from '@stores/mapStore'
+
 const Container = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 3%;
+  height: 40px;
   background-color: white;
   justify-content: left;
+  margin-top: 30px;
   z-index: 1;
 `
 const Wrapper = styled.div`
@@ -49,37 +52,68 @@ const DiscountStyle = styled.div`
 export default function AfterSearchBar() {
   const { searchValue, setSearchValue } = searchStore()
   const { tempInfos } = restaurantInfoStore()
-  const { markers } = mapStore()
+  const { markers, googleMap, filterCheck, setFilterCheck } = mapStore()
 
-  function findPrice(id: string): number {
-    let num = -1
+  function findDiscount(id: string): boolean {
+    let check = false
     tempInfos.forEach((info) => {
       if (info.id === id) {
-        num = info.menus[0].price
+        if (info.menus[0].discountPrice !== null) {
+          check = true
+        } else {
+          check = false
+        }
       }
     })
-    return num
+    return check
   }
-  function filterDiscount() {
+
+  function filterMarker() {
     if (markers.length) {
+      console.log('필터 실행됨')
       markers.forEach((marker) => {
-        const num = findPrice(marker.id)
-        if (num > 50) {
+        const check = findDiscount(marker.id)
+        if (check === false) {
           marker.map = null
         }
       })
     }
   }
+
+  function reRenderMarker() {
+    if (markers.length) {
+      console.log('리렌더 실행됨')
+      markers.forEach((marker) => {
+        const check = findDiscount(marker.id)
+        if (check === false) {
+          marker.map = googleMap
+        }
+      })
+    }
+  }
+
+  useEffect(() => {
+    if (filterCheck === true) {
+      filterMarker()
+    } else {
+      reRenderMarker()
+    }
+  }, [filterCheck])
+
   return (
     <Container>
       <Wrapper>
-        <IconWrapper onClick={() => setSearchValue('')}>
+        <IconWrapper
+          onClick={() => {
+            setSearchValue('')
+          }}
+        >
           <IoIosArrowBack />
         </IconWrapper>
         <ContentWrapper>{searchValue}</ContentWrapper>
       </Wrapper>
       <DiscountWrapper>
-        <DiscountStyle onClick={() => filterDiscount()}>
+        <DiscountStyle onClick={() => setFilterCheck()}>
           <AfterDiscountBar />
         </DiscountStyle>
       </DiscountWrapper>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import DiscountBar from '@components/MapCard/DiscountCard/DiscountBar'
 import styled from 'styled-components'
 import { IoIosSearch } from 'react-icons/io'
@@ -14,13 +14,14 @@ const SearchBarContainer = styled.div`
   background-color: none;
   justify-content: center;
   align-items: center;
+  padding-top: 30px;
   z-index: 1;
 `
 const Wrapper = styled.div`
   display: flex;
-  width: 80%;
+  width: 90%;
   margin-top: 30px;
-  box-shadow: 0 0 3px;
+  box-shadow: 0 0 5px;
   border-radius: 20px;
   color: grey;
 `
@@ -59,47 +60,76 @@ const IconWrapper = styled.div`
 `
 const DiscountWrapper = styled.div`
   display: flex;
-  margin-top: 15px;
+  margin-top: 20px;
   border-radius: 20px;
   justify-content: left;
-  width: 80%;
+  width: 90%;
 `
 const DiscountStyle = styled.div`
-  width: 35%;
+  width: 30%;
   cursor: pointer;
 `
 export default function SearchBar() {
   const [data, setData] = useState('')
   const { setSearchValue } = searchStore()
+  const { tempInfos } = restaurantInfoStore()
+  const { markers, googleMap, filterCheck, setFilterCheck } = mapStore()
   const handleValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData(e.target.value)
   }
-  const { tempInfos } = restaurantInfoStore()
-  const { markers } = mapStore()
 
-  function findPrice(id: string): number {
-    let num = -1
+  function findDiscount(id: string): boolean {
+    let check = false
     tempInfos.forEach((info) => {
       if (info.id === id) {
-        num = info.menus[0].price
+        if (info.menus[0].discountPrice !== null) {
+          check = true
+        } else {
+          check = false
+        }
       }
     })
-    return num
+    return check
   }
-  function filterDiscount() {
+
+  function filterMarker() {
     if (markers.length) {
       markers.forEach((marker) => {
-        const num = findPrice(marker.id)
-        if (num > 50) {
+        const check = findDiscount(marker.id)
+        if (check === false) {
           marker.map = null
         }
       })
     }
   }
+
+  function reRenderMarker() {
+    if (markers.length) {
+      markers.forEach((marker) => {
+        const check = findDiscount(marker.id)
+        if (check === false) {
+          marker.map = googleMap
+        }
+      })
+    }
+  }
+
+  useEffect(() => {
+    if (filterCheck === true) {
+      filterMarker()
+    } else {
+      reRenderMarker()
+    }
+  }, [filterCheck])
+
   return (
     <SearchBarContainer>
       <Wrapper>
-        <IconWrapper onClick={() => setSearchValue(data)}>
+        <IconWrapper
+          onClick={() => {
+            setSearchValue(data)
+          }}
+        >
           <IoIosSearch />
         </IconWrapper>
         <SearchInput
@@ -110,7 +140,7 @@ export default function SearchBar() {
         />
       </Wrapper>
       <DiscountWrapper>
-        <DiscountStyle onClick={() => filterDiscount()}>
+        <DiscountStyle onClick={() => setFilterCheck()}>
           <DiscountBar />
         </DiscountStyle>
       </DiscountWrapper>

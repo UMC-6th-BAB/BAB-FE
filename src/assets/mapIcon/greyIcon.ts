@@ -5,8 +5,8 @@ export default function greyIcon(price: number) {
   container.style.position = 'relative'
   container.style.display = 'inline-block'
   container.style.textAlign = 'center'
-  container.style.width = '50px'
-  container.style.height = '50px'
+  container.style.width = '81px'
+  container.style.height = '81px'
   container.style.fontSize = '12px'
   container.style.color = 'black'
   container.style.fontWeight = 'bold'
@@ -17,13 +17,16 @@ export default function greyIcon(price: number) {
   img.style.height = '100%'
   container.appendChild(img)
 
-  const label = document.createElement('div')
-  label.style.position = 'absolute'
-  label.style.top = '50%'
-  label.style.left = '50%'
-  label.style.transform = 'translate(-50%, -50%)'
-  label.textContent = `${price}원`
-  container.appendChild(label)
+  const Price = document.createElement('div')
+  Price.style.position = 'absolute'
+  Price.style.top = '40%'
+  Price.style.left = '50%'
+  Price.style.fontSize = '12px'
+  Price.style.fontWeight = '400'
+  Price.style.whiteSpace = 'nowrap'
+  Price.style.transform = 'translate(-50%, -50%)'
+  Price.textContent = `${price}원`
+  container.appendChild(Price)
 
   return container
 }

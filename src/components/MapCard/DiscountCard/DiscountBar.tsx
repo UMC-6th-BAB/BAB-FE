@@ -6,11 +6,10 @@ const Container = styled.div`
   background-color: #ffee9c;
   color: #767676;
   border-radius: 20px;
-  padding: 5px;
-  padding-top: 7px;
-  padding-bottom: 7px;
+  padding: 9px 5px 9px 5px;
   font-size: 13px;
-  box-shadow: 0 0 3px;
+  box-shadow: 0 0 5px;
+  text-align: center;
   z-index: 1;
 `
 export default function DiscountBar() {

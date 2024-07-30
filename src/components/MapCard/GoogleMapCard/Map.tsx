@@ -23,6 +23,7 @@ const MapWrapper = styled.div`
   width: 100%;
   height: 100%;
 `
+
 export default function Map() {
   const ref = useRef<HTMLDivElement>(null)
   const { lat, lng, googleMap, setGoogleMap, addMarker, clearMarker, markers } =
@@ -36,7 +37,8 @@ export default function Map() {
     clearTempInfo,
     addTempInfo,
     addTempMenu,
-    setIsDiscount,
+    setDiscountPrice,
+    setTempDiscountPrice,
   } = restaurantInfoStore()
 
   //가게 중복입력 방지함수
@@ -67,8 +69,9 @@ export default function Map() {
   //이전 검색마커 삭제기능 && 검색기능
   useEffect(() => {
     if (SearchValue) {
+      console.log('검색 실행')
       if (markers.length !== 0) {
-        console.log(markers.length)
+        console.log('마커 수 : ' + markers.length)
         markers.forEach((marker) => {
           marker.map = null
         })
@@ -88,9 +91,9 @@ export default function Map() {
         )) as google.maps.MarkerLibrary
         tempInfos.forEach((info) => {
           const logo =
-            info.menus[0].price > 50
+            info.menus[0].discountPrice === null
               ? greyIcon(info.menus[0].price)
-              : yellowIcon(info.menus[0].price)
+              : yellowIcon(info.menus[0].price, info.menus[0].discountPrice)
           const markerView = new AdvancedMarkerElement({
             map: googleMap,
             position: new google.maps.LatLng(info.lat, info.lng),
@@ -106,14 +109,14 @@ export default function Map() {
     })()
   }, [tempInfos])
 
-  //가게정보 출력 && 할인여부 추가
+  //가게정보 출력
   useEffect(() => {
     if (infos.length) {
       infos.forEach((info) => {
-        console.log(info)
+        //console.log(info)
         info.menus.forEach((menu) => {
-          console.log(info.name + ' 가격: ' + menu.price)
-          console.log(info.lat + ' ' + info.lng)
+          //console.log(info.name + ' 가격: ' + menu.price)
+          //console.log(info.lat + ' ' + info.lng)
         })
       })
     }
@@ -151,7 +154,7 @@ export default function Map() {
             place.location.lng(),
           )
           addMenu(place.id, '햄버거')
-          setIsDiscount(place.id)
+          setDiscountPrice(place.id)
         }
         //가짜 가게 정보 삽입기능
         addTempInfo(
@@ -161,6 +164,7 @@ export default function Map() {
           place.location.lng(),
         )
         addTempMenu(place.id, '햄버거')
+        setTempDiscountPrice(place.id)
       })
     } else {
       console.log('No results')

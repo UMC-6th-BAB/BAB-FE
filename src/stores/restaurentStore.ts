@@ -12,6 +12,7 @@ interface MenuItem {
   image: string
   name: string
   price: number
+  discountPrice: number | null
 }
 
 interface RestaurantInfo {
@@ -22,7 +23,6 @@ interface RestaurantInfo {
   image: string
   id: string
   university: string
-  isDiscount: boolean
   businessHours: BusinessHours[]
   breakTime: BusinessHours[]
   menus: MenuItem[]
@@ -45,10 +45,11 @@ interface RestaurantStore {
     lng: number,
   ) => void
   setrestaurantInfo: (info: RestaurantInfo) => void
-  setIsDiscount: (id: string) => void
   clearInfo: () => void
   clearTempInfo: () => void
   addMenu: (id: string, name: string) => void
+  setDiscountPrice: (id: string) => void
+  setTempDiscountPrice: (id: string) => void
   addTempMenu: (id: string, name: string) => void
   isRestaurantRegistered: boolean
   setRestaurantRegistered: (registered: boolean) => void
@@ -59,11 +60,12 @@ const restaurantInfoStore = create<RestaurantStore>((set) => ({
   tempInfos: [],
   restaurantInfo: {
     name: '밥이득 김치찌개',
+    lat: null,
+    lng: null,
     restaurantLink: '',
     image: '',
     id: '',
     university: '',
-    isDiscount: false,
     businessHours: [],
     breakTime: [],
     menus: [],
@@ -71,6 +73,30 @@ const restaurantInfoStore = create<RestaurantStore>((set) => ({
 
   clearInfo: () => set({ infos: [] }),
   clearTempInfo: () => set({ tempInfos: [] }),
+  setDiscountPrice: (id) =>
+    set(
+      produce((state: RestaurantStore) => {
+        const restaurent = state.infos.find((info) => info.id === id)
+        if (restaurent) {
+          restaurent.menus[0].price > 3500
+            ? (restaurent.menus[0].discountPrice =
+                restaurent.menus[0].price - 2000)
+            : (restaurent.menus[0].discountPrice = null)
+        }
+      }),
+    ),
+  setTempDiscountPrice: (id) =>
+    set(
+      produce((state: RestaurantStore) => {
+        const restaurent = state.tempInfos.find((info) => info.id === id)
+        if (restaurent) {
+          restaurent.menus[0].price > 3500
+            ? (restaurent.menus[0].discountPrice =
+                restaurent.menus[0].price - 2000)
+            : (restaurent.menus[0].discountPrice = null)
+        }
+      }),
+    ),
   addMenu: (id, name) =>
     set(
       produce((state: RestaurantStore) => {
@@ -79,7 +105,8 @@ const restaurantInfoStore = create<RestaurantStore>((set) => ({
           restaurent.menus.push({
             name: name,
             image: '',
-            price: Math.floor(Math.random() * 100),
+            price: Math.floor(Math.random() * 7000),
+            discountPrice: null,
           })
         }
       }),
@@ -95,6 +122,7 @@ const restaurantInfoStore = create<RestaurantStore>((set) => ({
             name: name,
             image: '',
             price: realRestaurent?.menus[0].price,
+            discountPrice: null,
           })
         }
       }),
@@ -140,19 +168,6 @@ const restaurantInfoStore = create<RestaurantStore>((set) => ({
         } as RestaurantInfo,
       ],
     })),
-  setIsDiscount: (id) =>
-    set(
-      produce((state: RestaurantStore) => {
-        const restaurent = state.infos.find((info) => info.id === id)
-        if (restaurent) {
-          if (restaurent.menus[0].price > 50) {
-            restaurent.isDiscount = false
-          } else {
-            restaurent.isDiscount = true
-          }
-        }
-      }),
-    ),
   setrestaurantInfo: (info) => set({ restaurantInfo: info }),
   isRestaurantRegistered: false,
   setRestaurantRegistered: (registered) =>

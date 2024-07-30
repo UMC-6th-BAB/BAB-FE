@@ -9,9 +9,9 @@ export const StatusBarContainer = styled.div`
   height: 35px;
   padding: 10px 15px;
   box-sizing: border-box;
-  position: absolute;
+  position: fixed;
   top: 0;
-  left: 0;
+  left: 25px;
   z-index: 1000;
 `
 

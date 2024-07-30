@@ -1,9 +1,9 @@
 import restaurantInfoStore from '@stores/restaurentStore'
-import { useStore } from '@stores/mapStore'
+import { mapStore } from '@stores/mapStore'
 
 export function filterDiscount() {
   const { infos } = restaurantInfoStore()
-  const { markers, clearMarker } = useStore()
+  const { markers, clearMarker } = mapStore()
 
   function findPrice(id: string): number {
     let num = -1
