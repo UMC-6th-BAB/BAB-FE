@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import { format, parseISO } from 'date-fns'
 import {
   PageContainer,
   Header,
@@ -109,12 +110,12 @@ export default function DiscountEventPage() {
                 <DatePicker
                   selected={
                     currentEvent.startDate
-                      ? new Date(currentEvent.startDate)
+                      ? parseISO(currentEvent.startDate)
                       : null
                   }
                   onChange={(date) =>
                     setEventPeriod(
-                      date ? date.toISOString().split('T')[0] : '',
+                      date ? format(date, 'yyyy-MM-dd') : '',
                       currentEvent.endDate,
                     )
                   }
@@ -126,12 +127,12 @@ export default function DiscountEventPage() {
               <CustomDatePickerWrapper>
                 <DatePicker
                   selected={
-                    currentEvent.endDate ? new Date(currentEvent.endDate) : null
+                    currentEvent.endDate ? parseISO(currentEvent.endDate) : null
                   }
                   onChange={(date) =>
                     setEventPeriod(
                       currentEvent.startDate,
-                      date ? date.toISOString().split('T')[0] : '',
+                      date ? format(date, 'yyyy-MM-dd') : '',
                     )
                   }
                   dateFormat="yyyy-MM-dd"
