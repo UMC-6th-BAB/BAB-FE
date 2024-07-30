@@ -16,9 +16,9 @@ import Back from '@assets/BusinessUploadPage/backIcon.svg'
 import { useNavigate } from 'react-router-dom'
 import useImageUpload from '@hooks/useImageUpload'
 import Loading from '@components/Loading/loading'
-import UploadFail from '@pages/UploadFail/UploadFail'
-import UploadSuccess from '@pages/UploadSuccess/UploadSuccess'
 import { useEffect, useState } from 'react'
+import UploadSuccess from '@components/UploadSuccess/UploadSuccess'
+import UploadFail from '@components/UploadFail/UploadFail'
 
 export default function BusinessDocUpload() {
   const navigate = useNavigate()
