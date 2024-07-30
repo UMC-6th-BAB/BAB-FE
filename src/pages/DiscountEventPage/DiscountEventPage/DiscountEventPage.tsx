@@ -31,8 +31,7 @@ export default function DiscountEventPage() {
     setDiscountChecked,
     setDiscountPrice,
     initializeDiscounts,
-    discounts,
-    eventPeriod,
+    currentEvent,
   } = discountEventStore()
   const { storeInfo, updateMenuDiscount } = storeInfoStore()
 
@@ -51,33 +50,28 @@ export default function DiscountEventPage() {
   const handleNextClick = () => {
     let periodError = ''
     let discountError = ''
-    let hasError = false // 위에 에러에 따라서 전역으로 따져주는 에러 상태!
+    let hasError = false
 
-    if (!eventPeriod.startDate || !eventPeriod.endDate) {
+    if (!currentEvent.startDate || !currentEvent.endDate) {
       periodError = '행사 기간을 입력하세요.'
       hasError = true
     }
 
-    for (const discount of discounts) {
-      //순회하면서 유효성 검사
-      if (
-        (!discount.isChecked && !discount.discountPrice) ||
-        (discount.isChecked && !discount.discountPrice)
-      ) {
+    let hasValidDiscount = false
+    for (const discount of currentEvent.discounts) {
+      if (discount.isChecked && !discount.discountPrice) {
         discountError = '할인할 메뉴에 대해 가격을 입력해주세요.'
         hasError = true
         break
       }
-      if (!discount.isChecked && discount.discountPrice) {
-        discountError = '할인할 메뉴를 체크해주세요.'
-        hasError = true
-        break
+      if (discount.isChecked && discount.discountPrice) {
+        hasValidDiscount = true
       }
-      if (discount.isChecked && discount.discountPrice >= 0) {
-        //모든 데이터가 정상적
-        hasError = false
-        break
-      }
+    }
+
+    if (!hasValidDiscount) {
+      discountError = '적용할 메뉴를 선택하고 가격을 입력해주세요.'
+      hasError = true
     }
 
     setErrorMessages({
@@ -86,18 +80,21 @@ export default function DiscountEventPage() {
     })
 
     if (!hasError) {
-      discounts.forEach((discount) => {
+      currentEvent.discounts.forEach((discount) => {
         if (discount.isChecked && discount.discountPrice > 0) {
           updateMenuDiscount(
             discount.id,
             discount.discountPrice,
-            discount.isChecked, // 체크를 해야 할인이 적용되도록 함
+            discount.isChecked,
           )
         }
       })
       navigate('/discount-eventTwo')
     }
   }
+
+  console.log(currentEvent.startDate)
+  console.log(currentEvent.endDate)
 
   return (
     <>
@@ -113,14 +110,14 @@ export default function DiscountEventPage() {
               <DateInput
                 type="date"
                 onChange={(e) =>
-                  setEventPeriod(e.target.value, eventPeriod.endDate)
+                  setEventPeriod(e.target.value, currentEvent.endDate)
                 }
               />
               <SpanLabel>부터</SpanLabel>
               <DateInput
                 type="date"
                 onChange={(e) =>
-                  setEventPeriod(eventPeriod.startDate, e.target.value)
+                  setEventPeriod(currentEvent.startDate, e.target.value)
                 }
               />
               <SpanLabel>까지</SpanLabel>

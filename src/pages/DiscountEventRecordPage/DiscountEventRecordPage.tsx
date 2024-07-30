@@ -40,7 +40,7 @@ export default function DiscountEventRecordPage() {
                 </EventDescription>
               ))}
             <EventPeriod>
-              {event.startDate} - {event.endDate}
+              {event.startDate} ~ {event.endDate}
             </EventPeriod>
           </EventItem>
         ))}

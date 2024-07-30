@@ -21,10 +21,12 @@ import discountEventStore from '@stores/discountEventStore'
 
 export default function DiscountEventPageTwo() {
   const navigate = useNavigate()
-  const { eventMessage, setEventMessage, addDiscountEvent, discounts } =
+  const { currentEvent, setEventMessage, addDiscountEvent } =
     discountEventStore()
   const { storeInfo } = storeInfoStore()
-  const [selectedMessage, setSelectedMessage] = useState<string>(eventMessage)
+  const [selectedMessage, setSelectedMessage] = useState<string>(
+    currentEvent.eventMessage,
+  )
 
   const handleSelectedMessage = (message: string) => {
     setSelectedMessage(message)
@@ -38,7 +40,7 @@ export default function DiscountEventPageTwo() {
 
   const handleSubmit = () => {
     addDiscountEvent()
-    console.log(discounts) // 할인 정보 보기위해 콘솔 찍어보자
+    console.log(currentEvent.discounts) // 할인 정보 보기위해 콘솔 찍어보자
     console.log(storeInfo.menu) // 할인된 가격만큼 가게 스토어에 반영됐는지 확인하자
     navigate('/manager')
   }

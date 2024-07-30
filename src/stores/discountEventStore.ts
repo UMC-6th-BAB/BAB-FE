@@ -16,9 +16,7 @@ interface DiscountEvent {
 }
 
 interface DiscountEventState {
-  eventPeriod: { startDate: string; endDate: string }
-  eventMessage: string
-  discounts: Discount[]
+  currentEvent: DiscountEvent
   discountEvents: DiscountEvent[]
   setEventPeriod: (startDate: string, endDate: string) => void
   setEventMessage: (message: string) => void
@@ -37,47 +35,76 @@ interface DiscountEventState {
 }
 
 const discountEventStore = create<DiscountEventState>((set) => ({
-  eventPeriod: { startDate: '', endDate: '' },
-  eventMessage: '',
-  discounts: [],
+  currentEvent: {
+    id: 0,
+    startDate: '',
+    endDate: '',
+    eventMessage: '',
+    discounts: [],
+  },
   discountEvents: [],
   setEventPeriod: (startDate, endDate) =>
-    set({ eventPeriod: { startDate, endDate } }),
-  setEventMessage: (message) => set({ eventMessage: message }),
+    set((state) => ({
+      currentEvent: {
+        ...state.currentEvent,
+        startDate,
+        endDate,
+      },
+    })),
+  setEventMessage: (message) =>
+    set((state) => ({
+      currentEvent: {
+        ...state.currentEvent,
+        eventMessage: message,
+      },
+    })),
   setDiscountChecked: (id, isChecked) =>
     set((state) => ({
-      discounts: state.discounts.map((discount) =>
-        discount.id === id ? { ...discount, isChecked: isChecked } : discount,
-      ),
+      currentEvent: {
+        ...state.currentEvent,
+        discounts: state.currentEvent.discounts.map((discount) =>
+          discount.id === id ? { ...discount, isChecked: isChecked } : discount,
+        ),
+      },
     })),
   setDiscountPrice: (id, price) =>
     set((state) => ({
-      discounts: state.discounts.map((discount) =>
-        discount.id === id ? { ...discount, discountPrice: price } : discount,
-      ),
+      currentEvent: {
+        ...state.currentEvent,
+        discounts: state.currentEvent.discounts.map((discount) =>
+          discount.id === id ? { ...discount, discountPrice: price } : discount,
+        ),
+      },
     })),
   initializeDiscounts: (menu) =>
-    set({
-      discounts: menu.map((item) => ({
-        id: item.id,
-        name: item.name,
-        discountPrice: 0,
-        isChecked: false,
-      })),
-    }),
-  addDiscountEvent: () =>
     set((state) => ({
-      discountEvents: [
-        ...state.discountEvents,
-        {
-          id: state.discountEvents.length + 1,
-          startDate: state.eventPeriod.startDate,
-          endDate: state.eventPeriod.endDate,
-          eventMessage: state.eventMessage,
-          discounts: state.discounts,
-        },
-      ],
+      currentEvent: {
+        ...state.currentEvent,
+        discounts: menu.map((item) => ({
+          id: item.id,
+          name: item.name,
+          discountPrice: 0,
+          isChecked: false,
+        })),
+      },
     })),
+  addDiscountEvent: () =>
+    set((state) => {
+      const newEvent: DiscountEvent = {
+        ...state.currentEvent,
+        id: state.discountEvents.length + 1,
+      }
+      return {
+        discountEvents: [...state.discountEvents, newEvent],
+        currentEvent: {
+          id: 0,
+          startDate: '',
+          endDate: '',
+          eventMessage: '',
+          discounts: [],
+        },
+      }
+    }),
 }))
 
 export default discountEventStore
