@@ -1,6 +1,6 @@
 import React from 'react'
 import useModalStore from '@stores/modalStore'
-import cloudIcon from '@assets/modal/구름 아이콘.png' // 이미지 경로에 맞게 변경완료
+import cloudIcon from '@assets/modal/구름 아이콘.svg' // 이미지 경로에 맞게 변경완료
 import {
   ModalBackground,
   ModalContainer,
@@ -11,12 +11,12 @@ import { useNavigate } from 'react-router-dom'
 
 export default function DiscountModal() {
   const { isModalOpen, closeModal } = useModalStore()
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   if (!isModalOpen) return null
 
   const handleDiscountPageClick = () => {
-    navigate("/discount-event")
+    navigate('/discount-event')
   }
 
   return (
