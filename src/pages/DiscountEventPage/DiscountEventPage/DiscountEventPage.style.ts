@@ -49,7 +49,7 @@ export const BackButton = styled.button`
 export const EventForm = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   width: 360px;
   padding: 20px;
   box-sizing: border-box;
@@ -88,7 +88,6 @@ export const DateInput = styled.input`
 
 export const MenuTable = styled.div`
   width: 100%;
-  margin-bottom: 20px;
   background-color: white;
   border-radius: 10px;
   padding: 20px;
@@ -186,7 +185,7 @@ export const SubmitButton = styled.button`
   position: absolute;
   bottom: 30px; /* 하단에서 간격 */
   width: calc(100% - 40px); /* 전체 폭에서 좌우 패딩을 제외 */
-  max-width: 360px; /* 최대 너비 설정 */
+  max-width: 342px; /* 최대 너비 설정 */
   padding: 15px;
   background-color: #ffc107;
   border: none;
@@ -196,4 +195,9 @@ export const SubmitButton = styled.button`
   color: white;
   cursor: pointer;
   box-sizing: border-box;
+`
+export const ErrorMessage = styled.div`
+  color: red;
+  margin-top: 4px;
+  font-size: 0.8rem;
 `

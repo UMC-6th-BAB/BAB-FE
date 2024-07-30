@@ -12,16 +12,16 @@ import {
   AccountInfo,
   AccountDetail,
   AccountActions,
-  NotifyIcon,
 } from './ManagerPage.style'
-import icon from '@assets/managerMypage/등록증 아이콘.png'
-import menuIcon from '@assets/managerMypage/메뉴아이콘.png'
-import bellIcon from '@assets/icons/bell.png'
+import icon from '@assets/managerMypage/등록증 아이콘.svg'
+import menuIcon from '@assets/managerMypage/메뉴아이콘.svg'
+import bellIcon from '@assets/icons/bell.svg'
 import useModalStore from '@stores/modalStore'
 import { useEffect, useState } from 'react'
 import DiscountModal from '@components/Modal/DiscountModal'
 import ManagerCompletedCard from '@components/ManagerCompletedCard/ManagerCompletedCard'
 import storeInfoStore from '@stores/storeInfoStore'
+import NotifyIcon from '@components/NotifyIcon'
 
 export default function ManagerPage() {
   const { isRegistered, setIsRegistered, setManagerRegistrationInfo } =
@@ -62,7 +62,7 @@ export default function ManagerPage() {
     <ManagerPageContainer>
       <Title>
         <TitleText>마이페이지</TitleText>
-        <NotifyIcon src={bellIcon} />
+        <NotifyIcon />
       </Title>
       {isStoreRegistered ? (
         <ManagerCompletedCard />
@@ -100,8 +100,7 @@ export default function ManagerPage() {
         </AccountDetail>
         <AccountDetail className="divider" />
         <AccountActions>
-          <span>비밀번호 변경</span>
-          <span>이메일 변경</span>
+          <span>로그아웃</span>
         </AccountActions>
       </AccountInfo>
       {isStoreRegistered ? <DiscountModal /> : null}

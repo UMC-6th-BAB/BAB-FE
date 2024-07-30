@@ -8,6 +8,19 @@ export const PageContainer = styled.div`
   width: 100%;
   height: 100%;
 `
+export const SubTitle = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  width: 85%;
+  height: 60px;
+  font-size: 1.2rem;
+  color: #333;
+  margin: 0px;
+  margin-top: 10px;
+  font-weight: 700;
+`
 
 export const Header = styled.div`
   display: flex;
@@ -38,6 +51,7 @@ export const EditOptions = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  margin-top: 20px;
 `
 
 export const OptionButton = styled.button<{
