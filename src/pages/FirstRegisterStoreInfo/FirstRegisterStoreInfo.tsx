@@ -25,9 +25,10 @@ import {
 import UploadImg from '../../assets/RegisterStoreInfo/upload.svg'
 import nav from '../../assets/RegisterStoreInfo/firststep.svg'
 import { useNavigate } from 'react-router-dom'
-import { ChangeEvent, useRef } from 'react'
+import { ChangeEvent, useRef, useState } from 'react'
 import useImageUploader from '../../hooks/useImageUpload'
 import { useErrorInput } from '../../hooks/useErrorInput'
+import { AddressSearch } from '../../components/AddressSearch/AddressSearch'
 
 export default function FirstRegisterStoreInfo() {
   const navigate = useNavigate()
@@ -36,6 +37,9 @@ export default function FirstRegisterStoreInfo() {
 
   const storeLink = useErrorInput('')
   const school = useErrorInput('')
+  const [address, setAddress] = useState('')
+
+  console.log('본문', address)
 
   const handleNext = () => {
     const isStoreLinkValid = storeLink.validate('링크를 입력해 주세요.')
@@ -68,6 +72,8 @@ export default function FirstRegisterStoreInfo() {
         <StyledFormContainer>
           <StyledLabel>가게 이름</StyledLabel>
           <StyledFormInput type="text" placeholder="밥이득 김치찌개" />
+          <StyledLabel>주소 입력</StyledLabel>
+          <AddressSearch address={address} setAddress={setAddress} />
           <StyledInputContainer>
             <StyledLabel>가게 링크</StyledLabel>
             {storeLink.error && (
