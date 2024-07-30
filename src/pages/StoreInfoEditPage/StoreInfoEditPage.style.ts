@@ -55,6 +55,7 @@ export const EditOptions = styled.div`
 `
 
 export const OptionButton = styled.button<{
+  active?: string
   type?: 'default' | 'destructive'
 }>`
   display: flex;
@@ -66,7 +67,8 @@ export const OptionButton = styled.button<{
   max-width: 342px;
   height: 50px;
   max-height: 50px;
-  background-color: #ffffff;
+  background-color: ${(props) =>
+    props.active === props.type ? '#e7e7e7' : '#ffffff'};
   border: 1px solid #e7e7e7;
   border-radius: 5px;
   font-weight: 500;
