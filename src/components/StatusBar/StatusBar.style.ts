@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const StatusBarContainer = styled.div`
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -9,9 +10,8 @@ export const StatusBarContainer = styled.div`
   height: 35px;
   padding: 10px 15px;
   box-sizing: border-box;
-  position: absolute;
+  position: fixed;
   top: 0;
-  left: 0;
   z-index: 1000;
 `
 

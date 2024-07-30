@@ -9,7 +9,7 @@ export const Splash: React.FC = () => {
     const {isLogined, setIsLogined} = LoginStore(state=>state);
 
     useEffect(()=>{
-        setIsLogined(true);
+        setIsLogined(false);
         if(isLogined==false){
             const timer = setTimeout(()=>navigate("/membertype"), 1000);
             return ()=> clearTimeout(timer);

@@ -14,6 +14,7 @@ export const FooterContainer = styled.div`
   bottom: 0;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
+  z-index: 100;
 `
 
 export const FooterLink = styled(Link)`

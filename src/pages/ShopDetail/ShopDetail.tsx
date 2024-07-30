@@ -41,6 +41,20 @@ export const ShopDetail: React.FC = () => {
                     discountrate="43%"
                     saleprice={6500}
                     />
+                    <ShopMenu
+                    img={shopmenu1}
+                    title="스파이시 참치포케"
+                    fixprice={11500}
+                    discountrate="43%"
+                    saleprice={6500}
+                    />
+                    <ShopMenu
+                    img={shopmenu1}
+                    title="스파이시 참치포케"
+                    fixprice={11500}
+                    discountrate="43%"
+                    saleprice={6500}
+                    />
                 </MenuContainer>
             </MenuBody>
         </DetailContainer>
