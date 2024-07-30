@@ -131,10 +131,19 @@ export const StyledCheckBox = styled.input.attrs({ type: 'checkbox' })`
   border: 0.4px solid #e7e7e7;
   appearance: none;
   -webkit-appearance: none;
-
+  position: relative;
   &:checked {
     background-color: #fdd100;
     border-color: #e1ba00;
+  }
+  &:checked::after {
+    content: '✓';
+    color: white;
+    font-size: 18px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 `
 
