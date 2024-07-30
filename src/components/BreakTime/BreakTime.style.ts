@@ -5,18 +5,19 @@ export const StyledBreakTimeRow = styled.div`
   align-items: center;
   margin-bottom: 10px;
 `
-export const StyledDayButton = styled.button`
+export const StyledDayButton = styled.button<{ selected: boolean }>`
   width: 40px;
   height: 28px;
   margin: 0 5px;
   text-align: center;
   border: 0.4px solid #e7e7e7;
   border-radius: 5px;
-  background: #ffffff;
+  background: ${(props) => (props.selected ? '#fdd100' : '#ffffff')};
   font-size: 14px;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `
 export const StyledTimeInput = styled.input`
   width: 72px;

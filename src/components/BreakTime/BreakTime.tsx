@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   StyledBreakTimeRow,
   StyledDayButton,
@@ -15,11 +16,27 @@ interface BreakTimeInputProps {
 }
 
 export const BreakTime = ({ time, index }: BreakTimeInputProps) => {
+  const [selectedDays, setSelectedDays] = useState<boolean[]>(
+    new Array(days.length).fill(false),
+  )
+
+  const toggleDay = (idx: number) => {
+    const newSelectedDays = [...selectedDays]
+    newSelectedDays[idx] = !newSelectedDays[idx]
+    setSelectedDays(newSelectedDays)
+  }
+
   return (
     <div key={index}>
       <StyledBreakTimeRow>
         {days.map((day, idx) => (
-          <StyledDayButton key={idx}>{day}</StyledDayButton>
+          <StyledDayButton
+            key={idx}
+            selected={selectedDays[idx]}
+            onClick={() => toggleDay(idx)}
+          >
+            {day}
+          </StyledDayButton>
         ))}
       </StyledBreakTimeRow>
       <StyledTimeRow>

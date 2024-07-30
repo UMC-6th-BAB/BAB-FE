@@ -30,6 +30,8 @@ import {
 import { BreakTime } from '../../components/BreakTime/BreakTime'
 import { useErrorInput } from '../../hooks/useErrorInput'
 
+const days = ['월', '화', '수', '목', '금', '토', '일']
+
 export default function SecondRegisterStoreInfo() {
   const navigate = useNavigate()
   const [breakTimes, setBreakTimes] = useState([
@@ -41,7 +43,7 @@ export default function SecondRegisterStoreInfo() {
 
   const operatingHours = useErrorInput('')
   const [checkedDays, setCheckedDays] = useState<boolean[]>(
-    Array(7).fill(false),
+    Array(days.length).fill(false),
   )
 
   const handleNext = () => {
@@ -92,7 +94,7 @@ export default function SecondRegisterStoreInfo() {
             )}
           </StyledInputContainer>
           <StyledTimeTable className={operatingHours.error ? 'invalid' : ''}>
-            {['월', '화', '수', '목', '금', '토', '일'].map((day, index) => (
+            {days.map((day, index) => (
               <StyledTimeRow key={index}>
                 <StyledDayLabel>{day}</StyledDayLabel>
                 <StyledTimeInput type="text" defaultValue="09:00" />
