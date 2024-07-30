@@ -15,11 +15,38 @@ import UploadImg from '@assets/BusinessUploadPage/upload.svg'
 import Back from '@assets/BusinessUploadPage/backIcon.svg'
 import { useNavigate } from 'react-router-dom'
 import useImageUpload from '@hooks/useImageUpload'
+import Loading from '@components/Loading/loading'
+import UploadFail from '@pages/UploadFail/UploadFail'
+import UploadSuccess from '@pages/UploadSuccess/UploadSuccess'
+import { useEffect, useState } from 'react'
 
 export default function BusinessDocUpload() {
   const navigate = useNavigate()
   const { selectedImage, handleImgUpload, openCamera, fileInputRef } =
     useImageUpload()
+  const [isLoading, setIsLoading] = useState(false)
+  const [isUploadSuccess, setIsUploadSuccess] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    if (selectedImage) {
+      handleUpload()
+    }
+  }, [selectedImage])
+
+  const handleUpload = async () => {
+    setIsLoading(true)
+
+    try {
+      // 임시 API 처리 - 항상 성공하는 것으로 가정
+      // 나중에는 아예 따로 분리해서 코드 작성할 예정임다
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+      setIsUploadSuccess(true)
+    } catch (error) {
+      setIsUploadSuccess(false)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   const handleNext = () => {
     if (!selectedImage) {
@@ -33,6 +60,18 @@ export default function BusinessDocUpload() {
     navigate(-1)
   }
 
+  if (isLoading) {
+    return <Loading />
+  }
+
+  if (isUploadSuccess === true) {
+    return <UploadSuccess retry={() => setIsUploadSuccess(null)} />
+  }
+
+  if (isUploadSuccess === false) {
+    return <UploadFail retry={() => setIsUploadSuccess(null)} />
+  }
+
   return (
     <StyledContainer>
       <StyledRow>
@@ -42,18 +81,8 @@ export default function BusinessDocUpload() {
       <StyledSection onClick={openCamera}>
         <StyledLabel>사진으로 등록하기</StyledLabel>
         <StyledUploadBox>
-          {selectedImage ? (
-            <img
-              src={URL.createObjectURL(selectedImage)}
-              alt="미리보기"
-              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-            />
-          ) : (
-            <>
-              <StyledUploadImg src={UploadImg} alt="업로드 아이콘" />
-              <StyledUploadText>카메라로 등록</StyledUploadText>
-            </>
-          )}
+          <StyledUploadImg src={UploadImg} alt="업로드 아이콘" />
+          <StyledUploadText>카메라로 등록</StyledUploadText>
         </StyledUploadBox>
       </StyledSection>
       <input
