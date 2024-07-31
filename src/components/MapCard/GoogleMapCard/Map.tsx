@@ -1,28 +1,15 @@
 //import { GoogleMap } from '@react-google-maps/api'
 import styled from 'styled-components'
+import {
+  MapContainer,
+  MapWrapper,
+} from '@components/MapCard/GoogleMapCard/Map.style'
 import { useEffect, useRef } from 'react'
 import { mapStore } from '@stores/mapStore'
 import { searchStore } from '@stores/searchStore'
 import restaurantInfoStore from '@stores/restaurentStore'
 import greyIcon from '@assets/mapIcon/greyIcon'
 import yellowIcon from '@assets/mapIcon/yellowIcon'
-
-const MapContainer = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 400px;
-  height: 100vh;
-  padding-top: 30px;
-  padding-bottom: 60px;
-  background-color: white;
-`
-
-const MapWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
-`
 
 export default function Map() {
   const ref = useRef<HTMLDivElement>(null)
