@@ -10,7 +10,6 @@ import {
   EventForm,
   Label,
   SpanLabel,
-  DateInput,
   MenuTable,
   MenuRow,
   MenuLabel,
@@ -92,8 +91,24 @@ export default function DiscountEventPage() {
     }
   }
 
-  console.log(currentEvent.startDate)
-  console.log(currentEvent.endDate)
+  const handleStartDateChange = (date: Date | null) => {
+    setEventPeriod(date ? format(date, 'yyyy-MM-dd') : '', currentEvent.endDate)
+    setErrorMessages((prev) => ({
+      ...prev,
+      periodError: '',
+    }))
+  }
+
+  const handleEndDateChange = (date: Date | null) => {
+    setEventPeriod(
+      currentEvent.startDate,
+      date ? format(date, 'yyyy-MM-dd') : '',
+    )
+    setErrorMessages((prev) => ({
+      ...prev,
+      periodError: '',
+    }))
+  }
 
   return (
     <>
@@ -113,12 +128,7 @@ export default function DiscountEventPage() {
                       ? parseISO(currentEvent.startDate)
                       : null
                   }
-                  onChange={(date) =>
-                    setEventPeriod(
-                      date ? format(date, 'yyyy-MM-dd') : '',
-                      currentEvent.endDate,
-                    )
-                  }
+                  onChange={handleStartDateChange}
                   dateFormat="yyyy-MM-dd"
                   placeholderText="연도.월.일"
                 />
@@ -129,12 +139,7 @@ export default function DiscountEventPage() {
                   selected={
                     currentEvent.endDate ? parseISO(currentEvent.endDate) : null
                   }
-                  onChange={(date) =>
-                    setEventPeriod(
-                      currentEvent.startDate,
-                      date ? format(date, 'yyyy-MM-dd') : '',
-                    )
-                  }
+                  onChange={handleEndDateChange}
                   dateFormat="yyyy-MM-dd"
                   placeholderText="연도.월.일"
                 />
