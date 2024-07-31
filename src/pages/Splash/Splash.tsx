@@ -11,10 +11,12 @@ export const Splash: React.FC = () => {
     useEffect(()=>{
         setIsLogined(false);
         if(isLogined==false){
+            //1초 뒤에 회원유형선택 페이지로 이동
             const timer = setTimeout(()=>navigate("/membertype"), 1000);
             return ()=> clearTimeout(timer);
         }
         else if(isLogined==true){
+            //로그인되어 있으면 홈으로 이동
             navigate("/mapPage");
         }
     }, []);

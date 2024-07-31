@@ -10,18 +10,42 @@ import shopmenu1 from '@assets/ShopDetailPage/shopmenu1.svg'
 
 export const ShopDetail: React.FC = () => {
     const navigate = useNavigate();
+    const dummy = [
+        {
+          id: 1,
+          discountType: '가게 특별 할인',
+          restaurantName: '샐러디',
+          menus: [
+            {
+              id: 1,
+              dishName: '콥 샐러드',
+              discountedPrice: 7200,
+              price: 8900,
+            },
+            {
+              id: 2,
+              dishName: '탄단지 샐러드',
+              discountedPrice: 7200,
+              price: 8900,
+            },
+          ],
+        },
+      ]
+      const resInfo = dummy.find(dummy=>dummy.id === 1);
 
     return (
         <DetailContainer>
             <CategoryHeader onClick={()=>navigate(-1)}>{`<`} 포케</CategoryHeader>
             <MenuHeader>
+                {resInfo? (
                 <BkImg $imgsrc={slowcalyImg}>
-                    <ShopTitle>슬로우 캘리 숭실대점</ShopTitle>
+                    <ShopTitle>{resInfo.restaurantName}</ShopTitle>
                     <EventContainer>
-                        <Event>통신사 행사</Event>
+                        <Event>{resInfo.discountType}</Event>
                         <LinkBtn onClick={()=>navigate("행사페이지")}>링크 바로가기{` >`}</LinkBtn>
                     </EventContainer>
-                </BkImg>
+                </BkImg>): '해당 식당 없음'
+            }
             </MenuHeader>
             <MenuBody>
                 <TodayEvent>오늘 할인 행사 하는 음식점이에요!</TodayEvent>
@@ -34,27 +58,15 @@ export const ShopDetail: React.FC = () => {
                 </Coupon>
                 <Line/>
                 <MenuContainer>
-                    <ShopMenu
-                    img={shopmenu1}
-                    title="스파이시 참치포케"
-                    fixprice={11500}
-                    discountrate="43%"
-                    saleprice={6500}
-                    />
-                    <ShopMenu
-                    img={shopmenu1}
-                    title="스파이시 참치포케"
-                    fixprice={11500}
-                    discountrate="43%"
-                    saleprice={6500}
-                    />
-                    <ShopMenu
-                    img={shopmenu1}
-                    title="스파이시 참치포케"
-                    fixprice={11500}
-                    discountrate="43%"
-                    saleprice={6500}
-                    />
+                    {resInfo && resInfo.menus.map((menu)=>
+                        <ShopMenu
+                        key={menu.id}
+                        img={shopmenu1}
+                        title={menu.dishName}
+                        fixprice={menu.price}
+                        discountrate={((menu.price - menu.discountedPrice) / menu.price * 100).toFixed(0) + '%'}
+                        saleprice={menu.discountedPrice}
+                    />)}
                 </MenuContainer>
             </MenuBody>
         </DetailContainer>

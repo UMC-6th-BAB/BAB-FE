@@ -26,7 +26,7 @@ export const MenuHeader = styled.div`
     top: 90px; /* 화면 상단에 고정 */
     width: 400px;
     z-index: 2; /* 다른 요소 위로 보이도록 설정 */
-
+    text-align: left;
 `;
 
 export const BkImg = styled.div<{$imgsrc: string}>`

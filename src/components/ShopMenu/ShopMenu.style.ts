@@ -4,6 +4,7 @@ export const MenuContainer = styled.div`
     display: flex;
     flex-direction: row;
     margin-left: 20px;
+    text-align: left;
 `;
 export const MenuImg = styled.img`
     width: 80px;

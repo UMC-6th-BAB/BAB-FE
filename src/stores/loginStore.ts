@@ -12,7 +12,7 @@ export interface LoginStateType{
 
 export const LoginStore = create(persist<LoginStateType>((set)=>({
     user: "고서현",
-    membertype: "",
+    membertype: "", //사장님 or 학생
     isLogined: false,
     setUser: (user) => set({user}),
     setMembertype: (membertype) => set({membertype}),
