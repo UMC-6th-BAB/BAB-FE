@@ -39,11 +39,29 @@ export default function DiscountEventPageTwo() {
   }
 
   const handleSubmit = () => {
-    addDiscountEvent()
-    console.log(currentEvent.discounts) // 할인 정보 보기위해 콘솔 찍어보자
-    console.log(storeInfo.menu) // 할인된 가격만큼 가게 스토어에 반영됐는지 확인하자
+    const discountData = addDiscountEvent() //추가되는 하나씩의 데이터
+    const state = discountEventStore.getState() //현재 최신화된 스토어의 상태 가져오기
+    console.log(discountData)
+    console.log('Updated Discount Events:', state.discountEvents) //최신화된 스토어에서 discountEvents 가져옴
+    console.log(currentEvent.discounts) // 할인 정보 보기위해 콘솔 찍어봄
+    console.log(storeInfo.menu) // 할인된 가격만큼 가게 스토어에 반영됐는지 확인해봄
     navigate('/manager')
   }
+
+  //나중에 사용할 api호출 함수 미리 작성해둠
+  /*
+    const handleSubmit = async () => {
+    addDiscountEvent()
+    const eventData = currentEvent
+    try {
+      const discountData = await axios.post('/임의 주소', eventData)
+      console.log(`할인 이벤트가 성공적으로 생성되었습니다. ${discountData}`)
+      navigate('/manager')
+    } catch (error) {
+      console.error('할인 이벤트 생성 중 오류가 발생했습니다:', error)
+    }
+  }
+  */
 
   return (
     <>

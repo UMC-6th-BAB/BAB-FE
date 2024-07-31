@@ -31,10 +31,10 @@ interface DiscountEventState {
       isDiscounted?: boolean
     }[],
   ) => void
-  addDiscountEvent: () => void
+  addDiscountEvent: () => DiscountEvent
 }
 
-const discountEventStore = create<DiscountEventState>((set) => ({
+const discountEventStore = create<DiscountEventState>((set, get) => ({
   currentEvent: {
     id: 0,
     startDate: '',
@@ -88,23 +88,24 @@ const discountEventStore = create<DiscountEventState>((set) => ({
         })),
       },
     })),
-  addDiscountEvent: () =>
-    set((state) => {
-      const newEvent: DiscountEvent = {
-        ...state.currentEvent,
-        id: state.discountEvents.length + 1,
-      }
-      return {
-        discountEvents: [...state.discountEvents, newEvent],
-        currentEvent: {
-          id: 0,
-          startDate: '',
-          endDate: '',
-          eventMessage: '',
-          discounts: [],
-        },
-      }
-    }),
+  addDiscountEvent: () => {
+    const state = get()
+    const newEvent: DiscountEvent = {
+      ...state.currentEvent,
+      id: state.discountEvents.length + 1,
+    }
+    set({
+      discountEvents: [...state.discountEvents, newEvent],
+      currentEvent: {
+        id: 0,
+        startDate: '',
+        endDate: '',
+        eventMessage: '',
+        discounts: [],
+      },
+    })
+    return newEvent
+  },
 }))
 
 export default discountEventStore
