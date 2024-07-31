@@ -13,7 +13,7 @@ import bellIcon from '@assets/icons/bell.svg'
 import { useState } from 'react'
 
 export default function StudentPage() {
-  const [isSchoolSet, setIsSchoolSet] = useState<boolean>(true)
+  const [isSchoolSet, setIsSchoolSet] = useState<boolean>(false)
   return (
     <StudentPageContainer>
       <Title>

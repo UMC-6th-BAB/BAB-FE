@@ -11,11 +11,15 @@ import StudentIDCardImg from '../../../assets/StudentPage/studentIDCard.svg'
 import ArrowImg from '../../../assets/StudentPage/arrow.svg'
 import PinImg from '../../../assets/StudentPage/pin.svg'
 
+import { useNavigate } from 'react-router-dom'
+
 interface Props {
   isSchoolSet: boolean
 }
 
 export default function StudentPageCardTop({ isSchoolSet }: Props) {
+  const navigate = useNavigate()
+
   return (
     <StyledCard paddingTop="35px" paddingBottom={isSchoolSet ? '16px' : '26px'}>
       <CardTitle>고서현님!</CardTitle>
@@ -45,7 +49,7 @@ export default function StudentPageCardTop({ isSchoolSet }: Props) {
               height="73px"
               style={{ marginBottom: '18px' }}
             />
-            <FindSchoolBtn>
+            <FindSchoolBtn onClick={() => navigate('/schoolSearch')}>
               학교찾기
               <StyledArrow src={ArrowImg} />
             </FindSchoolBtn>
