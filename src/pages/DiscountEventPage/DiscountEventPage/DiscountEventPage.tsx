@@ -60,6 +60,15 @@ export default function DiscountEventPage() {
       hasError = true
     }
 
+    if (
+      currentEvent.startDate &&
+      currentEvent.endDate &&
+      currentEvent.startDate > currentEvent.endDate
+    ) {
+      periodError = '시작 날짜는 종료 날짜보다 이전이어야 합니다.'
+      hasError = true
+    }
+
     let hasValidDiscount = false
     for (const discount of currentEvent.discounts) {
       if (discount.isChecked && discount.discountPrice) {
@@ -92,21 +101,26 @@ export default function DiscountEventPage() {
   }
 
   const handleStartDateChange = (date: Date | null) => {
-    setEventPeriod(date ? format(date, 'yyyy-MM-dd') : '', currentEvent.endDate)
+    const formattedDate = date ? format(date, 'yyyy-MM-dd') : ''
+    setEventPeriod(formattedDate, currentEvent.endDate)
     setErrorMessages((prev) => ({
       ...prev,
-      periodError: '',
+      periodError:
+        currentEvent.endDate && formattedDate > currentEvent.endDate
+          ? '시작 날짜는 종료 날짜보다 이전이어야 합니다.'
+          : '',
     }))
   }
 
   const handleEndDateChange = (date: Date | null) => {
-    setEventPeriod(
-      currentEvent.startDate,
-      date ? format(date, 'yyyy-MM-dd') : '',
-    )
+    const formattedDate = date ? format(date, 'yyyy-MM-dd') : ''
+    setEventPeriod(currentEvent.startDate, formattedDate)
     setErrorMessages((prev) => ({
       ...prev,
-      periodError: '',
+      periodError:
+        currentEvent.startDate && formattedDate < currentEvent.startDate
+          ? '종료 날짜는 시작 날짜보다 이후이어야 합니다.'
+          : '',
     }))
   }
 
