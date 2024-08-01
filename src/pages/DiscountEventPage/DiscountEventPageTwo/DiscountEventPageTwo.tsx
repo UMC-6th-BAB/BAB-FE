@@ -28,14 +28,18 @@ export default function DiscountEventPageTwo() {
     currentEvent.eventMessage,
   )
 
-  const handleSelectedMessage = (message: string) => {
+  const [selectedCheckbox, setSelectedCheckbox] = useState<string | null>(null)
+
+  const handleSelectedMessage = (message: string, checkboxId: string) => {
     setSelectedMessage(message)
     setEventMessage(message)
+    setSelectedCheckbox(checkboxId)
   }
 
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setSelectedMessage(e.target.value)
     setEventMessage(e.target.value)
+    setSelectedCheckbox(null) // 직접 입력시 체크박스 해제
   }
 
   const handleSubmit = () => {
@@ -87,12 +91,25 @@ export default function DiscountEventPageTwo() {
               <MenuTableBody>
                 <MenuRow
                   onClick={() =>
-                    handleSelectedMessage('밥이득 김치찌개 전 메뉴 1000원 할인')
+                    handleSelectedMessage(
+                      '밥이득 김치찌개 전 메뉴 1000원 할인',
+                      'discount1',
+                    )
                   }
                 >
                   <MenuLabel>밥이득 김치찌개 전 메뉴 1000원 할인</MenuLabel>
                   <CheckboxWrapper>
-                    <input type="checkbox" id="discount1" />
+                    <input
+                      type="checkbox"
+                      id="discount1"
+                      checked={selectedCheckbox === 'discount1'}
+                      onChange={() =>
+                        handleSelectedMessage(
+                          '밥이득 김치찌개 전 메뉴 1000원 할인',
+                          'discount1',
+                        )
+                      }
+                    />
                     <label htmlFor="discount1"></label>
                   </CheckboxWrapper>
                 </MenuRow>
@@ -100,12 +117,23 @@ export default function DiscountEventPageTwo() {
                   onClick={() =>
                     handleSelectedMessage(
                       '밥이득 김치찌개에서 할인행사 합니다!',
+                      'discount2',
                     )
                   }
                 >
                   <MenuLabel>밥이득 김치찌개에서 할인행사 합니다!</MenuLabel>
                   <CheckboxWrapper>
-                    <input type="checkbox" id="discount2" />
+                    <input
+                      type="checkbox"
+                      id="discount2"
+                      checked={selectedCheckbox === 'discount2'}
+                      onChange={() =>
+                        handleSelectedMessage(
+                          '밥이득 김치찌개에서 할인행사 합니다!',
+                          'discount2',
+                        )
+                      }
+                    />
                     <label htmlFor="discount2"></label>
                   </CheckboxWrapper>
                 </MenuRow>
