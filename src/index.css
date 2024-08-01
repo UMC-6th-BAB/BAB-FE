@@ -74,10 +74,7 @@ h1 {
 button {
   font-family: inherit;
   cursor: pointer;
-<<<<<<< HEAD
   transition: border-color 0.25s;
-=======
->>>>>>> develop
 }
 
 @media (prefers-color-scheme: light) {

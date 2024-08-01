@@ -196,7 +196,7 @@ export const CheckboxWrapper = styled.div`
     transform: translate(-50%, -50%);
     height: 100%;
     width: 100%;
-    background-color: #fdd100;
+    border: 1px solid #e7e7e7;
     border-radius: 4px;
     cursor: pointer;
   }
