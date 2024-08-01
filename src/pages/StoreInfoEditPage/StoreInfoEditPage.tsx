@@ -9,6 +9,7 @@ import {
   OptionButton,
   NextButton,
 } from '@pages/StoreInfoEditPage/StoreInfoEditPage.style'
+import { Option } from 'src/types/ButtonOpionTypes'
 import { useNavigate } from 'react-router-dom'
 
 export default function StoreInfoEditPage() {
@@ -16,7 +17,7 @@ export default function StoreInfoEditPage() {
 
   const [selectedOption, setSelectedOption] = useState<string | null>(null)
 
-  const options = [
+  const options: Option[] = [
     { label: '기본 정보', type: 'default', route: '/basic-info' },
     { label: '영업 시간', type: 'default', route: '/business-hours' },
     { label: '메뉴 등록', type: 'default', route: '/menu-registration' },
@@ -51,7 +52,7 @@ export default function StoreInfoEditPage() {
             key={option.label}
             active={selectedOption === option.label ? option.type : undefined}
             onClick={() => handleOptionClick(option.label)}
-            type={option.type as 'default' | 'destructive'}
+            type={option.type}
           >
             {option.label}
           </OptionButton>
