@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
-import styled, { ThemeProvider } from 'styled-components'
+import styled from 'styled-components'
 import ManagerPage from '@pages/ManagerPage/ManagerPage'
 import Footer from '@components/Footer/Footer'
 import StatusBar from '@components/StatusBar/StatusBar'
@@ -8,7 +8,9 @@ import DiscountEventPageTwo from '@pages/DiscountEventPage/DiscountEventPageTwo/
 import DiscountEventRecordPage from '@pages/DiscountEventRecordPage/DiscountEventRecordPage'
 import StoreInfoEditPage from '@pages/StoreInfoEditPage/StoreInfoEditPage'
 import StoreInfoDeletePage from '@pages/StoreInfoDeletePage/StoreInfoDeletePage'
-
+import TodayDiscountRestaurantPage from '@pages/TodayDiscountRestaurantPage/TodayDiscountRestaurantPage'
+import DiscountRestaurantListPage from '@pages/DiscountRestaurantListPage/DiscountRestaurantListPage'
+import StudentPage from '@pages/StudentPage/StudentPage'
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -22,7 +24,7 @@ export default function AppContent() {
   const location = useLocation()
   const showFooter =
     location.pathname === '/manager' ||
-    location.pathname === '/student-page' ||
+    location.pathname === '/studentPage' ||
     location.pathname === '/' ||
     location.pathname === '/list'
 
@@ -37,6 +39,12 @@ export default function AppContent() {
         <Route path="/discount-record" element={<DiscountEventRecordPage />} />
         <Route path="/storeInfo-edit" element={<StoreInfoEditPage />} />
         <Route path="/storeInfo-delete" element={<StoreInfoDeletePage />} />
+        <Route path="/studentPage" element={<StudentPage />} />
+        <Route
+          path="/todayDiscountRestaurant"
+          element={<TodayDiscountRestaurantPage />}
+        />
+        <Route path="/list" element={<DiscountRestaurantListPage />} />
       </Routes>
       {showFooter && <Footer />}
     </>
