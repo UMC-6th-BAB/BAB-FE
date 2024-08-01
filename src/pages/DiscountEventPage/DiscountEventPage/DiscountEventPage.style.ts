@@ -109,6 +109,7 @@ export const DateInputWrapper = styled.div`
     width: 100%;
     padding: 8px;
     font-size: 14px;
+    font-weight: 600;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;

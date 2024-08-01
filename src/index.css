@@ -54,6 +54,11 @@
   font-style: normal;
 }
 
+textarea {
+  font-family: 'SUITE';
+  font-weight: 400;
+}
+
 body {
   font-family: 'SUITE', sans-serif;
 }
