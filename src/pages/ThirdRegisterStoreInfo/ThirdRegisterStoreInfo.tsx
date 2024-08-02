@@ -20,6 +20,7 @@ import {
   StyledUploadText,
   StyledErrorMessage,
   StyledInputContainer,
+  StyledMenuLabel,
 } from './ThirdRegisterStoreInfo.style'
 import { useState } from 'react'
 import { RegisterMenu } from '../../components/RegisterMenu/RegisterMenu'
@@ -100,18 +101,20 @@ export default function ThirdRegisterStoreInfo() {
               * 가격은 1인분 기준으로 입력해주세요.
             </StyledUploadText>
             {menus.map((menu, index) => (
-              <RegisterMenu
-                key={index}
-                index={index}
-                menu={menu}
-                onChange={handleMenuChange}
-              />
+              <div key={index}>
+                <StyledMenuLabel>메뉴 {index + 1}</StyledMenuLabel>
+                <RegisterMenu
+                  index={index}
+                  menu={menu}
+                  onChange={handleMenuChange}
+                />
+              </div>
             ))}
             <StyledMenuAddButton onClick={handleAddMenu}>
               메뉴 추가하기
             </StyledMenuAddButton>
           </StyledMenuTable>
-          <StyledButton onClick={handleNext}>다음</StyledButton>
+          <StyledButton onClick={handleNext}>완료</StyledButton>
         </StyledFormContainer>
       </StyledScrollableContent>
     </StyledContainer>

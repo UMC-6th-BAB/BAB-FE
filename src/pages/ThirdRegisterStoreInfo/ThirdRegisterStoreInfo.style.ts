@@ -92,11 +92,19 @@ export const StyledLabel = styled.p`
   padding-left: 6px;
 `
 
+export const StyledMenuLabel = styled.p`
+  font-weight: 600;
+  font-size: 14px;
+  color: #000000;
+  text-align: start;
+  padding-left: 10px;
+`
+
 export const StyledUploadText = styled.p`
   align-self: flex-start;
   margin-left: 10px;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 12px;
   color: #676767;
 `
 
