@@ -15,7 +15,6 @@ import UploadImg from '@assets/BusinessUploadPage/upload.svg'
 import Back from '@assets/BusinessUploadPage/backIcon.svg'
 import { useNavigate } from 'react-router-dom'
 import useImageUpload from '@hooks/useImageUpload'
-import Loading from '@components/Loading/Loading'
 import { useEffect, useState } from 'react'
 import UploadSuccess from '@components/UploadSuccess/UploadSuccess'
 import UploadFail from '@components/UploadFail/UploadFail'
@@ -61,7 +60,8 @@ export default function BusinessDocUpload() {
   }
 
   if (isLoading) {
-    return <Loading />
+    return
+    // <Loading />
   }
 
   if (isUploadSuccess === true) {
