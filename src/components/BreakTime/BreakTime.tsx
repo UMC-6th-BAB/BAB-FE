@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
   StyledBreakTimeRow,
   StyledDayButton,
@@ -7,23 +6,27 @@ import {
   StyledTimeText,
   StyledToggle,
 } from './BreakTime.style'
+import { BreakTimeInputProps } from '../../types/types'
 
 const days = ['월', '화', '수', '목', '금', '토', '일']
 
-interface BreakTimeInputProps {
-  time: { start: string; end: string }
-  index: number
-}
-
-export const BreakTime = ({ time, index }: BreakTimeInputProps) => {
-  const [selectedDays, setSelectedDays] = useState<boolean[]>(
-    new Array(days.length).fill(false),
-  )
-
+export const BreakTime = ({
+  time,
+  index,
+  setBreakTimes,
+  breakTimes,
+}: BreakTimeInputProps) => {
   const toggleDay = (idx: number) => {
-    const newSelectedDays = [...selectedDays]
-    newSelectedDays[idx] = !newSelectedDays[idx]
-    setSelectedDays(newSelectedDays)
+    const newBreakTimes = [...breakTimes]
+    newBreakTimes[index].selectedDays[idx] =
+      !newBreakTimes[index].selectedDays[idx]
+    setBreakTimes(newBreakTimes)
+  }
+
+  const handleTimeChange = (field: 'start' | 'end', value: string) => {
+    const newBreakTimes = [...breakTimes]
+    newBreakTimes[index][field] = value
+    setBreakTimes(newBreakTimes)
   }
 
   return (
@@ -32,7 +35,7 @@ export const BreakTime = ({ time, index }: BreakTimeInputProps) => {
         {days.map((day, idx) => (
           <StyledDayButton
             key={idx}
-            selected={selectedDays[idx]}
+            selected={time.selectedDays[idx]}
             onClick={() => toggleDay(idx)}
           >
             {day}
@@ -40,9 +43,17 @@ export const BreakTime = ({ time, index }: BreakTimeInputProps) => {
         ))}
       </StyledBreakTimeRow>
       <StyledTimeRow>
-        <StyledTimeInput type="text" defaultValue={time.start} />
+        <StyledTimeInput
+          type="time"
+          value={time.start}
+          onChange={(e) => handleTimeChange('start', e.target.value)}
+        />
         <StyledTimeText>부터</StyledTimeText>
-        <StyledTimeInput type="text" defaultValue={time.end} />
+        <StyledTimeInput
+          type="time"
+          value={time.end}
+          onChange={(e) => handleTimeChange('end', e.target.value)}
+        />
         <StyledTimeText>까지</StyledTimeText>
         <StyledToggle />
       </StyledTimeRow>

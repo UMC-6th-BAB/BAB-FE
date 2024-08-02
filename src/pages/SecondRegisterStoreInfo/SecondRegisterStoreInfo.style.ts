@@ -108,6 +108,7 @@ export const StyledDayLabel = styled.div`
 `
 
 export const StyledTimeInput = styled.input`
+  color: black;
   width: 72px;
   height: 26px;
   margin: 0 10px;

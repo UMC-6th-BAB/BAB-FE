@@ -6,6 +6,7 @@ export const StyledBreakTimeRow = styled.div`
   margin-bottom: 10px;
 `
 export const StyledDayButton = styled.button<{ selected: boolean }>`
+  color: black;
   width: 40px;
   height: 28px;
   margin: 0 5px;
@@ -20,6 +21,7 @@ export const StyledDayButton = styled.button<{ selected: boolean }>`
   cursor: pointer;
 `
 export const StyledTimeInput = styled.input`
+  color: black;
   width: 72px;
   height: 26px;
   margin: 0 10px;
