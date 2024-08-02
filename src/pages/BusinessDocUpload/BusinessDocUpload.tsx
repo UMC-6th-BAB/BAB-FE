@@ -18,6 +18,7 @@ import useImageUpload from '@hooks/useImageUpload'
 import { useEffect, useState } from 'react'
 import UploadSuccess from '@components/UploadSuccess/UploadSuccess'
 import UploadFail from '@components/UploadFail/UploadFail'
+import Loader from '@components/Loader/Loader'
 
 export default function BusinessDocUpload() {
   const navigate = useNavigate()
@@ -60,8 +61,7 @@ export default function BusinessDocUpload() {
   }
 
   if (isLoading) {
-    return
-    // <Loading />
+    return <Loader />
   }
 
   if (isUploadSuccess === true) {
