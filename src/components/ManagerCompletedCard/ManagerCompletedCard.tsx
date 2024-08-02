@@ -14,14 +14,14 @@ import managerRegisterInfoStore from '@stores/managerRegisterInfoStore'
 import { useNavigate } from 'react-router-dom'
 
 export default function ManagerCompletedCard() {
-  const { storeInfo } = storeInfoStore()
+  const { storeInfos } = storeInfoStore()
   const { managerName } = managerRegisterInfoStore()
   const navigate = useNavigate()
 
   return (
     <CardContainer>
       <CardTitle>{managerName} 사장님의</CardTitle>
-      <CardSubtitle>{storeInfo.name}</CardSubtitle>
+      <CardSubtitle>{storeInfos[0].name}</CardSubtitle>
       <CardContent>
         <CardButton onClick={() => navigate('/discount-event')}>
           <span>할인행사</span>

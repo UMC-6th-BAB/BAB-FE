@@ -24,7 +24,7 @@ import {
   CustomDatePickerWrapper,
 } from '@pages/DiscountEventPage/DiscountEventPage/DiscountEventPage.style'
 import { useNavigate } from 'react-router-dom'
-import storeInfoStore from '@stores/storeInfoStore'
+import storeInfoStore, { MenuItem } from '@stores/storeInfoStore'
 import discountEventStore from '@stores/discountEventStore'
 
 export default function DiscountEventPage() {
@@ -36,7 +36,7 @@ export default function DiscountEventPage() {
     initializeDiscounts,
     currentEvent,
   } = discountEventStore()
-  const { storeInfo, updateMenuDiscount } = storeInfoStore()
+  const { storeInfos, updateMenuDiscount } = storeInfoStore()
 
   const [errorMessages, setErrorMessages] = useState<{
     periodError: string
@@ -47,8 +47,8 @@ export default function DiscountEventPage() {
   })
 
   useEffect(() => {
-    initializeDiscounts(storeInfo.menu)
-  }, [storeInfo.menu, initializeDiscounts])
+    initializeDiscounts(storeInfos[0].menu)
+  }, [storeInfos[0].menu, initializeDiscounts])
 
   const handleNextClick = () => {
     let periodError = ''
@@ -90,6 +90,7 @@ export default function DiscountEventPage() {
       currentEvent.discounts.forEach((discount) => {
         if (discount.isChecked && discount.discountPrice > 0) {
           updateMenuDiscount(
+            storeInfos[0].id,
             discount.id,
             discount.discountPrice,
             discount.isChecked,
@@ -172,7 +173,7 @@ export default function DiscountEventPage() {
               <span>적용</span>
             </MenuTableHeader>
             <MenuTableBody>
-              {storeInfo.menu.map((item) => (
+              {storeInfos[0].menu.map((item: MenuItem) => (
                 <MenuRow key={item.id}>
                   <MenuLabel>{item.name}</MenuLabel>
                   <PriceInput

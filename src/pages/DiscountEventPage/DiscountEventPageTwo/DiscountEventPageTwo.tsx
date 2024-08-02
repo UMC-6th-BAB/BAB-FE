@@ -23,7 +23,7 @@ export default function DiscountEventPageTwo() {
   const navigate = useNavigate()
   const { currentEvent, setEventMessage, addDiscountEvent } =
     discountEventStore()
-  const { storeInfo } = storeInfoStore()
+  const { storeInfos } = storeInfoStore()
   const [selectedMessage, setSelectedMessage] = useState<string>(
     currentEvent.eventMessage,
   )
@@ -48,7 +48,7 @@ export default function DiscountEventPageTwo() {
     console.log(discountData)
     console.log('Updated Discount Events:', state.discountEvents) //최신화된 스토어에서 discountEvents 가져옴
     console.log(currentEvent.discounts) // 할인 정보 보기위해 콘솔 찍어봄
-    console.log(storeInfo.menu) // 할인된 가격만큼 가게 스토어에 반영됐는지 확인해봄
+    console.log(storeInfos[0].menu) // 할인된 가격만큼 가게 스토어에 반영됐는지 확인해봄
     navigate('/manager')
   }
 

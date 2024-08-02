@@ -16,7 +16,7 @@ import discountEventStore from '@stores/discountEventStore'
 
 export default function DiscountEventRecordPage() {
   const navigate = useNavigate()
-  const { storeInfo } = storeInfoStore()
+  const { storeInfos } = storeInfoStore()
   const { discountEvents } = discountEventStore()
 
   return (
@@ -28,7 +28,7 @@ export default function DiscountEventRecordPage() {
       <EventList>
         {discountEvents.map((event) => (
           <EventItem key={event.id}>
-            <EventTitle>{storeInfo.name}</EventTitle>
+            <EventTitle>{storeInfos[0].name}</EventTitle>
             <EventDescription>{event.eventMessage}</EventDescription>
             {event.discounts
               .filter(
