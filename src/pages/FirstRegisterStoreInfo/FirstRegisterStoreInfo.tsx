@@ -38,14 +38,29 @@ export default function FirstRegisterStoreInfo() {
   const storeLink = useErrorInput('')
   const school = useErrorInput('')
   const [address, setAddress] = useState('')
-
-  console.log('본문', address)
+  const [roadAddress, setRoadAddress] = useState('')
+  const [latitude, setLatitude] = useState(0)
+  const [longitude, setLongitude] = useState(0)
+  const [storeName, setStoreName] = useState('')
 
   const handleNext = () => {
     const isStoreLinkValid = storeLink.validate('링크를 입력해 주세요.')
     const isSchoolValid = school.validate('학교를 선택해 주세요.')
 
     if (isStoreLinkValid && isSchoolValid) {
+      const formData = {
+        name: storeName,
+        address,
+        streetAddress: roadAddress,
+        longitude,
+        latitude,
+        storeLink: storeLink.value,
+        university: school.value,
+      }
+
+      console.log('전체 데이터', formData)
+      // 데이터 확인용, api 연결할 때 코드 분리하겠습니당
+
       navigate('/secondRegisterStoreInfo')
     }
   }
@@ -71,9 +86,20 @@ export default function FirstRegisterStoreInfo() {
       <StyledScrollableContent>
         <StyledFormContainer>
           <StyledLabel>가게 이름</StyledLabel>
-          <StyledFormInput type="text" placeholder="밥이득 김치찌개" />
+          <StyledFormInput
+            type="text"
+            placeholder="밥이득 김치찌개"
+            value={storeName}
+            onChange={(e) => setStoreName(e.target.value)}
+          />
           <StyledLabel>주소 입력</StyledLabel>
-          <AddressSearch address={address} setAddress={setAddress} />
+          <AddressSearch
+            address={address}
+            setAddress={setAddress}
+            setRoadAddress={setRoadAddress}
+            setLatitude={setLatitude}
+            setLongitude={setLongitude}
+          />
           <StyledInputContainer>
             <StyledLabel>가게 링크</StyledLabel>
             {storeLink.error && (

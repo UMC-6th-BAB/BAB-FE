@@ -10,15 +10,24 @@ import {
 
 interface AddressSearchProps {
   address: string
-  setAddress: (address: string) => void
+  setAddress: (jibunAddress: string) => void
+  setRoadAddress: (roadAddress: string) => void
+  setLatitude: (latitude: number) => void
+  setLongitude: (longitude: number) => void
 }
 
 interface DaumPostcodeData {
-  address: string
+  jibunAddress: string
   roadAddress: string
 }
 
-export const AddressSearch = ({ address, setAddress }: AddressSearchProps) => {
+export const AddressSearch = ({
+  address,
+  setAddress,
+  setRoadAddress,
+  setLatitude,
+  setLongitude,
+}: AddressSearchProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [postcodeKey, setPostcodeKey] = useState(0)
 
@@ -37,9 +46,8 @@ export const AddressSearch = ({ address, setAddress }: AddressSearchProps) => {
               Number(result[0].y),
               Number(result[0].x),
             )
-            console.log('위도:', coords.getLat())
-            console.log('경도:', coords.getLng())
-            // 콘솔 pr 올리기 전에 삭제하겠습니다
+            setLatitude(coords.getLat())
+            setLongitude(coords.getLng())
           } else {
             console.error('getCoordinates 에러', status)
           }
@@ -49,12 +57,12 @@ export const AddressSearch = ({ address, setAddress }: AddressSearchProps) => {
   }
 
   const handleComplete = (data: DaumPostcodeData) => {
-    console.log('주소:', data.address)
-    console.log('도로명 주소:', data.roadAddress)
-    setAddress(data.address)
+    setAddress(data.jibunAddress)
+    setRoadAddress(data.roadAddress)
     setIsModalOpen(false)
     getCoordinates(data.roadAddress)
   }
+
   const openModal = () => {
     setIsModalOpen(true)
     setPostcodeKey((prevKey) => prevKey + 1)
