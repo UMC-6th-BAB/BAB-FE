@@ -3,7 +3,7 @@ import {
   StyledLoadingContainer,
   StyledSpinner,
   StyledText,
-} from './loading.style'
+} from './Loading.style'
 
 export default function Loading() {
   return (
