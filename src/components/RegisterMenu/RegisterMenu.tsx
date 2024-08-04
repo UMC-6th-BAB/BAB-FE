@@ -1,3 +1,4 @@
+import useImageLoad from '@hooks/useImageLoad'
 import Camera from '../../assets/RegisterStoreInfo/camera.svg'
 import {
   StyledCheckBox,
@@ -10,7 +11,6 @@ import {
   StyledUploadBox,
   StyledUploadImg,
 } from './RegisterMenu.style'
-import useImageUploader from '../../hooks/useImageUpload'
 import { useRef } from 'react'
 
 interface RegisterMenuProps {
@@ -23,7 +23,7 @@ interface RegisterMenuProps {
 }
 
 export const RegisterMenu = ({ index, menu, onChange }: RegisterMenuProps) => {
-  const { selectedImage, handleUpload } = useImageUploader()
+  const { selectedImage, handleUpload } = useImageLoad()
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   return (

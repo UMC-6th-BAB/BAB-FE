@@ -1,31 +1,30 @@
-import { useState, useEffect } from 'react'
-import { UploadImage } from '../types/types'
+import { useState, useRef } from 'react'
 
-export default function useImageUploader() {
-  const [selectedImage, setSelectedImage] = useState<UploadImage | null>(null)
+const useImageUpload = () => {
+  const [selectedImage, setSelectedImage] = useState<File | null>(null)
+  const fileInputRef = useRef<HTMLInputElement | null>(null)
 
-  useEffect(() => {
-    return () => {
-      if (selectedImage) {
-        URL.revokeObjectURL(selectedImage.thumbnail)
-      }
+  const openCamera = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click()
     }
-  }, [selectedImage])
+  }
 
-  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const fileList = e.target.files
-    if (fileList && fileList[0]) {
-      const url = URL.createObjectURL(fileList[0])
-      setSelectedImage({
-        file: fileList[0],
-        thumbnail: url,
-        type: fileList[0].type.split('/')[0],
-      })
+  const handleImgUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files ? event.target.files[0] : null
+    if (file) {
+      setSelectedImage(file)
+      console.log('이미지 선택됨:', file)
+      // 콘솔 추후에 삭제하겠습니당
     }
   }
 
   return {
     selectedImage,
-    handleUpload,
+    handleImgUpload,
+    openCamera,
+    fileInputRef,
   }
 }
+
+export default useImageUpload

@@ -26,14 +26,14 @@ import UploadImg from '../../assets/RegisterStoreInfo/upload.svg'
 import nav from '../../assets/RegisterStoreInfo/firststep.svg'
 import { useNavigate } from 'react-router-dom'
 import { ChangeEvent, useRef, useState } from 'react'
-import useImageUploader from '../../hooks/useImageUpload'
 import { useErrorInput } from '../../hooks/useErrorInput'
 import { AddressSearch } from '../../components/AddressSearch/AddressSearch'
+import useImageLoad from '@hooks/useImageLoad'
 
 export default function FirstRegisterStoreInfo() {
   const navigate = useNavigate()
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const { selectedImage, handleUpload } = useImageUploader()
+  const { selectedImage, handleUpload } = useImageLoad()
 
   const storeLink = useErrorInput('')
   const school = useErrorInput('')
