@@ -7,19 +7,10 @@ import {
   StyledModalContent,
   StyledRowDiv,
 } from './AddressSearch.style'
-
-interface AddressSearchProps {
-  address: string
-  setAddress: (jibunAddress: string) => void
-  setRoadAddress: (roadAddress: string) => void
-  setLatitude: (latitude: number) => void
-  setLongitude: (longitude: number) => void
-}
-
-interface DaumPostcodeData {
-  jibunAddress: string
-  roadAddress: string
-}
+import {
+  AddressSearchProps,
+  DaumPostcodeData,
+} from 'src/types/AddressSearchTypes'
 
 export const AddressSearch = ({
   address,

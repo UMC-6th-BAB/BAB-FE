@@ -3,7 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import Back from '@assets/RegisterStoreInfo/back.svg'
 import nav from '@assets/RegisterStoreInfo/secondstep.svg'
 import errorIcon from '@assets/RegisterStoreInfo/warnning.svg'
-import { OperatingHour, BreakTimeType } from '../../types/types'
+import {
+  OperatingHour,
+  BreakTimeType,
+} from 'src/types/SecondRegisterStoreInfoTypes'
 
 import {
   StyledAddTimeButton,

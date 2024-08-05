@@ -6,7 +6,7 @@ import {
   StyledTimeText,
   StyledToggle,
 } from './BreakTime.style'
-import { BreakTimeInputProps } from '../../types/types'
+import { BreakTimeInputProps } from 'src/types/BreakTimeTypes'
 
 const days = ['월', '화', '수', '목', '금', '토', '일']
 

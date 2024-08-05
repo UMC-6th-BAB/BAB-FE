@@ -13,14 +13,7 @@ import {
 } from './RegisterMenu.style'
 import { useRef } from 'react'
 
-interface RegisterMenuProps {
-  index: number
-  menu: {
-    name: string
-    price: string
-  }
-  onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void
-}
+import { RegisterMenuProps } from 'src/types/RegisterMenuTypes'
 
 export const RegisterMenu = ({ index, menu, onChange }: RegisterMenuProps) => {
   const { selectedImage, handleUpload } = useImageLoad()

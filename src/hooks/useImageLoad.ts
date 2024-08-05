@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react'
-import { UploadImage } from '../types/types'
+
+type UploadImage = {
+  file: File
+  thumbnail: string
+  type: string
+}
 
 export default function useImageLoad() {
   const [selectedImage, setSelectedImage] = useState<UploadImage | null>(null)
