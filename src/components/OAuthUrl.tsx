@@ -1,5 +1,3 @@
-
-
 const REST_API_KEY = import.meta.env.REACT_APP_KAKAO_OAUTH_KEY
 const REDIRECT_URI = 'http://localhost:5173/oauth'
 

@@ -17,7 +17,6 @@ import TodayDiscountRestaurantPage from '@pages/TodayDiscountRestaurantPage/Toda
 import DiscountRestaurantListPage from '@pages/DiscountRestaurantListPage/DiscountRestaurantListPage'
 import StudentPage from '@pages/StudentPage/StudentPage'
 
-
 export default function AppContent() {
   const location = useLocation()
   const showFooter =
@@ -30,11 +29,11 @@ export default function AppContent() {
     <>
       <StatusBar />
       <Routes>
-        <Route path="/" element={<Splash/>} />
-        <Route path="/memberType" element={<MemberType/>} />
-        <Route path="/signup" element={<Signup/>} />
-        <Route path="/oauth" element={<OAuth/>} />
-        <Route path="/shopdetail" element={<ShopDetail/>} />
+        <Route path="/" element={<Splash />} />
+        <Route path="/memberType" element={<MemberType />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/oauth" element={<OAuth />} />
+        <Route path="/shopdetail" element={<ShopDetail />} />
         <Route path="/manager" element={<ManagerPage />} />
         <Route path="/discount-event" element={<DiscountEventPage />} />
         <Route path="/discount-eventTwo" element={<DiscountEventPageTwo />} />
