@@ -8,9 +8,9 @@ import {
 } from './StudentPageCardTop.style'
 import { studentInfoStore, schoolInfoStore } from '@stores/studentInfoStore'
 
-import StudentIDCardImg from '../../../assets/StudentPage/studentIDCard.svg'
-import ArrowImg from '../../../assets/StudentPage/arrow.svg'
-import PinImg from '../../../assets/StudentPage/pin.svg'
+import StudentIDCardImg from '@assets/StudentPage/studentIDCard.svg'
+import ArrowImg from '@assets/StudentPage/arrow.svg'
+import PinImg from '@assets/StudentPage/pin.svg'
 
 import { useNavigate } from 'react-router-dom'
 
