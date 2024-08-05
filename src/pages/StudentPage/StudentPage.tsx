@@ -8,12 +8,12 @@ import {
   TitleText,
   NotifyIcon,
 } from '../StudentPage/StudentPage.style'
+import { studentInfoStore } from '@stores/studentInfoStore'
 import bellIcon from '@assets/icons/bell.svg'
 
-import { useState } from 'react'
-
 export default function StudentPage() {
-  const [isSchoolSet, setIsSchoolSet] = useState<boolean>(false)
+  const { isSchoolSet } = studentInfoStore((state) => state)
+
   return (
     <StudentPageContainer>
       <Title>
@@ -21,7 +21,7 @@ export default function StudentPage() {
         <NotifyIcon src={bellIcon} />
       </Title>
       <Content>
-        <StudentPageCardTop isSchoolSet={isSchoolSet} />
+        <StudentPageCardTop />
         {isSchoolSet ? <DiscountInfo /> : null}
         <StudentPageCardAccount />
       </Content>

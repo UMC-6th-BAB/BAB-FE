@@ -6,14 +6,17 @@ import {
   Text,
   AccountControlBtn,
 } from './StudentPageCardAccount.style'
+import { studentInfoStore } from '@stores/studentInfoStore'
 
 export default function StudentPageCardAccount() {
+  const { id } = studentInfoStore((state) => state)
+
   return (
     <StyledCard paddingTop="24px" paddingBottom="21px">
       <CardTitle paddingBottom="18px">계정</CardTitle>
       <StyledAccount>
         <Text>아이디</Text>
-        <Text color="#9A9A9A">koseohyeon1</Text>
+        <Text color="#9A9A9A">{id}</Text>
       </StyledAccount>
       <hr
         style={{
