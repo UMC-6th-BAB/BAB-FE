@@ -1,11 +1,6 @@
 import { StyledCard } from '../MyPageCard.style'
 import { CardTitle } from '../MyPageCard.style'
-import {
-  StyledAccount,
-  StyledAccountControl,
-  Text,
-  AccountControlBtn,
-} from './StudentPageCardAccount.style'
+import { StyledAccount, Text, Btn } from './StudentPageCardAccount.style'
 import { studentInfoStore } from '@stores/studentInfoStore'
 
 export default function StudentPageCardAccount() {
@@ -27,10 +22,9 @@ export default function StudentPageCardAccount() {
           marginRight: '24px',
         }}
       />
-      <StyledAccountControl>
-        <AccountControlBtn>비밀번호 변경</AccountControlBtn>
-        <AccountControlBtn>이메일 변경</AccountControlBtn>
-      </StyledAccountControl>
+      <StyledAccount>
+        <Btn>로그아웃</Btn>
+      </StyledAccount>
     </StyledCard>
   )
 }
