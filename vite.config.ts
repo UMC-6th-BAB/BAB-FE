@@ -17,4 +17,13 @@ export default defineConfig({
       '@icons': path.resolve(__dirname, 'src/assets/icons'),
     },
   },
+  server: {
+    proxy: {
+      '/v1': {
+        target: 'http://43.201.218.182:8080',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 })
