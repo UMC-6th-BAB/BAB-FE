@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
-import Back from '../../assets/RegisterStoreInfo/back.svg'
-import nav from '../../assets/RegisterStoreInfo/thirdstep.svg'
-import errorIcon from '../../assets/RegisterStoreInfo/warnning.svg'
+import Back from '@assets/RegisterStoreInfo/back.svg'
+import nav from '@assets/RegisterStoreInfo/thirdstep.svg'
+import errorIcon from '@assets/RegisterStoreInfo/warnning.svg'
 
 import {
   StyledBackIcon,
@@ -23,7 +23,7 @@ import {
   StyledMenuLabel,
 } from './ThirdRegisterStoreInfo.style'
 import { useState } from 'react'
-import { RegisterMenu } from '../../components/RegisterMenu/RegisterMenu'
+import { RegisterMenu } from '@components/RegisterMenu/RegisterMenu'
 
 interface Menu {
   name: string

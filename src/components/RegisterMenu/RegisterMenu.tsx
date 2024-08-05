@@ -1,5 +1,5 @@
 import useImageLoad from '@hooks/useImageLoad'
-import Camera from '../../assets/RegisterStoreInfo/camera.svg'
+import Camera from '@assets/RegisterStoreInfo/camera.svg'
 import {
   StyledCheckBox,
   StyledCheckboxContainer,

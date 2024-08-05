@@ -1,5 +1,5 @@
-import Back from '../../assets/RegisterStoreInfo/back.svg'
-import errorIcon from '../../assets/RegisterStoreInfo/warnning.svg'
+import Back from '@assets/RegisterStoreInfo/back.svg'
+import errorIcon from '@assets/RegisterStoreInfo/warnning.svg'
 import {
   StyledScrollableContent,
   StyledBackIcon,
@@ -22,12 +22,12 @@ import {
   StyledInputContainer,
   StyledSearchInputContainer,
 } from './FirstRegisterStoreInfo.style'
-import UploadImg from '../../assets/RegisterStoreInfo/upload.svg'
-import nav from '../../assets/RegisterStoreInfo/firststep.svg'
+import UploadImg from '@assets/RegisterStoreInfo/upload.svg'
+import nav from '@assets/RegisterStoreInfo/firststep.svg'
 import { useNavigate } from 'react-router-dom'
 import { ChangeEvent, useRef, useState } from 'react'
-import { useErrorInput } from '../../hooks/useErrorInput'
-import { AddressSearch } from '../../components/AddressSearch/AddressSearch'
+import { useErrorInput } from '@hooks/useErrorInput'
+import { AddressSearch } from '@components/AddressSearch/AddressSearch'
 import useImageLoad from '@hooks/useImageLoad'
 
 export default function FirstRegisterStoreInfo() {
