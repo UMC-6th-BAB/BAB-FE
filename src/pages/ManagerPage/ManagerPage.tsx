@@ -15,18 +15,21 @@ import {
 } from './ManagerPage.style'
 import icon from '@assets/managerMypage/등록증 아이콘.svg'
 import menuIcon from '@assets/managerMypage/메뉴아이콘.svg'
-import bellIcon from '@assets/icons/bell.svg'
 import useModalStore from '@stores/modalStore'
 import { useEffect, useState } from 'react'
 import DiscountModal from '@components/Modal/DiscountModal'
 import ManagerCompletedCard from '@components/ManagerCompletedCard/ManagerCompletedCard'
-import storeInfoStore from '@stores/storeInfoStore'
+import storeInfoStore, { StoreInfo } from '@stores/storeInfoStore'
 import NotifyIcon from '@components/NotifyIcon'
+import discountEventStore from '@stores/discountEventStore'
 
 export default function ManagerPage() {
   const { isRegistered, setIsRegistered, setManagerRegistrationInfo } =
     managerRegisterInfoStore()
   const { isStoreRegistered, setStoreRegistered } = storeInfoStore()
+  const addStoreInfo = storeInfoStore((state) => state.addStoreInfo)
+  const storeInfos = storeInfoStore((state) => state.storeInfos)
+  const { discountEvents } = discountEventStore()
   const { openModal } = useModalStore()
   const [businessData, setBusinessData] = useState<ManagerRegisterState | null>(
     null,
@@ -39,6 +42,11 @@ export default function ManagerPage() {
       setBusinessData(null)
     }
   }, [isRegistered])
+
+  useEffect(() => {
+    console.log('Updated Store Infos:', storeInfos) // storeInfos 변경 시 로그 찍기
+  }, [storeInfos])
+  console.log(discountEvents)
 
   const handleManagerRegisterClick = (): void => {
     setIsRegistered(true)
@@ -54,10 +62,43 @@ export default function ManagerPage() {
   }
 
   const handleStoreRegisterClick = (): void => {
+    const newStore: StoreInfo = {
+      id: storeInfos.length,
+      name: '새로운 가게',
+      storeLink: '',
+      image: '',
+      university: '',
+      businessHours: [],
+      breakTime: [],
+      menu: [
+        //임의로 메뉴 데이터가 입력된다고 가정
+        {
+          id: 0,
+          image: '/assets/icons/bell.svg',
+          name: '김치찌개',
+          price: 8000,
+          isDiscounted: false,
+        },
+        {
+          id: 1,
+          image: '/assets/icons/bell.svg',
+          name: '된장찌개',
+          price: 7500,
+          isDiscounted: false,
+        },
+        {
+          id: 2,
+          image: '/assets/icons/bell.svg',
+          name: '미역국',
+          price: 5000,
+          isDiscounted: false,
+        },
+      ],
+    }
+    addStoreInfo(newStore)
     setStoreRegistered(true)
     openModal()
   }
-
   return (
     <ManagerPageContainer>
       <Title>

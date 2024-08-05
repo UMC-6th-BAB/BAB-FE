@@ -87,7 +87,7 @@ const storeInfoStore = create<StoreInfoState>((set) => ({
     set((state) => {
       const updatedStores = state.storeInfos.filter(
         (store) => store.id !== storeId,
-      ) //가게 정보 삭제 시에 할인정보 스토어에 있는 할인 정보 삭제
+      ) //가게 정보 삭제 시에 가게 id에 해당하는 할인 정보 동시에 삭제
       discountEventStore.getState().removeDiscountEventsByStoreId(storeId)
       console.log('Updated Stores:', updatedStores)
       return {

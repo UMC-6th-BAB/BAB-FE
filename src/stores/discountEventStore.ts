@@ -9,6 +9,7 @@ interface Discount {
 
 interface DiscountEvent {
   id: number
+  storeId: number // 가게 ID와 연결되는 필드 추가
   startDate: string
   endDate: string
   eventMessage: string
@@ -38,6 +39,7 @@ interface DiscountEventState {
 const discountEventStore = create<DiscountEventState>((set, get) => ({
   currentEvent: {
     id: 0,
+    storeId: 0,
     startDate: '',
     endDate: '',
     eventMessage: '',
@@ -93,12 +95,14 @@ const discountEventStore = create<DiscountEventState>((set, get) => ({
     const state = get()
     const newEvent: DiscountEvent = {
       ...state.currentEvent,
-      id: state.discountEvents.length + 1,
+      id: state.discountEvents.length,
+      storeId: state.currentEvent.storeId, // 현재 이벤트의 storeId 사용
     }
     set({
       discountEvents: [...state.discountEvents, newEvent],
       currentEvent: {
         id: 0,
+        storeId: 0,
         startDate: '',
         endDate: '',
         eventMessage: '',
@@ -110,7 +114,7 @@ const discountEventStore = create<DiscountEventState>((set, get) => ({
   removeDiscountEventsByStoreId: (storeId) => {
     set((state) => ({
       discountEvents: state.discountEvents.filter(
-        (event) => event.id !== storeId,
+        (event) => event.storeId !== storeId,
       ),
     }))
   },
