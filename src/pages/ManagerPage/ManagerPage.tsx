@@ -63,7 +63,7 @@ export default function ManagerPage() {
 
   const handleStoreRegisterClick = (): void => {
     const newStore: StoreInfo = {
-      id: storeInfos.length,
+      id: storeInfos.length + 1,
       name: '새로운 가게',
       storeLink: '',
       image: '',
