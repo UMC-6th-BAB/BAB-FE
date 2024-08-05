@@ -15,7 +15,7 @@ export const FooterContainer = styled.div`
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   z-index: 100;
-`;
+`
 
 export const FooterLink = styled(Link)`
   display: flex;
