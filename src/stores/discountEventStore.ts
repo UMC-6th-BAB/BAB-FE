@@ -32,6 +32,7 @@ interface DiscountEventState {
     }[],
   ) => void
   addDiscountEvent: () => DiscountEvent
+  removeDiscountEventsByStoreId: (storeId: number) => void
 }
 
 const discountEventStore = create<DiscountEventState>((set, get) => ({
@@ -105,6 +106,13 @@ const discountEventStore = create<DiscountEventState>((set, get) => ({
       },
     })
     return newEvent
+  },
+  removeDiscountEventsByStoreId: (storeId) => {
+    set((state) => ({
+      discountEvents: state.discountEvents.filter(
+        (event) => event.id !== storeId,
+      ),
+    }))
   },
 }))
 
