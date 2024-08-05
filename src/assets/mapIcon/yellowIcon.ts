@@ -1,5 +1,4 @@
 import yellowLogo from '@assets/mapIcon/yellow_webp/yellow_2x.webp'
-import { after } from 'node:test'
 
 export default function yellowIcon(price: number, discountprice: number) {
   const container = document.createElement('div')

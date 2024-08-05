@@ -1,21 +1,30 @@
-//import { GoogleMap } from '@react-google-maps/api'
-import styled from 'styled-components'
 import {
   MapContainer,
   MapWrapper,
 } from '@components/MapCard/GoogleMapCard/Map.style'
 import { useEffect, useRef } from 'react'
 import { mapStore } from '@stores/mapStore'
-import { searchStore } from '@stores/searchStore'
 import restaurantInfoStore from '@stores/restaurentStore'
 import greyIcon from '@assets/mapIcon/greyIcon'
 import yellowIcon from '@assets/mapIcon/yellowIcon'
+//import { MarkerClusterer } from '@googlemaps/markerclusterer'
 
-export default function Map() {
+type Props = {
+  markers: google.maps.marker.AdvancedMarkerElement[]
+  searchValue: string
+  addMarker: (marker: google.maps.marker.AdvancedMarkerElement) => void
+  clearMarker: () => void
+}
+
+export default function Map({
+  markers,
+  addMarker,
+  clearMarker,
+  searchValue,
+}: Props) {
   const ref = useRef<HTMLDivElement>(null)
-  const { lat, lng, googleMap, setGoogleMap, addMarker, clearMarker, markers } =
-    mapStore()
-  const SearchValue = searchStore((state) => state.searchValue)
+  const { lat, lng, googleMap, setGoogleMap } = mapStore()
+
   const {
     infos,
     tempInfos,
@@ -55,7 +64,7 @@ export default function Map() {
 
   //이전 검색마커 삭제기능 && 검색기능
   useEffect(() => {
-    if (SearchValue) {
+    if (searchValue) {
       console.log('검색 실행')
       if (markers.length !== 0) {
         console.log('마커 수 : ' + markers.length)
@@ -67,7 +76,7 @@ export default function Map() {
       clearTempInfo()
       findPlaces()
     }
-  }, [SearchValue])
+  }, [searchValue])
 
   //마커 삽입기능
   useEffect(() => {
@@ -97,17 +106,17 @@ export default function Map() {
   }, [tempInfos])
 
   //가게정보 출력
-  useEffect(() => {
+  /*useEffect(() => {
     if (infos.length) {
       infos.forEach((info) => {
-        //console.log(info)
+        console.log(info)
         info.menus.forEach((menu) => {
-          //console.log(info.name + ' 가격: ' + menu.price)
-          //console.log(info.lat + ' ' + info.lng)
+          console.log(info.name + ' 가격: ' + menu.price)
+          console.log(info.lat + ' ' + info.lng)
         })
       })
     }
-  }, [infos])
+  }, [infos])*/
 
   //가게검색 기능
   async function findPlaces() {
@@ -119,7 +128,7 @@ export default function Map() {
     )) as google.maps.CoreLibrary*/
 
     const request = {
-      textQuery: SearchValue,
+      textQuery: searchValue,
       fields: ['displayName', 'location', 'businessStatus'],
       includedType: 'restaurant',
       maxResultCount: 10,

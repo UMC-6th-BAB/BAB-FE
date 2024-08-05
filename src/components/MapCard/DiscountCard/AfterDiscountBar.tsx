@@ -1,6 +1,4 @@
-import styled from 'styled-components'
 import { DiscountContainer } from '@components/MapCard/DiscountCard/DiscountBar.style'
-import { colors } from '@styles/theme'
 
 export default function AfterDiscountBar() {
   return (

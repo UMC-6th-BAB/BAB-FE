@@ -7,9 +7,7 @@ export const AfterSearchBarContainer = styled.div`
   width: 100%;
   height: 40px;
   background-color: white;
-  justify-content: left;
-  align-items: center;
-  margin-top: 30px;
+  padding-top: 30px;
   z-index: 1;
 `
 
@@ -40,7 +38,7 @@ export const AfterSearchBarContentWrapper = styled.div`
 export const AfterSearchBarDiscountWrapper = styled.div`
   display: flex;
   width: 80%;
-  margin-top: 30px;
+  margin-top: 20px;
   padding-left: 20px;
   background-color: none;
 `

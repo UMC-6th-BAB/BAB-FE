@@ -1,4 +1,3 @@
-import styled from 'styled-components'
 import { DiscountContainer } from '@components/MapCard/DiscountCard/DiscountBar.style'
 
 export default function DiscountBar() {
