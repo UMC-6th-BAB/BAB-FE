@@ -5,7 +5,7 @@ import {Kakao_Auth_Url} from '@components/OAuthUrl'
 import bablogo from '@assets/OnboardingPage/bablogo.svg'
 import kakaoBtn from '@assets/OnboardingPage/kakao_login_large_wide.png'
 
-export const Signup: React.FC = () => {
+export default function Signup() {
 
     return (
         <LogoContainer>

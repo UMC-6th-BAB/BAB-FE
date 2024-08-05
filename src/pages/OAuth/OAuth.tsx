@@ -5,7 +5,7 @@ import SyncLoader from "react-spinners/SyncLoader"
 import {LoadContainer} from './OAuth.style'
 import {LoginStore} from '@stores/loginStore'
 
-export const OAuth: React.FC = () => {
+export default function OAuth() {
     const navigate = useNavigate();
     const {setIsLogined} = LoginStore(state=>state);
 

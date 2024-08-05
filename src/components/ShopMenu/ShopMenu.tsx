@@ -9,7 +9,7 @@ interface ShopMenuProps {
     saleprice: number; // 판매가 타입
 }
 
-export const ShopMenu: React.FC<ShopMenuProps> = ({img, title, fixprice, discountrate, saleprice})=>{
+export default function ShopMenu({img, title, fixprice, discountrate, saleprice}:ShopMenuProps) {
 
     return (
         <MenuContainer>

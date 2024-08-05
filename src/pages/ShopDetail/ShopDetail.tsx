@@ -1,14 +1,15 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
-import {DetailContainer, CategoryHeader, MenuHeader, BkImg, ShopTitle, EventContainer, Event, LinkBtn, MenuBody,
+import { useNavigate } from 'react-router-dom'
+import {DetailContainer, MenuHeader, BkImg, ShopTitle, EventContainer, Event, LinkBtn, MenuBody,
     TodayEvent, Coupon, CouponImg, CouponInfoContainer, CouponInfoTitle, CouponInfoBody, MenuContainer, Line
 } from './ShopDetail.style'
-import {ShopMenu} from '@components/ShopMenu/ShopMenu'
+import ShopMenu from '@components/ShopMenu/ShopMenu'
 import slowcalyImg from '@assets/ShopDetailPage/slowcalyImg.svg';
 import couponImg from '@assets/icons/coupon.svg';
 import shopmenu1 from '@assets/ShopDetailPage/shopmenu1.svg'
+import BackBar from '@components/BackBar/BackBar'
 
-export const ShopDetail: React.FC = () => {
+export default function ShopDetail() {
     const navigate = useNavigate();
     const dummy = [
         {
@@ -28,6 +29,18 @@ export const ShopDetail: React.FC = () => {
               discountedPrice: 7200,
               price: 8900,
             },
+            {
+                id: 3,
+                dishName: '참치 샐러드',
+                discountedPrice: 6000,
+                price: 10000,
+              },
+              {
+                id: 4,
+                dishName: '연어 샐러드',
+                discountedPrice: 12000,
+                price: 13000,
+              },
           ],
         },
       ]
@@ -35,7 +48,7 @@ export const ShopDetail: React.FC = () => {
 
     return (
         <DetailContainer>
-            <CategoryHeader onClick={()=>navigate(-1)}>{`<`} 포케</CategoryHeader>
+            <BackBar/>
             <MenuHeader>
                 {resInfo? (
                 <BkImg $imgsrc={slowcalyImg}>
@@ -66,7 +79,8 @@ export const ShopDetail: React.FC = () => {
                         fixprice={menu.price}
                         discountrate={((menu.price - menu.discountedPrice) / menu.price * 100).toFixed(0) + '%'}
                         saleprice={menu.discountedPrice}
-                    />)}
+                    />
+                    )}
                 </MenuContainer>
             </MenuBody>
         </DetailContainer>

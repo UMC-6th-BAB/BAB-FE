@@ -1,6 +1,6 @@
 
 
-const REST_API_KEY = 'c57491a61eb5e7938e2c6124d78227ba'
+const REST_API_KEY = import.meta.env.REACT_APP_KAKAO_OAUTH_KEY
 const REDIRECT_URI = 'http://localhost:5173/oauth'
 
 export const Kakao_Auth_Url = `https://kauth.kakao.com/oauth/authorize?

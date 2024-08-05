@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { theme } from '../../styles/theme'
 
 export const MemberContainer = styled.div`
     display: flex;
@@ -24,6 +23,7 @@ export const SelectMessage = styled.div`
 `;
 
 export const MemberButton = styled.button`
+    border-style: solid;
     border-radius: 20px;
     border-color: #D7D7D7;
     width: 342px;

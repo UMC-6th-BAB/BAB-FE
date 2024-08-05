@@ -4,7 +4,7 @@ import {LoginStore} from '@stores/loginStore'
 import { SplashContainer, Logo, Title } from './Splash.style';
 import bablogo from '@assets/OnboardingPage/bablogo.svg'
 
-export const Splash: React.FC = () => {
+export default function Splash() {
     const navigate = useNavigate();
     const {isLogined, setIsLogined} = LoginStore(state=>state);
 

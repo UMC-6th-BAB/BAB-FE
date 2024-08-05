@@ -6,24 +6,9 @@ export const DetailContainer = styled.div`
     height: 100vh; /* 전체 높이를 100vh로 설정 */
 `;
 
-export const CategoryHeader = styled.div`
-    display: flex;
-    background-color: #FFFFFF;
-    width: 370px;
-    height: 58px;
-    font-size: 19px;
-    font-weight: 600;
-    align-items: center;
-    padding: 30px 0px 0px 30px;
-    cursor: pointer;
-    position: fixed;
-    top: 0px;
-    z-index: 4; /* 다른 요소 위로 보이도록 설정 */
-`;
-
 export const MenuHeader = styled.div`
     position: fixed;
-    top: 90px; /* 화면 상단에 고정 */
+    top: 80px; /* 화면 상단에 고정 */
     width: 400px;
     z-index: 2; /* 다른 요소 위로 보이도록 설정 */
     text-align: left;
@@ -73,11 +58,11 @@ export const LinkBtn = styled.div`
 export const MenuBody = styled.div`
     display: flex;
     flex-direction: column;
+    width: 400px;
     border-radius: 15px;
     background-color: #FFFFFF;
     position: relative;
-    top: 330px;
-    padding: 10px; /* 여백 추가 */
+    top: 310px;
     margin-top: -10px; /* MenuHeader와 겹치도록 조정 */
     z-index: 3;
     `;

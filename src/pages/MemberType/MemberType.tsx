@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom'
 import {LoginStore} from '@stores/loginStore'
 import { MemberContainer, Welcome, SelectMessage, MemberButton, StartButton } from './MemberType.style';
 
-export const MemberType: React.FC = () => {
+export default function MemberType() {
     const navigate = useNavigate();
 
     const {user, membertype, isLogined, setMembertype} = LoginStore(state=>state);
