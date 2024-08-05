@@ -9,6 +9,7 @@ import {
   EventTitle,
   EventDescription,
   EventPeriod,
+  DeleteButton,
 } from '@pages/DiscountEventRecordPage/DiscountEventRecordPage.style'
 import { useNavigate } from 'react-router-dom'
 import storeInfoStore from '@stores/storeInfoStore'
@@ -17,8 +18,13 @@ import discountEventStore from '@stores/discountEventStore'
 export default function DiscountEventRecordPage() {
   const navigate = useNavigate()
   const { storeInfos } = storeInfoStore()
-  const { discountEvents } = discountEventStore()
+  const { discountEvents, removeDiscountEventsByStoreId } = discountEventStore()
 
+  const handleDeleteClick = (storeId: number) => {
+    removeDiscountEventsByStoreId(storeId)
+  } //여기 API 코드는 브렌치 새로 파서 진행하겠습니다(본격적인 할인 로직 다룰때)
+  //현재는 클라이언트 단에서(스토어) 삭제되는거까지만 해놨습니다.
+  console.log(discountEvents)
   return (
     <PageContainer>
       <Header>
@@ -42,6 +48,9 @@ export default function DiscountEventRecordPage() {
             <EventPeriod>
               {event.startDate} ~ {event.endDate}
             </EventPeriod>
+            <DeleteButton onClick={() => handleDeleteClick(event.storeId)}>
+              삭제
+            </DeleteButton>
           </EventItem>
         ))}
       </EventList>
