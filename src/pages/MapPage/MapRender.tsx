@@ -3,6 +3,8 @@ import SearchBar from '@components/MapCard/SearchCard/SearchBar'
 import AfterSearchBar from '@components/MapCard/SearchCard/AfterSearchBar'
 import restaurantInfoStore from '@stores/restaurentStore'
 import { mapStore } from '@stores/mapStore'
+import smallGreyIcon from '@assets/mapIcon/smallGreyIcon'
+import smallYellowIcon from '@assets/mapIcon/smallYellowIcon'
 import { Wrapper, Status } from '@googlemaps/react-wrapper'
 import { useState, useEffect } from 'react'
 
@@ -100,15 +102,6 @@ export default function MapRender() {
     }
   }, [searchValue])
 
-  /*useEffect(() => {
-    const zoom = googleMap?.getZoom()
-    if(zoom){
-      markers.forEach((marker)=>{
-        marker.
-      })
-    }
-  }, [googleMap?.getZoom()])*/
-
   return (
     <Wrapper apiKey={import.meta.env.VITE_API_KEY} render={render}>
       {searchValue === '' ? (
@@ -125,6 +118,7 @@ export default function MapRender() {
       )}
       <Map
         markers={markers}
+        filterCheck={filterCheck}
         addMarker={addMarker}
         clearMarker={clearMarker}
         searchValue={searchValue}

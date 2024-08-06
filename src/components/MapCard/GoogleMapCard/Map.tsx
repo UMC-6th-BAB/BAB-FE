@@ -6,18 +6,28 @@ import { useEffect, useRef } from 'react'
 import { mapStore } from '@stores/mapStore'
 import restaurantInfoStore from '@stores/restaurentStore'
 import greyIcon from '@assets/mapIcon/greyIcon'
+import smallGreyIcon from '@assets/mapIcon/smallGreyIcon'
 import yellowIcon from '@assets/mapIcon/yellowIcon'
+import smallYellowIcon from '@assets/mapIcon/smallYellowIcon'
 //import { MarkerClusterer } from '@googlemaps/markerclusterer'
 
 type Props = {
   markers: google.maps.marker.AdvancedMarkerElement[]
   searchValue: string
+  filterCheck: boolean
   addMarker: (marker: google.maps.marker.AdvancedMarkerElement) => void
   clearMarker: () => void
 }
 
+interface storeInfo {
+  price: number
+  discountPrice: number
+  check: boolean
+}
+
 export default function Map({
   markers,
+  filterCheck,
   addMarker,
   clearMarker,
   searchValue,
@@ -49,6 +59,25 @@ export default function Map({
     return check
   }
 
+  function findIsDiscount(id: string): storeInfo {
+    let storeinfo: storeInfo
+    storeinfo = { check: false, price: 0, discountPrice: -1 }
+
+    tempInfos.forEach((info) => {
+      if (info.id === id) {
+        if (info.menus[0].discountPrice === null) {
+          storeinfo.check = false
+          storeinfo.price = info.menus[0].price
+        } else {
+          storeinfo.check = true
+          storeinfo.price = info.menus[0].price
+          storeinfo.discountPrice = info.menus[0].discountPrice
+        }
+      }
+    })
+    return storeinfo
+  }
+
   //지도 초기화
   useEffect(() => {
     if (ref.current) {
@@ -77,6 +106,31 @@ export default function Map({
       findPlaces()
     }
   }, [searchValue])
+
+  useEffect(() => {
+    const zoom = googleMap?.getZoom()
+    let storeinfo: storeInfo
+    if (zoom < 16) {
+      console.log(zoom)
+      markers.forEach((marker) => {
+        storeinfo = findIsDiscount(marker.id)
+        if (storeinfo.check === true) {
+          marker.content = smallYellowIcon()
+        } else {
+          marker.content = smallGreyIcon()
+        }
+      })
+    } else {
+      markers.forEach((marker) => {
+        storeinfo = findIsDiscount(marker.id)
+        if (storeinfo.check === true) {
+          marker.content = yellowIcon(storeinfo.price, storeinfo.discountPrice)
+        } else {
+          marker.content = greyIcon(storeinfo.price)
+        }
+      })
+    }
+  }, [filterCheck])
 
   //마커 삽입기능
   useEffect(() => {
