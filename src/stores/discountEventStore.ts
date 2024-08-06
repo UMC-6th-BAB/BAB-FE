@@ -1,5 +1,9 @@
 import { create } from 'zustand'
 
+const generateUniqueId = () => {
+  return Math.floor(Math.random() * 1000000) // 0에서 999,999 사이의 랜덤 숫자 생성
+}
+
 interface Discount {
   id: number
   name: string
@@ -9,7 +13,6 @@ interface Discount {
 
 interface DiscountEvent {
   id: number
-  storeId: number // 가게 ID와 연결되는 필드 추가
   startDate: string
   endDate: string
   eventMessage: string
@@ -33,13 +36,12 @@ interface DiscountEventState {
     }[],
   ) => void
   addDiscountEvent: () => DiscountEvent
-  removeDiscountEventsByStoreId: (storeId: number) => void
+  removeDiscountEventById: (eventId: number) => void
 }
 
 const discountEventStore = create<DiscountEventState>((set, get) => ({
   currentEvent: {
     id: 0,
-    storeId: 0,
     startDate: '',
     endDate: '',
     eventMessage: '',
@@ -95,14 +97,12 @@ const discountEventStore = create<DiscountEventState>((set, get) => ({
     const state = get()
     const newEvent: DiscountEvent = {
       ...state.currentEvent,
-      id: state.discountEvents.length,
-      storeId: state.currentEvent.storeId, // 현재 이벤트의 storeId 사용
+      id: generateUniqueId(), // 고유한 ID 생성 함수 사용
     }
     set({
       discountEvents: [...state.discountEvents, newEvent],
       currentEvent: {
         id: 0,
-        storeId: 0,
         startDate: '',
         endDate: '',
         eventMessage: '',
@@ -111,10 +111,10 @@ const discountEventStore = create<DiscountEventState>((set, get) => ({
     })
     return newEvent
   },
-  removeDiscountEventsByStoreId: (storeId) => {
+  removeDiscountEventById: (eventId) => {
     set((state) => ({
       discountEvents: state.discountEvents.filter(
-        (event) => event.storeId !== storeId,
+        (event) => event.id !== eventId,
       ),
     }))
   },
