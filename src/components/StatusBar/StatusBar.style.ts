@@ -11,7 +11,6 @@ export const StatusBarContainer = styled.div`
   box-sizing: border-box;
   position: fixed;
   top: 0;
-  left: 20px;
   z-index: 1000;
 `
 

@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import styled, { ThemeProvider } from 'styled-components'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { ThemeProvider } from 'styled-components'
 import GlobalStyle from '@styles/GlobalStyle'
 import { theme } from '@styles/theme'
 import ManagerPage from '@pages/ManagerPage/ManagerPage'
@@ -18,6 +18,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
 `
+import AppContent from '@components/AppContent'
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
           <Route path="/map" element={<MapRender />} />
         </Routes>
         <Footer />
+        <AppContent />
       </Router>
     </ThemeProvider>
   )
