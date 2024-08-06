@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const API_BASE_URL = 'http://43.201.218.182:8080' // 실제 API 기본 URL로 대체하기
-
+const API_BASE_URL = 'http://43.201.218.182:8080'
+//기본 엔드포인트는 추후 env에다가 설정해두는게 좋을 거 같네요
 export const deleteStore = async (storeId: number) => {
   try {
     const response = await axios.delete(`/v1/stores/${storeId}`)
