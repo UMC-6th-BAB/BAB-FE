@@ -18,7 +18,8 @@ import { HiMagnifyingGlass } from 'react-icons/hi2'
 import logo from '@assets/dummy/suu_emblem1.jpg'
 import Button from '@components/Button/Button'
 
-import { studentInfoStore, schoolInfoStore } from '@stores/studentInfoStore'
+import { studentInfoStore } from '@stores/studentInfoStore'
+import { schoolInfoStore } from '@stores/schoolInfoStore'
 
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -27,7 +28,7 @@ export default function SchoolSearchPage() {
   const [response, setResponse] = useState<boolean>(false)
   const [searchVal, setSearchVal] = useState<string>('')
   const { studentName, setIsSchoolSet } = studentInfoStore((state) => state)
-  const { setSchoonName, setAddress } = schoolInfoStore((state) => state)
+  const { setSchoolName, setAddress } = schoolInfoStore((state) => state)
 
   const dummy = {
     schoolName: '숭실대학교',
@@ -44,7 +45,7 @@ export default function SchoolSearchPage() {
   }
   const handleSetSchool = () => {
     setIsSchoolSet(true)
-    setSchoonName(dummy.schoolName)
+    setSchoolName(dummy.schoolName)
     setAddress(dummy.address)
     navigate('/studentPage')
   }

@@ -8,25 +8,6 @@ interface StudentInfo {
   setIsSchoolSet: (school: boolean) => void
 }
 
-interface SchoolInfo {
-  schoolName: string | null
-  address: string | null
-  setSchoonName: (schoolNamee: string) => void
-  setAddress: (addresss: string) => void
-}
-
-export const schoolInfoStore = create(
-  persist<SchoolInfo>(
-    (set) => ({
-      schoolName: null,
-      address: null,
-      setSchoonName: (schoolNamee) => set({ schoolName: schoolNamee }),
-      setAddress: (addresss) => set({ address: addresss }),
-    }),
-    { name: 'schoolInfo' },
-  ),
-)
-
 export const studentInfoStore = create(
   persist<StudentInfo>(
     (set) => ({

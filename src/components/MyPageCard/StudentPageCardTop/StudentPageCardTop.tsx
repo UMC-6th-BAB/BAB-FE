@@ -6,7 +6,8 @@ import {
   StyledArrow,
   EditSchool,
 } from './StudentPageCardTop.style'
-import { studentInfoStore, schoolInfoStore } from '@stores/studentInfoStore'
+import { studentInfoStore } from '@stores/studentInfoStore'
+import { schoolInfoStore } from '@stores/schoolInfoStore'
 
 import StudentIDCardImg from '@assets/StudentPage/studentIDCard.svg'
 import ArrowImg from '@assets/StudentPage/arrow.svg'
