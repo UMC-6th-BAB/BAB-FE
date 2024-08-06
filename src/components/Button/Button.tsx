@@ -1,15 +1,18 @@
 import styled from 'styled-components'
 import { buttonSize, buttonType, fontWeight } from './Button.style'
 interface ButtonStyleProps {
-  state: 'normal'
-  width: string
   colorType: 'gray' | 'yellow'
   fontWeight?: 'SemiBold' | 'Bold' | 'ExtraBold'
+  width: 'half' | 'full' | string
 }
 
 const ButtonStyle = styled.button<ButtonStyleProps>`
   cursor: pointer;
-  width: ${(props) => props.width};
+
+  ${(props) =>
+    props.width === 'half' || props.width === 'full'
+      ? buttonSize[props.width]
+      : buttonSize.custom(props.width)}
   height: 47px;
   display: flex;
   justify-content: center;
@@ -20,7 +23,7 @@ const ButtonStyle = styled.button<ButtonStyleProps>`
   border: none;
 
   ${(props) => props.fontWeight && fontWeight[props.fontWeight]};
-  ${(props) => buttonType[props.colorType]?.[props.state]};
+  ${(props) => buttonType[props.colorType]?.['normal']};
 `
 
 interface ButtonProps extends ButtonStyleProps {
@@ -31,11 +34,17 @@ interface ButtonProps extends ButtonStyleProps {
 export default function Button({
   children,
   onClick,
+  width,
   fontWeight = 'Bold',
   ...styleProps
 }: ButtonProps) {
   return (
-    <ButtonStyle {...styleProps} onClick={onClick} fontWeight={fontWeight}>
+    <ButtonStyle
+      onClick={onClick}
+      width={width}
+      fontWeight={fontWeight}
+      {...styleProps}
+    >
       {children}
     </ButtonStyle>
   )

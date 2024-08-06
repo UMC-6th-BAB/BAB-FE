@@ -1,12 +1,16 @@
 import { css } from 'styled-components'
 export const buttonSize = {
   half: css`
-    width: '46%';
-    height: '47px';
+    width: 160px;
+    height: 47px;
   `,
   full: css`
-    width: '100%';
-    height: '47px';
+    width: 342px;
+    height: 47px;
+  `,
+  custom: (width: string) => css`
+    width: ${width};
+    height: 47px;
   `,
 }
 
