@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const DiscountList = styled.div`
   width: 294px;
@@ -22,8 +23,9 @@ export const Text = styled.div<{ color: string }>`
   color: ${(props) => props.color};
 `
 
-export const More = styled.div`
+export const More = styled(Link)`
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 13px;
   margin-top: 5px;
