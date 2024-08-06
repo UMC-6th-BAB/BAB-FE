@@ -1,8 +1,5 @@
 import { create } from 'zustand'
-
-const generateUniqueId = () => {
-  return Math.floor(Math.random() * 1000000) // 0에서 999,999 사이의 랜덤 숫자 생성
-}
+import { generateUniqueId } from '@utils/generateUniqueId'
 
 interface Discount {
   id: number
