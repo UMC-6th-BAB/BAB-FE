@@ -6,23 +6,29 @@ import {
   StyledArrow,
   EditSchool,
 } from './StudentPageCardTop.style'
+import { studentInfoStore } from '@stores/studentInfoStore'
+import { schoolInfoStore } from '@stores/schoolInfoStore'
 
 import StudentIDCardImg from '@assets/StudentPage/studentIDCard.svg'
 import ArrowImg from '@assets/StudentPage/arrow.svg'
 import PinImg from '@assets/StudentPage/pin.svg'
 
+import { useNavigate } from 'react-router-dom'
 
-interface Props {
-  isSchoolSet: boolean
-}
+export default function StudentPageCardTop() {
+  const navigate = useNavigate()
+  const { studentName, isSchoolSet } = studentInfoStore((state) => state)
+  const { schoolName } = schoolInfoStore((state) => state)
 
-export default function StudentPageCardTop({ isSchoolSet }: Props) {
+  const handleSchoolEdit = () => {
+    navigate('/schoolSearch')
+  }
   return (
     <StyledCard paddingTop="35px" paddingBottom={isSchoolSet ? '16px' : '26px'}>
-      <CardTitle>고서현님!</CardTitle>
+      <CardTitle>{studentName}님!</CardTitle>
       {isSchoolSet ? (
         <>
-          <CardTitle>OO 대학교 근처 식당으로</CardTitle>
+          <CardTitle>{schoolName} 근처 식당으로</CardTitle>
           <CardTitle paddingBottom="21px">할인 정보를 알려드릴게요!</CardTitle>
           <FindSchoolContainer>
             <img
@@ -32,7 +38,7 @@ export default function StudentPageCardTop({ isSchoolSet }: Props) {
               style={{ marginBottom: '18px' }}
             />
           </FindSchoolContainer>
-          <EditSchool>대학 수정하기</EditSchool>
+          <EditSchool onClick={handleSchoolEdit}>대학 수정하기</EditSchool>
         </>
       ) : (
         <>
@@ -46,7 +52,7 @@ export default function StudentPageCardTop({ isSchoolSet }: Props) {
               height="73px"
               style={{ marginBottom: '18px' }}
             />
-            <FindSchoolBtn>
+            <FindSchoolBtn onClick={() => navigate('/schoolSearch')}>
               학교찾기
               <StyledArrow src={ArrowImg} />
             </FindSchoolBtn>

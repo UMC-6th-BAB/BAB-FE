@@ -21,6 +21,9 @@ const GlobalStyle = createGlobalStyle`
     border-color: black;
     align-items: center;
   }
+  * {
+    box-sizing: border-box;
+  }
 `
 
 export default GlobalStyle

@@ -1,19 +1,17 @@
 import { StyledCard } from '../MyPageCard.style'
 import { CardTitle } from '../MyPageCard.style'
-import {
-  StyledAccount,
-  StyledAccountControl,
-  Text,
-  AccountControlBtn,
-} from './StudentPageCardAccount.style'
+import { StyledAccount, Text, Btn } from './StudentPageCardAccount.style'
+import { studentInfoStore } from '@stores/studentInfoStore'
 
 export default function StudentPageCardAccount() {
+  const { id } = studentInfoStore((state) => state)
+
   return (
     <StyledCard paddingTop="24px" paddingBottom="21px">
       <CardTitle paddingBottom="18px">계정</CardTitle>
       <StyledAccount>
         <Text>아이디</Text>
-        <Text color="#9A9A9A">koseohyeon1</Text>
+        <Text color="#9A9A9A">{id}</Text>
       </StyledAccount>
       <hr
         style={{
@@ -24,10 +22,9 @@ export default function StudentPageCardAccount() {
           marginRight: '24px',
         }}
       />
-      <StyledAccountControl>
-        <AccountControlBtn>비밀번호 변경</AccountControlBtn>
-        <AccountControlBtn>이메일 변경</AccountControlBtn>
-      </StyledAccountControl>
+      <StyledAccount>
+        <Btn>로그아웃</Btn>
+      </StyledAccount>
     </StyledCard>
   )
 }
