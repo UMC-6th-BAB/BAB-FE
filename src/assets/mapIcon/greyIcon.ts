@@ -20,7 +20,7 @@ export default function greyIcon(price: number) {
   const Price = document.createElement('div')
   Price.style.position = 'absolute'
   Price.style.top = '40%'
-  Price.style.left = '50%'
+  Price.style.left = '51%'
   Price.style.fontSize = '12px'
   Price.style.fontWeight = '400'
   Price.style.whiteSpace = 'nowrap'

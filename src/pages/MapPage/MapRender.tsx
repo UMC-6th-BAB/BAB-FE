@@ -100,6 +100,15 @@ export default function MapRender() {
     }
   }, [searchValue])
 
+  /*useEffect(() => {
+    const zoom = googleMap?.getZoom()
+    if(zoom){
+      markers.forEach((marker)=>{
+        marker.
+      })
+    }
+  }, [googleMap?.getZoom()])*/
+
   return (
     <Wrapper apiKey={import.meta.env.VITE_API_KEY} render={render}>
       {searchValue === '' ? (
