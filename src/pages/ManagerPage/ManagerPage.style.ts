@@ -29,12 +29,6 @@ export const TitleText = styled.div`
   font-weight: bold;
 `
 
-export const NotifyIcon = styled.img`
-  width: 20px;
-  height: 25px;
-  cursor: pointer;
-`
-
 export const Card = styled.div`
   display: flex;
   flex-direction: column;
@@ -122,11 +116,12 @@ export const AccountDetail = styled.div`
 
 export const AccountActions = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   margin-top: 10px;
 
   span {
     color: #666;
     cursor: pointer;
+    font-size: 500;
   }
 `

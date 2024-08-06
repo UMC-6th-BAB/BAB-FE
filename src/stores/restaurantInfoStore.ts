@@ -12,7 +12,7 @@ interface MenuItem {
   image: string
   name: string
   price: number
-  discountPrice?: number
+  discountPrice: number
 }
 
 interface restaurantInfo {

@@ -1,7 +1,6 @@
 import { StyledCard, CardTitle } from '../MyPageCard.style'
 import { DiscountList, DiscountItem, Text, More } from './DiscountInfo.style'
 
-import moreArrowImg from '../../../assets/StudentPage/moreArrow.svg'
 export default function DiscountInfo() {
   const dummy = [
     { id: 1, name: '샐러디 숭실대점', content: '전메뉴 5000원 할인' },
@@ -12,9 +11,9 @@ export default function DiscountInfo() {
     <StyledCard paddingTop="24px" paddingBottom="27px">
       <div style={{ display: 'flex', gap: '109px', alignItems: 'start' }}>
         <CardTitle paddingBottom="35px">오늘의 할인 식당</CardTitle>
-        <More>
+        <More to="/todayDiscountRestaurant">
           <div>더보기</div>
-          <img src={moreArrowImg} width="5px" height="11px" />
+          <div>&gt;</div>
         </More>
       </div>
       <DiscountList>

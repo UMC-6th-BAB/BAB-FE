@@ -12,22 +12,21 @@ import {
   AccountInfo,
   AccountDetail,
   AccountActions,
-  NotifyIcon,
 } from './ManagerPage.style'
-import icon from '@assets/managerMypage/등록증 아이콘.png'
-import menuIcon from '@assets/managerMypage/메뉴아이콘.png'
-import bellIcon from '@assets/icons/bell.png'
+import icon from '@assets/managerMypage/등록증 아이콘.svg'
+import menuIcon from '@assets/managerMypage/메뉴아이콘.svg'
+import bellIcon from '@assets/icons/bell.svg'
 import useModalStore from '@stores/modalStore'
 import { useEffect, useState } from 'react'
 import DiscountModal from '@components/Modal/DiscountModal'
 import ManagerCompletedCard from '@components/ManagerCompletedCard/ManagerCompletedCard'
-import restaurantInfoStore from '@stores/restaurantInfoStore'
+import storeInfoStore from '@stores/storeInfoStore'
+import NotifyIcon from '@components/NotifyIcon'
 
 export default function ManagerPage() {
   const { isRegistered, setIsRegistered, setManagerRegistrationInfo } =
     managerRegisterInfoStore()
-  const { isRestaurantRegistered, setRestaurantRegistered } =
-    restaurantInfoStore()
+  const { isStoreRegistered, setStoreRegistered } = storeInfoStore()
   const { openModal } = useModalStore()
   const [businessData, setBusinessData] = useState<ManagerRegisterState | null>(
     null,
@@ -54,8 +53,8 @@ export default function ManagerPage() {
     })
   }
 
-  const handleRestaurantRegisterClick = (): void => {
-    setRestaurantRegistered(true)
+  const handleStoreRegisterClick = (): void => {
+    setStoreRegistered(true)
     openModal()
   }
 
@@ -63,9 +62,9 @@ export default function ManagerPage() {
     <ManagerPageContainer>
       <Title>
         <TitleText>마이페이지</TitleText>
-        <NotifyIcon src={bellIcon} />
+        <NotifyIcon />
       </Title>
-      {isRestaurantRegistered ? (
+      {isStoreRegistered ? (
         <ManagerCompletedCard />
       ) : (
         <Card>
@@ -78,7 +77,7 @@ export default function ManagerPage() {
           {isRegistered && businessData ? (
             <>
               <CardImage src={menuIcon} alt="메뉴 아이콘" />
-              <Button onClick={handleRestaurantRegisterClick}>
+              <Button onClick={handleStoreRegisterClick}>
                 가게 등록하러 가기
               </Button>
             </>
@@ -101,11 +100,10 @@ export default function ManagerPage() {
         </AccountDetail>
         <AccountDetail className="divider" />
         <AccountActions>
-          <span>비밀번호 변경</span>
-          <span>이메일 변경</span>
+          <span>로그아웃</span>
         </AccountActions>
       </AccountInfo>
-      {isRestaurantRegistered ? <DiscountModal /> : null}
+      {isStoreRegistered ? <DiscountModal /> : null}
     </ManagerPageContainer>
   )
 }
