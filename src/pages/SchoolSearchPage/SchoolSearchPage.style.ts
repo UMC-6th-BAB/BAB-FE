@@ -82,8 +82,7 @@ export const StyledInput = styled.input`
   height: 36px;
   border: none;
   &:focus {
-    /* 왜 안되지? */
-    border: none;
+    outline: none;
   }
 `
 export const Result = styled.div`
@@ -98,8 +97,6 @@ export const SchoolLogo = styled.img`
   border: 0.4px solid #767676;
   border-radius: 5px;
   box-sizing: border-box;
-
-  /* background: #ffffff; */
 `
 export const School = styled.div`
   display: flex;
@@ -127,6 +124,6 @@ export const ControlBtn = styled.div`
   display: flex;
   gap: 22px;
 
-  margin-top: auto; /* 추가한 부분 */
+  margin-top: auto;
   margin-bottom: 5.6vh;
 `
