@@ -48,6 +48,7 @@ export const StyledAddressButton = styled.button`
   border-radius: 4px;
   background-color: #efefef;
   margin-left: 10px;
+  border: none;
 `
 export const StyledAddressInput = styled(StyledFormInput)`
   width: 235px;
@@ -56,6 +57,5 @@ export const StyledAddressInput = styled(StyledFormInput)`
 export const StyledRowDiv = styled.div`
   display: flex;
   flex-direction: row;
-  /* gap: 4px; */
-  width: 100%;
+  width: 95%;
 `

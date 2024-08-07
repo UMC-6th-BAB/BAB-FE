@@ -264,5 +264,5 @@ export const StyledErrorMessage = styled.div`
 export const StyledInputContainer = styled.div`
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 95%;
 `

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const StyledBreakTimeRow = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  padding: 3%;
 `
 export const StyledDayButton = styled.button<{ selected: boolean }>`
   color: black;
@@ -31,9 +31,10 @@ export const StyledTimeInput = styled.input`
 `
 
 export const StyledTimeRow = styled.div`
+  padding: 3%;
   display: flex;
   align-items: center;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   width: 100%;
 `
 export const StyledTimeText = styled.div`
