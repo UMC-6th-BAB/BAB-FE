@@ -3,10 +3,10 @@ import SearchBar from '@components/MapCard/SearchCard/SearchBar'
 import AfterSearchBar from '@components/MapCard/SearchCard/AfterSearchBar'
 import restaurantInfoStore from '@stores/restaurentStore'
 import { mapStore } from '@stores/mapStore'
-import smallGreyIcon from '@assets/mapIcon/smallGreyIcon'
-import smallYellowIcon from '@assets/mapIcon/smallYellowIcon'
 import { Wrapper, Status } from '@googlemaps/react-wrapper'
 import { useState, useEffect } from 'react'
+
+//////////////  최상부 컨테이너  //////////////
 
 const render = (status: Status) => {
   switch (status) {
@@ -118,7 +118,6 @@ export default function MapRender() {
       )}
       <Map
         markers={markers}
-        filterCheck={filterCheck}
         addMarker={addMarker}
         clearMarker={clearMarker}
         searchValue={searchValue}

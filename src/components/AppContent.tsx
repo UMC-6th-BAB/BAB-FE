@@ -16,6 +16,7 @@ import StoreInfoDeletePage from '@pages/StoreInfoDeletePage/StoreInfoDeletePage'
 import TodayDiscountRestaurantPage from '@pages/TodayDiscountRestaurantPage/TodayDiscountRestaurantPage'
 import DiscountRestaurantListPage from '@pages/DiscountRestaurantListPage/DiscountRestaurantListPage'
 import StudentPage from '@pages/StudentPage/StudentPage'
+import MapRender from '@pages/MapPage/MapRender'
 
 export default function AppContent() {
   const location = useLocation()
@@ -41,6 +42,7 @@ export default function AppContent() {
         <Route path="/storeInfo-edit" element={<StoreInfoEditPage />} />
         <Route path="/storeInfo-delete" element={<StoreInfoDeletePage />} />
         <Route path="/studentPage" element={<StudentPage />} />
+        <Route path="/map" element={<MapRender />} />
         <Route
           path="/todayDiscountRestaurant"
           element={<TodayDiscountRestaurantPage />}

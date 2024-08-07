@@ -2,19 +2,17 @@ import {
   MapContainer,
   MapWrapper,
 } from '@components/MapCard/GoogleMapCard/Map.style'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { mapStore } from '@stores/mapStore'
 import restaurantInfoStore from '@stores/restaurentStore'
 import greyIcon from '@assets/mapIcon/greyIcon'
 import smallGreyIcon from '@assets/mapIcon/smallGreyIcon'
 import yellowIcon from '@assets/mapIcon/yellowIcon'
 import smallYellowIcon from '@assets/mapIcon/smallYellowIcon'
-//import { MarkerClusterer } from '@googlemaps/markerclusterer'
 
 type Props = {
   markers: google.maps.marker.AdvancedMarkerElement[]
   searchValue: string
-  filterCheck: boolean
   addMarker: (marker: google.maps.marker.AdvancedMarkerElement) => void
   clearMarker: () => void
 }
@@ -27,14 +25,13 @@ interface storeInfo {
 
 export default function Map({
   markers,
-  filterCheck,
   addMarker,
   clearMarker,
   searchValue,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null)
   const { lat, lng, googleMap, setGoogleMap } = mapStore()
-
+  const [zoom, setZoom] = useState<number | undefined>(16)
   const {
     infos,
     tempInfos,
@@ -61,13 +58,14 @@ export default function Map({
 
   function findIsDiscount(id: string): storeInfo {
     let storeinfo: storeInfo
-    storeinfo = { check: false, price: 0, discountPrice: -1 }
+    storeinfo = { check: false, price: 0, discountPrice: 0 }
 
     tempInfos.forEach((info) => {
       if (info.id === id) {
         if (info.menus[0].discountPrice === null) {
           storeinfo.check = false
           storeinfo.price = info.menus[0].price
+          storeinfo.discountPrice = 0
         } else {
           storeinfo.check = true
           storeinfo.price = info.menus[0].price
@@ -83,11 +81,15 @@ export default function Map({
     if (ref.current) {
       const initialMap = new window.google.maps.Map(ref.current, {
         center: { lat, lng },
-        zoom: 16,
+        zoom: 17,
         disableDefaultUI: true,
         mapId: 'eb4ca83b18a77f42',
       })
       setGoogleMap(initialMap)
+
+      initialMap.addListener('zoom_changed', () => {
+        setZoom(initialMap.getZoom())
+      })
     }
   }, [])
 
@@ -107,10 +109,10 @@ export default function Map({
     }
   }, [searchValue])
 
+  //zoom값에 따라 아이콘 조절기능
   useEffect(() => {
-    const zoom = googleMap?.getZoom()
     let storeinfo: storeInfo
-    if (zoom < 16) {
+    if (zoom < 17) {
       console.log(zoom)
       markers.forEach((marker) => {
         storeinfo = findIsDiscount(marker.id)
@@ -130,7 +132,7 @@ export default function Map({
         }
       })
     }
-  }, [filterCheck])
+  }, [zoom])
 
   //마커 삽입기능
   useEffect(() => {
