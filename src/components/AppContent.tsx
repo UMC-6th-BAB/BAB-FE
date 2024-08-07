@@ -1,5 +1,4 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
-import styled from 'styled-components'
 import ManagerPage from '@pages/ManagerPage/ManagerPage'
 import Footer from '@components/Footer/Footer'
 import StatusBar from '@components/StatusBar/StatusBar'
@@ -24,8 +23,8 @@ export default function AppContent() {
     location.pathname === '/manager' ||
     location.pathname === '/studentPage' ||
     location.pathname === '/shopdetail' ||
-    location.pathname === '/list'
-
+    location.pathname === '/list' ||
+    location.pathname === '/map'
   return (
     <>
       <StatusBar />
