@@ -1,5 +1,4 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
-import styled from 'styled-components'
 import ManagerPage from '@pages/ManagerPage/ManagerPage'
 import Footer from '@components/Footer/Footer'
 import StatusBar from '@components/StatusBar/StatusBar'
@@ -17,6 +16,7 @@ import TodayDiscountRestaurantPage from '@pages/TodayDiscountRestaurantPage/Toda
 import DiscountRestaurantListPage from '@pages/DiscountRestaurantListPage/DiscountRestaurantListPage'
 import StudentPage from '@pages/StudentPage/StudentPage'
 import MapRender from '@pages/MapPage/MapRender'
+import SchoolSearchPage from '@pages/SchoolSearchPage/SchoolSearchPage'
 
 export default function AppContent() {
   const location = useLocation()
@@ -43,6 +43,7 @@ export default function AppContent() {
         <Route path="/storeInfo-delete" element={<StoreInfoDeletePage />} />
         <Route path="/studentPage" element={<StudentPage />} />
         <Route path="/map" element={<MapRender />} />
+        <Route path="/schoolSearch" element={<SchoolSearchPage />} />
         <Route
           path="/todayDiscountRestaurant"
           element={<TodayDiscountRestaurantPage />}
