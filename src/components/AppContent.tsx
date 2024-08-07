@@ -15,6 +15,7 @@ import StoreInfoDeletePage from '@pages/StoreInfoDeletePage/StoreInfoDeletePage'
 import TodayDiscountRestaurantPage from '@pages/TodayDiscountRestaurantPage/TodayDiscountRestaurantPage'
 import DiscountRestaurantListPage from '@pages/DiscountRestaurantListPage/DiscountRestaurantListPage'
 import StudentPage from '@pages/StudentPage/StudentPage'
+import MapRender from '@pages/MapPage/MapRender'
 import SchoolSearchPage from '@pages/SchoolSearchPage/SchoolSearchPage'
 
 export default function AppContent() {
@@ -23,8 +24,8 @@ export default function AppContent() {
     location.pathname === '/manager' ||
     location.pathname === '/studentPage' ||
     location.pathname === '/shopdetail' ||
-    location.pathname === '/list'
-
+    location.pathname === '/list' ||
+    location.pathname === '/map'
   return (
     <>
       <StatusBar />
@@ -41,6 +42,7 @@ export default function AppContent() {
         <Route path="/storeInfo-edit" element={<StoreInfoEditPage />} />
         <Route path="/storeInfo-delete" element={<StoreInfoDeletePage />} />
         <Route path="/studentPage" element={<StudentPage />} />
+        <Route path="/map" element={<MapRender />} />
         <Route path="/schoolSearch" element={<SchoolSearchPage />} />
         <Route
           path="/todayDiscountRestaurant"
