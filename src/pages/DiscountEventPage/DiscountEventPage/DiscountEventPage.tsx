@@ -70,7 +70,7 @@ export default function DiscountEventPage() {
       hasError = true
     }
 
-    let hasValidDiscount = currentEvent.discounts.every(
+    let hasValidDiscount = currentEvent.discounts.some(
       (discount) => discount.isChecked && discount.discountPrice,
     )
 
