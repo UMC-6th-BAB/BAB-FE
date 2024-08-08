@@ -36,15 +36,6 @@ export default function DiscountEventRecordPage() {
           <EventItem key={event.id}>
             <EventTitle>{storeInfos[0].name}</EventTitle>
             <EventDescription>{event.eventMessage}</EventDescription>
-            {event.discounts
-              .filter(
-                (discount) => discount.isChecked && discount.discountPrice > 0,
-              )
-              .map((discount) => (
-                <EventDescription key={discount.id}>
-                  {discount.name} {discount.discountPrice}원 할인
-                </EventDescription>
-              ))}
             <EventPeriod>
               {event.startDate} ~ {event.endDate}
             </EventPeriod>
