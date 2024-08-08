@@ -15,6 +15,9 @@ import StoreInfoDeletePage from '@pages/StoreInfoDeletePage/StoreInfoDeletePage'
 import TodayDiscountRestaurantPage from '@pages/TodayDiscountRestaurantPage/TodayDiscountRestaurantPage'
 import DiscountRestaurantListPage from '@pages/DiscountRestaurantListPage/DiscountRestaurantListPage'
 import StudentPage from '@pages/StudentPage/StudentPage'
+import FirstRegisterStoreInfo from '@pages/FirstRegisterStoreInfo/FirstRegisterStoreInfo'
+import SecondRegisterStoreInfo from '@pages/SecondRegisterStoreInfo/SecondRegisterStoreInfo'
+import ThirdRegisterStoreInfo from '@pages/ThirdRegisterStoreInfo/ThirdRegisterStoreInfo'
 import MapRender from '@pages/MapPage/MapRender'
 import SchoolSearchPage from '@pages/SchoolSearchPage/SchoolSearchPage'
 
@@ -49,6 +52,18 @@ export default function AppContent() {
           element={<TodayDiscountRestaurantPage />}
         />
         <Route path="/list" element={<DiscountRestaurantListPage />} />
+        <Route
+          path="/firstregisterstoreinfo"
+          element={<FirstRegisterStoreInfo />}
+        />
+        <Route
+          path="/secondregisterstoreinfo"
+          element={<SecondRegisterStoreInfo />}
+        />
+        <Route
+          path="/thirdregisterstoreinfo"
+          element={<ThirdRegisterStoreInfo />}
+        />
       </Routes>
       {showFooter && <Footer />}
     </>
