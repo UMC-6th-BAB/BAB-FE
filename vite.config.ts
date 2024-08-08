@@ -14,7 +14,17 @@ export default defineConfig({
       '@pages': path.resolve(__dirname, 'src/pages'),
       '@stores': path.resolve(__dirname, 'src/stores'),
       '@styles': path.resolve(__dirname, 'src/styles'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
       '@icons': path.resolve(__dirname, 'src/assets/icons'),
+    },
+  },
+  server: {
+    proxy: {
+      '/v1': {
+        target: 'http://43.201.218.182:8080',
+        changeOrigin: true,
+        secure: false,
+      },
     },
   },
 })

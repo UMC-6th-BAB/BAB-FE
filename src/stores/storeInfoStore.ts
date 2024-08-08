@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import discountEventStore from './discountEventStore'
 
 interface BusinessHours {
   day: string
@@ -16,7 +17,7 @@ export interface MenuItem {
   isDiscounted?: boolean // 추가된 필드
 }
 
-interface StoreInfo {
+export interface StoreInfo {
   id: number // 가게 ID 추가
   name: string
   storeLink: string
@@ -30,6 +31,7 @@ interface StoreInfo {
 interface StoreInfoState {
   storeInfos: StoreInfo[]
   setStoreInfo: (info: StoreInfo) => void
+  addStoreInfo: (info: StoreInfo) => void // 새로운 가게를 추가하는 액션 추가
   isStoreRegistered: boolean
   setStoreRegistered: (registered: boolean) => void
   updateMenuDiscount: (
@@ -38,50 +40,26 @@ interface StoreInfoState {
     discountPrice?: number,
     isDiscounted?: boolean,
   ) => void
+  removeStoreInfo: (storeId: number) => void // 추가
 }
 
 const storeInfoStore = create<StoreInfoState>((set) => ({
-  storeInfos: [
-    {
-      id: 1, // 가게 ID 추가
-      name: '밥이득 김치찌개',
-      storeLink: '',
-      image: '',
-      university: '',
-      businessHours: [],
-      breakTime: [],
-      menu: [
-        {
-          id: 0,
-          image: '',
-          name: '김치찌개',
-          price: 8000,
-          isDiscounted: false,
-        },
-        {
-          id: 1,
-          image: '',
-          name: '된장찌개',
-          price: 7500,
-          isDiscounted: false,
-        },
-        {
-          id: 2,
-          image: '',
-          name: '계란말이',
-          price: 5000,
-          isDiscounted: false,
-        },
-      ],
-    },
-    // 다른 가게도 추가 가능
-  ],
+  storeInfos: [], // 초기값을 빈 배열로 설정
   setStoreInfo: (info) =>
     set((state) => ({
       storeInfos: state.storeInfos.map((store) =>
         store.id === info.id ? info : store,
       ),
     })),
+  addStoreInfo: (info) =>
+    set((state) => {
+      const updatedStoreInfos = [...state.storeInfos, info]
+      console.log('Updated Store Infos:', updatedStoreInfos) // 추가된 가게 정보 확인용 콘솔 로그
+      return {
+        storeInfos: updatedStoreInfos,
+        isStoreRegistered: true,
+      }
+    }),
   isStoreRegistered: false,
   setStoreRegistered: (registered) => set({ isStoreRegistered: registered }),
   updateMenuDiscount: (storeId, menuId, discountPrice, isDiscounted) =>
@@ -105,6 +83,18 @@ const storeInfoStore = create<StoreInfoState>((set) => ({
           : store,
       ),
     })),
+  removeStoreInfo: (storeId) => {
+    set((state) => {
+      const updatedStores = state.storeInfos.filter(
+        (store) => store.id !== storeId,
+      )
+      console.log('Updated Stores:', updatedStores)
+      return {
+        storeInfos: updatedStores,
+        isStoreRegistered: updatedStores.length > 0,
+      }
+    })
+  },
 }))
 
 export default storeInfoStore
