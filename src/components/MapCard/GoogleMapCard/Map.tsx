@@ -1,7 +1,4 @@
-import {
-  MapContainer,
-  MapWrapper,
-} from '@components/MapCard/GoogleMapCard/Map.style'
+import { MapWrapper } from '@components/MapCard/GoogleMapCard/Map.style'
 import { useEffect, useRef, useState } from 'react'
 import { mapStore } from '@stores/mapStore'
 import restaurantInfoStore from '@stores/restaurentStore'
@@ -86,7 +83,6 @@ export default function Map({
         mapId: 'eb4ca83b18a77f42',
       })
       setGoogleMap(initialMap)
-
       initialMap.addListener('zoom_changed', () => {
         setZoom(initialMap.getZoom())
       })
@@ -161,27 +157,11 @@ export default function Map({
     })()
   }, [tempInfos])
 
-  //가게정보 출력
-  /*useEffect(() => {
-    if (infos.length) {
-      infos.forEach((info) => {
-        console.log(info)
-        info.menus.forEach((menu) => {
-          console.log(info.name + ' 가격: ' + menu.price)
-          console.log(info.lat + ' ' + info.lng)
-        })
-      })
-    }
-  }, [infos])*/
-
   //가게검색 기능
   async function findPlaces() {
     const { Place } = (await google.maps.importLibrary(
       'places',
     )) as google.maps.PlacesLibrary
-    /*const { LatLngBounds } = (await google.maps.importLibrary(
-      'core',
-    )) as google.maps.CoreLibrary*/
 
     const request = {
       textQuery: searchValue,
@@ -223,9 +203,5 @@ export default function Map({
     }
   }
 
-  return (
-    <MapContainer>
-      <MapWrapper ref={ref} id="map" />
-    </MapContainer>
-  )
+  return <MapWrapper ref={ref} id="map" />
 }
