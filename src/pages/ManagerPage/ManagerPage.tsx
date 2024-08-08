@@ -22,6 +22,7 @@ import ManagerCompletedCard from '@components/ManagerCompletedCard/ManagerComple
 import storeInfoStore, { StoreInfo } from '@stores/storeInfoStore'
 import NotifyIcon from '@components/NotifyIcon'
 import discountEventStore from '@stores/discountEventStore'
+import { generateUniqueId } from '@utils/generateUniqueId'
 
 export default function ManagerPage() {
   const { isRegistered, setIsRegistered, setManagerRegistrationInfo } =
@@ -63,7 +64,7 @@ export default function ManagerPage() {
 
   const handleStoreRegisterClick = (): void => {
     const newStore: StoreInfo = {
-      id: storeInfos.length + 1,
+      id: generateUniqueId(),
       name: '새로운 가게',
       storeLink: '',
       image: '',
