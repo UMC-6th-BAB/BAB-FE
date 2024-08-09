@@ -1,11 +1,7 @@
-import {
-  MapContainer,
-  MapWrapper,
-} from '@components/MapCard/GoogleMapCard/Map.style'
+import { MapWrapper } from '@components/MapCard/GoogleMapCard/Map.style'
 import { useEffect, useRef, useState } from 'react'
 import { mapStore } from '@stores/mapStore'
 import storeInfoStore from '@stores/storeInfoStore'
-import restaurantInfoStore from '@stores/restaurentStore'
 import greyIcon from '@assets/mapIcon/greyIcon'
 import smallGreyIcon from '@assets/mapIcon/smallGreyIcon'
 import yellowIcon from '@assets/mapIcon/yellowIcon'
@@ -33,18 +29,7 @@ export default function Map({
   const ref = useRef<HTMLDivElement>(null)
   const { lat, lng, googleMap, setGoogleMap } = mapStore()
   const [zoom, setZoom] = useState<number | undefined>(16)
-  /*const {
-    infos,
-    tempInfos,
-    addRestaurantInfo,
-    addMenu,
-    clearTempInfo,
-    addTempInfo,
-    addTempMenu,
-    setDiscountPrice,
-    setTempDiscountPrice,
-  } = restaurantInfoStore()*/
-  const { storeInfos, addStoreInfo, addMenu } = storeInfoStore()
+  const { storeInfos, tempAddStoreInfo, addMenu } = storeInfoStore()
 
   //가게 중복입력 방지함수
   function findRestaurant(id: number): boolean {
@@ -89,7 +74,6 @@ export default function Map({
         mapId: 'eb4ca83b18a77f42',
       })
       setGoogleMap(initialMap)
-
       initialMap.addListener('zoom_changed', () => {
         setZoom(initialMap.getZoom())
       })
@@ -153,7 +137,7 @@ export default function Map({
               : yellowIcon(info.menu[0].price, info.menu[0].discountPrice)
           const markerView = new AdvancedMarkerElement({
             map: googleMap,
-            position: new google.maps.LatLng(info.lat, info.lng),
+            position: new google.maps.LatLng(info.lat as number, info.lng),
             title: info.name,
             content: logo,
           })
@@ -166,27 +150,11 @@ export default function Map({
     })()
   }, [storeInfos])
 
-  //가게정보 출력
-  /*useEffect(() => {
-    if (infos.length) {
-      infos.forEach((info) => {
-        console.log(info)
-        info.menus.forEach((menu) => {
-          console.log(info.name + ' 가격: ' + menu.price)
-          console.log(info.lat + ' ' + info.lng)
-        })
-      })
-    }
-  }, [infos])*/
-
   //가게검색 기능
   async function findPlaces() {
     const { Place } = (await google.maps.importLibrary(
       'places',
     )) as google.maps.PlacesLibrary
-    /*const { LatLngBounds } = (await google.maps.importLibrary(
-      'core',
-    )) as google.maps.CoreLibrary*/
 
     const request = {
       textQuery: searchValue,
@@ -204,14 +172,14 @@ export default function Map({
       places.forEach((place) => {
         //진짜 가게 정보 삽입기능
         if (findRestaurant(parseInt(place.id)) === false) {
-          addStoreInfo(
+          tempAddStoreInfo(
             parseInt(place.id),
             place.displayName as string,
             place.location?.lat(),
             place.location?.lng(),
           )
           addMenu(parseInt(place.id), '햄버거')
-          setDiscountPrice(place.id)
+          //setDiscountPrice(place.id)
         }
       })
     } else {
@@ -219,9 +187,5 @@ export default function Map({
     }
   }
 
-  return (
-    <MapContainer>
-      <MapWrapper ref={ref} id="map" />
-    </MapContainer>
-  )
+  return <MapWrapper ref={ref} id="map" />
 }
