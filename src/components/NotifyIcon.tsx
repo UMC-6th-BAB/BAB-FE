@@ -4,7 +4,6 @@ import bellIcon from '@assets/icons/bell.svg'
 const Icon = styled.img`
   width: 25px;
   height: 25px;
-  cursor: pointer;
 `
 
 export default function NotifyIcon() {

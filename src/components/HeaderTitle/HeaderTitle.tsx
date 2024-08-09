@@ -1,7 +1,37 @@
-export default function HeaderTitle() {
+import {
+  Icon,
+  Title,
+  Container,
+} from '@components/HeaderTitle/HeaderTitle.style'
+import NotifyIcon from '@components/NotifyIcon'
+import BackIcon from '@components/BackIcon'
+
+interface HeaderTitleStyleProps {
+  icon?: 'back' | 'notification'
+}
+interface HeaderTitleProps extends HeaderTitleStyleProps {
+  title: string
+  onClick?: () => void
+}
+
+export default function HeaderTitle({
+  title,
+  icon,
+  onClick,
+}: HeaderTitleProps) {
   return (
-    <div>
-      {/* 타이틀에 따라 헤더에 문구 다르게 해줘야할듯(ex. 마이페이지, 사업자 등록*/}
-    </div>
+    <Container>
+      {icon == 'back' && (
+        <Icon onClick={onClick}>
+          <BackIcon />
+        </Icon>
+      )}
+      <Title icon={icon}>{title}</Title>
+      {icon == 'notification' && (
+        <Icon onClick={onClick}>
+          <NotifyIcon />
+        </Icon>
+      )}
+    </Container>
   )
 }
