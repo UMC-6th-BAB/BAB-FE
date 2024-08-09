@@ -1,13 +1,12 @@
 import styled from 'styled-components'
 
 export const AfterSearchBarContainer = styled.div`
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 400px;
   height: 40px;
   background-color: white;
-  padding-top: 30px;
   z-index: 1;
 `
 
@@ -49,14 +48,12 @@ export const AfterSearchBarDiscountStyle = styled.div`
 `
 
 export const SearchBarContainer = styled.div`
-  position: absolute;
+  position: fixed;
   flex-direction: column;
   display: flex;
-  width: 100%;
+  width: 400px;
   background-color: none;
-  justify-content: center;
   align-items: center;
-  padding-top: 30px;
   z-index: 1;
 `
 
