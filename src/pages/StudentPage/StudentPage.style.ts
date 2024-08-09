@@ -6,7 +6,11 @@ export const StudentPageContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   background-color: #f8f8f8;
-  padding: 20px 0;
+  padding-top: 70px;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 export const Title = styled.div`

@@ -1,8 +1,5 @@
 import {
   SchoolSearchPageContainer,
-  Title,
-  TitleText,
-  BackArrow,
   PageContent,
   Step,
   StyledForm,
@@ -17,6 +14,7 @@ import {
 import { HiMagnifyingGlass } from 'react-icons/hi2'
 import logo from '@assets/dummy/suu_emblem1.jpg'
 import Button from '@components/Button/Button'
+import HeaderTitle from '@components/HeaderTitle/HeaderTitle'
 
 import { studentInfoStore } from '@stores/studentInfoStore'
 import { schoolInfoStore } from '@stores/schoolInfoStore'
@@ -52,10 +50,11 @@ export default function SchoolSearchPage() {
 
   return (
     <SchoolSearchPageContainer>
-      <Title>
-        <BackArrow to="/studentPage">&lt;</BackArrow>
-        <TitleText>학생 정보 입력</TitleText>
-      </Title>
+      <HeaderTitle
+        title="학생 정보 입력"
+        icon="back"
+        onClick={() => navigate('/studentPage')}
+      />
       <PageContent>
         {response ? (
           <>

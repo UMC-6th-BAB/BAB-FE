@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 
 export const SchoolSearchPageContainer = styled.div`
   width: 100%;
@@ -10,42 +9,15 @@ export const SchoolSearchPageContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
 
-  padding-top: 20px;
+  padding-top: 58px;
 
   background-color: #f8f8f8;
-`
-
-export const Title = styled.div`
-  width: 100%;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 20px 0 60px 0;
-  padding: 0 23px;
-  box-sizing: border-box;
-
-  font-size: 22px;
-  color: #111111;
-`
-
-export const TitleText = styled.div`
-  flex: 1;
-  text-align: center;
-  font-weight: bold;
-`
-
-export const BackArrow = styled(Link)`
-  width: 10.5px;
-  height: 20px;
-
-  color: #111111;
 `
 
 export const PageContent = styled.div`
   width: 100%;
 
-  padding: 0 24px;
+  padding: 54px 24px 0;
   box-sizing: border-box;
 
   font-weight: 700;
