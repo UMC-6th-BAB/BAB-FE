@@ -4,6 +4,7 @@ import {
 } from '@components/MapCard/GoogleMapCard/Map.style'
 import { useEffect, useRef, useState } from 'react'
 import { mapStore } from '@stores/mapStore'
+import storeInfoStore from '@stores/storeInfoStore'
 import restaurantInfoStore from '@stores/restaurentStore'
 import greyIcon from '@assets/mapIcon/greyIcon'
 import smallGreyIcon from '@assets/mapIcon/smallGreyIcon'
@@ -19,7 +20,7 @@ type Props = {
 
 interface storeInfo {
   price: number
-  discountPrice: number
+  discountPrice: number | null
   check: boolean
 }
 
@@ -32,7 +33,7 @@ export default function Map({
   const ref = useRef<HTMLDivElement>(null)
   const { lat, lng, googleMap, setGoogleMap } = mapStore()
   const [zoom, setZoom] = useState<number | undefined>(16)
-  const {
+  /*const {
     infos,
     tempInfos,
     addRestaurantInfo,
@@ -42,12 +43,13 @@ export default function Map({
     addTempMenu,
     setDiscountPrice,
     setTempDiscountPrice,
-  } = restaurantInfoStore()
+  } = restaurantInfoStore()*/
+  const { storeInfos, addStoreInfo, addMenu } = storeInfoStore()
 
   //가게 중복입력 방지함수
-  function findRestaurant(id: string): boolean {
+  function findRestaurant(id: number): boolean {
     let check = false
-    infos.forEach((info) => {
+    storeInfos.forEach((info) => {
       if (info.id === id) {
         check = true
         return
@@ -56,27 +58,28 @@ export default function Map({
     return check
   }
 
-  function findIsDiscount(id: string): storeInfo {
+  //할인 확인 함수 o
+  function findIsDiscount(id: number): storeInfo {
     let storeinfo: storeInfo
-    storeinfo = { check: false, price: 0, discountPrice: 0 }
+    storeinfo = { check: false, price: 0, discountPrice: null }
 
-    tempInfos.forEach((info) => {
+    storeInfos.forEach((info) => {
       if (info.id === id) {
-        if (info.menus[0].discountPrice === null) {
+        if (info.menu[0].isDiscounted === false) {
           storeinfo.check = false
-          storeinfo.price = info.menus[0].price
-          storeinfo.discountPrice = 0
+          storeinfo.price = info.menu[0].price
+          storeinfo.discountPrice = null
         } else {
           storeinfo.check = true
-          storeinfo.price = info.menus[0].price
-          storeinfo.discountPrice = info.menus[0].discountPrice
+          storeinfo.price = info.menu[0].price
+          storeinfo.discountPrice = info.menu[0].discountPrice
         }
       }
     })
     return storeinfo
   }
 
-  //지도 초기화
+  //지도 초기화 o
   useEffect(() => {
     if (ref.current) {
       const initialMap = new window.google.maps.Map(ref.current, {
@@ -104,7 +107,6 @@ export default function Map({
         })
         clearMarker()
       }
-      clearTempInfo()
       findPlaces()
     }
   }, [searchValue])
@@ -115,7 +117,7 @@ export default function Map({
     if (zoom < 17) {
       console.log(zoom)
       markers.forEach((marker) => {
-        storeinfo = findIsDiscount(marker.id)
+        storeinfo = findIsDiscount(parseInt(marker.id))
         if (storeinfo.check === true) {
           marker.content = smallYellowIcon()
         } else {
@@ -124,9 +126,12 @@ export default function Map({
       })
     } else {
       markers.forEach((marker) => {
-        storeinfo = findIsDiscount(marker.id)
+        storeinfo = findIsDiscount(parseInt(marker.id))
         if (storeinfo.check === true) {
-          marker.content = yellowIcon(storeinfo.price, storeinfo.discountPrice)
+          marker.content = yellowIcon(
+            storeinfo.price,
+            storeinfo.discountPrice as number,
+          )
         } else {
           marker.content = greyIcon(storeinfo.price)
         }
@@ -137,29 +142,29 @@ export default function Map({
   //마커 삽입기능
   useEffect(() => {
     ;(async () => {
-      if (tempInfos.length) {
+      if (storeInfos.length) {
         const { AdvancedMarkerElement } = (await google.maps.importLibrary(
           'marker',
         )) as google.maps.MarkerLibrary
-        tempInfos.forEach((info) => {
+        storeInfos.forEach((info) => {
           const logo =
-            info.menus[0].discountPrice === null
-              ? greyIcon(info.menus[0].price)
-              : yellowIcon(info.menus[0].price, info.menus[0].discountPrice)
+            info.menu[0].discountPrice === null
+              ? greyIcon(info.menu[0].price)
+              : yellowIcon(info.menu[0].price, info.menu[0].discountPrice)
           const markerView = new AdvancedMarkerElement({
             map: googleMap,
             position: new google.maps.LatLng(info.lat, info.lng),
             title: info.name,
             content: logo,
           })
-          markerView.id = info.id
+          markerView.id = info.id.toString()
           addMarker(markerView)
         })
       } else {
         console.log('없어 ㅋㅋ')
       }
     })()
-  }, [tempInfos])
+  }, [storeInfos])
 
   //가게정보 출력
   /*useEffect(() => {
@@ -198,25 +203,16 @@ export default function Map({
     if (places.length) {
       places.forEach((place) => {
         //진짜 가게 정보 삽입기능
-        if (findRestaurant(place.id) === false) {
-          addRestaurantInfo(
-            place.displayName,
-            place.id,
-            place.location.lat(),
-            place.location.lng(),
+        if (findRestaurant(parseInt(place.id)) === false) {
+          addStoreInfo(
+            parseInt(place.id),
+            place.displayName as string,
+            place.location?.lat(),
+            place.location?.lng(),
           )
-          addMenu(place.id, '햄버거')
+          addMenu(parseInt(place.id), '햄버거')
           setDiscountPrice(place.id)
         }
-        //가짜 가게 정보 삽입기능
-        addTempInfo(
-          place.displayName,
-          place.id,
-          place.location.lat(),
-          place.location.lng(),
-        )
-        addTempMenu(place.id, '햄버거')
-        setTempDiscountPrice(place.id)
       })
     } else {
       console.log('No results')

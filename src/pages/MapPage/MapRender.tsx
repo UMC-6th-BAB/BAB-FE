@@ -1,7 +1,7 @@
 import Map from '@components/MapCard/GoogleMapCard/Map'
 import SearchBar from '@components/MapCard/SearchCard/SearchBar'
 import AfterSearchBar from '@components/MapCard/SearchCard/AfterSearchBar'
-import restaurantInfoStore from '@stores/restaurentStore'
+import storeInfoStore from '@stores/storeInfoStore'
 import { mapStore } from '@stores/mapStore'
 import { Wrapper, Status } from '@googlemaps/react-wrapper'
 import { useState, useEffect } from 'react'
@@ -22,7 +22,7 @@ const render = (status: Status) => {
 }
 
 export default function MapRender() {
-  const { tempInfos } = restaurantInfoStore()
+  const { storeInfos } = storeInfoStore()
   const { googleMap } = mapStore()
   const [markers, setMarkers] = useState<
     google.maps.marker.AdvancedMarkerElement[]
@@ -48,11 +48,11 @@ export default function MapRender() {
     setSearchValue(value)
   }
 
-  function findDiscount(id: string): boolean {
+  function findDiscount(id: number): boolean {
     let check = false
-    tempInfos.forEach((info) => {
+    storeInfos.forEach((info) => {
       if (info.id === id) {
-        if (info.menus[0].discountPrice !== null) {
+        if (info.menu[0].discountPrice !== null) {
           check = true
         } else {
           check = false
@@ -66,7 +66,7 @@ export default function MapRender() {
     if (markers.length) {
       console.log('필터 실행')
       markers.forEach((marker) => {
-        const check = findDiscount(marker.id)
+        const check = findDiscount(parseInt(marker.id))
         if (check === false) {
           marker.map = null
         }
@@ -78,7 +78,7 @@ export default function MapRender() {
     if (markers.length) {
       console.log('리렌더 실행')
       markers.forEach((marker) => {
-        const check = findDiscount(marker.id)
+        const check = findDiscount(parseInt(marker.id))
         if (check === false) {
           marker.map = googleMap
         }
