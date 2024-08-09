@@ -23,8 +23,10 @@ import storeInfoStore, { StoreInfo } from '@stores/storeInfoStore'
 import NotifyIcon from '@components/NotifyIcon'
 import discountEventStore from '@stores/discountEventStore'
 import { generateUniqueId } from '@utils/generateUniqueId'
+import { useNavigate } from 'react-router-dom'
 
 export default function ManagerPage() {
+  const navigate = useNavigate()
   const { isRegistered, setIsRegistered, setManagerRegistrationInfo } =
     managerRegisterInfoStore()
   const { isStoreRegistered, setStoreRegistered } = storeInfoStore()
@@ -60,6 +62,7 @@ export default function ManagerPage() {
       industry: '업태',
       item: '종목',
     })
+    navigate('/businessdocupload')
   }
 
   const handleStoreRegisterClick = (): void => {

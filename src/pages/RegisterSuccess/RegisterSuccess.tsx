@@ -14,7 +14,7 @@ export default function RegisterSuccess() {
     navigate('/manager')
   }
   const handleRegisterStoreInfoClick = () => {
-    // navigate('/registerStoreInfo')
+    navigate('/firstregisterstoreinfo')
     console.log('가게 등록 페이지로 이동 버튼')
   }
   return (

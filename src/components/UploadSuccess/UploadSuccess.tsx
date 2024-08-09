@@ -44,7 +44,7 @@ export default function UploadSuccess({ retry }: UploadSuccessProps) {
 
   const RetryClick = () => {
     retry()
-    navigate('/managerUpload')
+    navigate('/businessdocupload')
   }
 
   return (

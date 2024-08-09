@@ -60,7 +60,7 @@ export default function ThirdRegisterStoreInfo() {
     if (isFormValid) {
       setIsError(false)
       console.log('폼 유효함')
-      // navigate('/nextpage')
+      navigate('/registerstoresuccess')
     } else {
       setIsError(true)
       console.log('모든 필드를 채워주세요.')

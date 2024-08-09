@@ -20,6 +20,9 @@ import SecondRegisterStoreInfo from '@pages/SecondRegisterStoreInfo/SecondRegist
 import ThirdRegisterStoreInfo from '@pages/ThirdRegisterStoreInfo/ThirdRegisterStoreInfo'
 import MapRender from '@pages/MapPage/MapRender'
 import SchoolSearchPage from '@pages/SchoolSearchPage/SchoolSearchPage'
+import RegisterStoreSuccess from '@pages/RegisterSuccess/RegisterStoreSuccess'
+import BusinessDocUpload from '@pages/BusinessDocUpload/BusinessDocUpload'
+import RegisterSuccess from '@pages/RegisterSuccess/RegisterSuccess'
 
 export default function AppContent() {
   const location = useLocation()
@@ -64,6 +67,12 @@ export default function AppContent() {
           path="/thirdregisterstoreinfo"
           element={<ThirdRegisterStoreInfo />}
         />
+        <Route
+          path="/registerstoresuccess"
+          element={<RegisterStoreSuccess />}
+        />
+        <Route path="/registerSuccess" element={<RegisterSuccess />} />
+        <Route path="/businessdocupload" element={<BusinessDocUpload />} />
       </Routes>
       {showFooter && <Footer />}
     </>
