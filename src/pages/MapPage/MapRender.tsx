@@ -1,34 +1,30 @@
+import { useState, useEffect, ReactElement } from 'react'
+import { SyncLoader } from 'react-spinners'
+import { MapContainer, SpinnerContainer } from '@pages/MapPage/MapRender.style'
 import Map from '@components/MapCard/GoogleMapCard/Map'
 import SearchBar from '@components/MapCard/SearchCard/SearchBar'
 import AfterSearchBar from '@components/MapCard/SearchCard/AfterSearchBar'
-import restaurantInfoStore from '@stores/restaurentStore'
 import { mapStore } from '@stores/mapStore'
+import storeInfoStore from '@stores/storeInfoStore'
 import { Wrapper, Status } from '@googlemaps/react-wrapper'
-import { useState, useEffect } from 'react'
-
 //////////////  최상부 컨테이너  //////////////
 
-const render = (status: Status) => {
-  switch (status) {
-    case Status.LOADING:
-      return <>로딩중...</>
-    case Status.FAILURE:
-      return <>에러 발생</>
-    case Status.SUCCESS:
-      return null
-    default:
-      return null
+const render = (status: Status): ReactElement => {
+  if (status === Status.FAILURE) {
+    return <div>에러 발생!!</div>
   }
+  return <div>로딩 완료!!</div>
 }
 
 export default function MapRender() {
-  const { tempInfos } = restaurantInfoStore()
+  const { storeInfos } = storeInfoStore()
   const { googleMap } = mapStore()
   const [markers, setMarkers] = useState<
     google.maps.marker.AdvancedMarkerElement[]
   >([])
   const [filterCheck, setFilterCheck] = useState<boolean>(false)
   const [searchValue, setSearchValue] = useState<string>('')
+  const [loading, setLoading] = useState<boolean>(true)
 
   function addMarker(marker: google.maps.marker.AdvancedMarkerElement): void {
     setMarkers((prev) => [...prev, marker])
@@ -48,11 +44,11 @@ export default function MapRender() {
     setSearchValue(value)
   }
 
-  function findDiscount(id: string): boolean {
+  function findDiscount(id: number): boolean {
     let check = false
-    tempInfos.forEach((info) => {
+    storeInfos.forEach((info) => {
       if (info.id === id) {
-        if (info.menus[0].discountPrice !== null) {
+        if (info.menu[0].discountPrice !== null) {
           check = true
         } else {
           check = false
@@ -66,7 +62,7 @@ export default function MapRender() {
     if (markers.length) {
       console.log('필터 실행')
       markers.forEach((marker) => {
-        const check = findDiscount(marker.id)
+        const check = findDiscount(parseInt(marker.id))
         if (check === false) {
           marker.map = null
         }
@@ -78,7 +74,7 @@ export default function MapRender() {
     if (markers.length) {
       console.log('리렌더 실행')
       markers.forEach((marker) => {
-        const check = findDiscount(marker.id)
+        const check = findDiscount(parseInt(marker.id))
         if (check === false) {
           marker.map = googleMap
         }
@@ -102,26 +98,43 @@ export default function MapRender() {
     }
   }, [searchValue])
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false)
+    }, 1000)
+    return () => clearTimeout(timer)
+  }, [])
+
   return (
-    <Wrapper apiKey={import.meta.env.VITE_API_KEY} render={render}>
-      {searchValue === '' ? (
-        <SearchBar
-          handleFilterCheck={handleFilterCheck}
-          handleSearchValue={handleSearchValue}
-        />
-      ) : (
-        <AfterSearchBar
-          handleFilterCheck={handleFilterCheck}
-          searchValue={searchValue}
-          handleSearchValue={handleSearchValue}
-        />
-      )}
-      <Map
-        markers={markers}
-        addMarker={addMarker}
-        clearMarker={clearMarker}
-        searchValue={searchValue}
-      />
-    </Wrapper>
+    <>
+      <MapContainer>
+        {loading ? (
+          <SpinnerContainer>
+            <SyncLoader color="#4f7233" margin={5} />
+          </SpinnerContainer>
+        ) : (
+          <Wrapper apiKey={import.meta.env.VITE_API_KEY} render={render}>
+            <Map
+              markers={markers}
+              addMarker={addMarker}
+              clearMarker={clearMarker}
+              searchValue={searchValue}
+            />
+            {searchValue === '' ? (
+              <SearchBar
+                handleFilterCheck={handleFilterCheck}
+                handleSearchValue={handleSearchValue}
+              />
+            ) : (
+              <AfterSearchBar
+                handleFilterCheck={handleFilterCheck}
+                searchValue={searchValue}
+                handleSearchValue={handleSearchValue}
+              />
+            )}
+          </Wrapper>
+        )}
+      </MapContainer>
+    </>
   )
 }
