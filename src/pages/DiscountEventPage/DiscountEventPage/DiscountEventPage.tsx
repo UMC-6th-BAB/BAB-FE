@@ -51,6 +51,7 @@ export default function DiscountEventPage() {
   }, [storeInfos[0].menu, initializeDiscounts])
 
   const handleNextClick = () => {
+    //유효성 검사 로직 커스텀훅으로 분리 예정
     let periodError = ''
     let discountError = ''
     let hasError = false
@@ -69,12 +70,9 @@ export default function DiscountEventPage() {
       hasError = true
     }
 
-    let hasValidDiscount = false
-    for (const discount of currentEvent.discounts) {
-      if (discount.isChecked && discount.discountPrice) {
-        hasValidDiscount = true
-      }
-    }
+    let hasValidDiscount = currentEvent.discounts.some(
+      (discount) => discount.isChecked && discount.discountPrice,
+    )
 
     if (!hasValidDiscount) {
       discountError = '적용할 메뉴를 선택하고 가격을 입력해주세요.'
@@ -123,6 +121,33 @@ export default function DiscountEventPage() {
           ? '종료 날짜는 시작 날짜보다 이후이어야 합니다.'
           : '',
     }))
+  }
+
+  const handleCheckboxClick = (id: number, checked: boolean) => {
+    const discount = currentEvent.discounts.find((d) => d.id === id)
+    if (discount && discount.discountPrice > 0) {
+      setDiscountChecked(id, checked)
+      setErrorMessages((prev) => ({
+        ...prev,
+        discountError: '',
+      }))
+    } else {
+      setErrorMessages((prev) => ({
+        ...prev,
+        discountError: '가격을 입력해주세요.',
+      }))
+    }
+  }
+
+  const handlePriceChange = (id: number, price: number) => {
+    setDiscountPrice(id, price)
+    const discount = currentEvent.discounts.find((d) => d.id === id)
+    if (discount && price > 0) {
+      setErrorMessages((prev) => ({
+        ...prev,
+        discountError: '',
+      }))
+    }
   }
 
   return (
@@ -179,11 +204,7 @@ export default function DiscountEventPage() {
                   <PriceInput
                     type="text"
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setDiscountPrice(item.id, Number(e.target.value) || 0)
-                      setErrorMessages((prev) => ({
-                        ...prev,
-                        discountError: '',
-                      }))
+                      handlePriceChange(item.id, Number(e.target.value) || 0)
                     }}
                   />
                   <CheckboxWrapper>
@@ -191,11 +212,7 @@ export default function DiscountEventPage() {
                       type="checkbox"
                       id={`menu${item.id}`}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        setDiscountChecked(item.id, e.target.checked)
-                        setErrorMessages((prev) => ({
-                          ...prev,
-                          discountError: '',
-                        }))
+                        handleCheckboxClick(item.id, e.target.checked)
                       }}
                     />
                     <label htmlFor={`menu${item.id}`}></label>

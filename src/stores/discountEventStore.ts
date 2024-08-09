@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { generateUniqueId } from '@utils/generateUniqueId'
 
 interface Discount {
   id: number
@@ -32,6 +33,7 @@ interface DiscountEventState {
     }[],
   ) => void
   addDiscountEvent: () => DiscountEvent
+  removeDiscountEventById: (eventId: number) => void
 }
 
 const discountEventStore = create<DiscountEventState>((set, get) => ({
@@ -92,7 +94,7 @@ const discountEventStore = create<DiscountEventState>((set, get) => ({
     const state = get()
     const newEvent: DiscountEvent = {
       ...state.currentEvent,
-      id: state.discountEvents.length + 1,
+      id: generateUniqueId(), // 고유한 ID 생성 함수 사용
     }
     set({
       discountEvents: [...state.discountEvents, newEvent],
@@ -105,6 +107,13 @@ const discountEventStore = create<DiscountEventState>((set, get) => ({
       },
     })
     return newEvent
+  },
+  removeDiscountEventById: (eventId) => {
+    set((state) => ({
+      discountEvents: state.discountEvents.filter(
+        (event) => event.id !== eventId,
+      ),
+    }))
   },
 }))
 

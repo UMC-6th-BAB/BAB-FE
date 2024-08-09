@@ -1,3 +1,4 @@
+import { deleteStore } from '@apis/Store/deleteStore'
 import {
   BackButton,
   Checkbox,
@@ -11,23 +12,45 @@ import {
   SubTitle,
   Title,
 } from '@pages/StoreInfoDeletePage/StoreInfoDeletePage.style'
-import { useState } from 'react'
+import storeInfoStore from '@stores/storeInfoStore'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export default function StoreInfoDeletePage() {
   const navigate = useNavigate()
-  const [isChecked, setIsChecked] = useState(false)
+  const [isChecked, setIsChecked] = useState<boolean>(false)
+  const storeInfos = storeInfoStore((state) => state.storeInfos)
+  const removeStoreInfo = storeInfoStore((state) => state.removeStoreInfo)
+
+  // 현재 등록된 가게 정보가 없을 경우에 대한 처리
+  const storeId = storeInfos.length > 0 ? storeInfos[0].id : null
+
+  useEffect(() => {
+    console.log('Store Infos before deletion:', storeInfos)
+  }, [])
+
+  useEffect(() => {
+    console.log('Updated Store Infos after deletion:', storeInfos)
+  }, [storeInfos])
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(e.target.checked)
   }
-
-  const handleDeleteClick = () => {
-    if (isChecked) {
-      // 가게 삭제 로직 나중에 추가
-      navigate('/manager')
-    } else {
-      return
+  //실제 api 다룰때는 api함수 호출 -> 리턴받은 id 받고 removeStore에 인자로 보내주기 -> 가게 정보 업뎃
+  //현재는 일단 removeStore를 통해 스토어에서 없어지는거 확인
+  const handleDeleteClick = async () => {
+    if (isChecked && storeId !== null) {
+      try {
+        //const deletedStoreId = await deleteStore(storeId) - api 다루는 부분
+        //removeStoreInfo(deletedStoreId) - 반환받은 부분
+        removeStoreInfo(storeId)
+        const updatedStoreInfos = storeInfoStore.getState().storeInfos
+        console.log(`Store with ID ${storeId} deleted successfully`)
+        console.log('Updated Store Infos:', updatedStoreInfos)
+        navigate('/manager')
+      } catch (error) {
+        console.error('Error deleting store:', error)
+      }
     }
   }
   return (
