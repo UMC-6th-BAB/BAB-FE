@@ -3,12 +3,9 @@ const API = import.meta.env.VITE_API_BASE_URL
 
 export interface OperatingHours {
   day: string
-  openTime: string | null
-  closeTime: string | null
-  breakTime: {
-    startTime: string | null
-    endTime: string | null
-  }
+  openTime: string
+  closeTime: string
+  breakTime: { startTime: string; endTime: string } | Record<string, never>
 }
 
 export const getOperatingHours = async (
