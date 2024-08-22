@@ -81,7 +81,6 @@ export default function FirstRegisterStoreInfo() {
           name,
           lat: latitude,
           lng: longitude,
-          storeType: '',
           storeLink: storeLink.value,
           isStoreRegistered: true,
           image: selectedImage?.thumbnail || '',
