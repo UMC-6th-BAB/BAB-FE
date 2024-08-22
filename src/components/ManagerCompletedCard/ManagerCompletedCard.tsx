@@ -13,17 +13,19 @@ import {
   CardTitle,
   CardSubTitle,
 } from '@components/MyPageCard/MyPageCard.style'
+import { LoginStore } from '@stores/loginStore'
 
 export default function ManagerCompletedCard() {
   const { storeInfos } = storeInfoStore()
   const navigate = useNavigate()
   const { ownerNickname } = managerRegisterInfoStore()
+  const user = LoginStore((state) => state.user)
 
   return (
     <StyledCard $paddingtop="24px" $paddingbottom="20px" $paddingright="19px">
       {storeInfos && storeInfos.length > 0 ? (
         <>
-          <CardSubTitle>{ownerNickname} 사장님의</CardSubTitle>
+          <CardSubTitle>{user} 사장님의</CardSubTitle>
           <CardTitle $paddingbottom="13px">{storeInfos[0].name}</CardTitle>
           <CardContent>
             <CardButton onClick={() => navigate('/discount-event')}>

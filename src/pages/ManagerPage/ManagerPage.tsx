@@ -24,7 +24,7 @@ export default function ManagerPage() {
   const { isRegistered, isStoreRegistered, ownerNickname, updateFromApi } =
     managerRegisterInfoStore()
 
-  const { kakao_token, kakaoEmail } = LoginStore((state) => state)
+  const { user, kakao_token, kakaoEmail } = LoginStore((state) => state)
 
   const fetchOwnerData = async () => {
     try {
@@ -66,7 +66,7 @@ export default function ManagerPage() {
       <RegistrationPrompt
         isRegistered={true}
         businessData={[managerRegisterInfoStore.getState()]}
-        ownerNickname={ownerNickname}
+        ownerNickname={user}
       />
       <ImgBtnContainer $gap="12px">
         <img src={menuIcon} alt="메뉴 아이콘" />
@@ -81,7 +81,7 @@ export default function ManagerPage() {
   const renderUnregisteredContent = () => (
     <>
       <RegistrationPrompt
-        ownerNickname={ownerNickname}
+        ownerNickname={user}
         isRegistered={false}
         businessData={null}
       />
