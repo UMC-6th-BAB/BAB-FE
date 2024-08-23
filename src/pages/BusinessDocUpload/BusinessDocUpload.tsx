@@ -1,3 +1,5 @@
+import React, { useState, useEffect, useRef } from 'react'
+import imageCompression from 'browser-image-compression'
 import {
   StyledButton,
   StyledContainer,
@@ -10,8 +12,6 @@ import {
 
 import UploadImg from '@assets/BusinessUploadPage/upload.svg'
 import { useNavigate } from 'react-router-dom'
-import useImageUpload from '@hooks/useImageUpload'
-import { useEffect, useState } from 'react'
 import UploadSuccess from '@components/UploadSuccess/UploadSuccess'
 import UploadFail from '@components/UploadFail/UploadFail'
 import Loader from '@components/Loader/Loader'
@@ -22,16 +22,41 @@ import { LoginStore } from '@stores/loginStore'
 export default function BusinessDocUpload() {
   const { kakao_token } = LoginStore((state) => state)
   const navigate = useNavigate()
-  const { selectedImage, handleImgUpload, openCamera, fileInputRef } =
-    useImageUpload()
+  const [selectedImage, setSelectedImage] = useState<File | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [isUploadSuccess, setIsUploadSuccess] = useState<boolean | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     if (selectedImage) {
       handleUpload()
     }
   }, [selectedImage])
+
+  const handleImgUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const file = event.target.files?.[0]
+    if (!file) {
+      return
+    }
+
+    try {
+      const compressedFile = await compressImage(file)
+      setSelectedImage(compressedFile)
+    } catch (error) {
+      console.error('이미지 처리 실패', error)
+    }
+  }
+
+  const compressImage = async (file: File) => {
+    const options = {
+      maxSizeMB: 0.2,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    return await imageCompression(file, options)
+  }
 
   const handleUpload = async () => {
     if (!selectedImage) {
@@ -41,9 +66,8 @@ export default function BusinessDocUpload() {
     setIsLoading(true)
 
     try {
-      const response = await postCertificates(selectedImage, kakao_token)
-      console.log('성공', response)
-      console.log(response.result)
+      const response = await postCertificates(selectedImage)
+      console.log('업로드 성공', response)
       setIsUploadSuccess(true)
       navigate('/uploadSuccess', {
         state: { registrationData: response.result },
@@ -53,6 +77,12 @@ export default function BusinessDocUpload() {
       setIsUploadSuccess(false)
     } finally {
       setIsLoading(false)
+    }
+  }
+
+  const openCamera = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click()
     }
   }
 
@@ -75,11 +105,9 @@ export default function BusinessDocUpload() {
   if (isLoading) {
     return <Loader />
   }
-
   if (isUploadSuccess === true) {
     return <UploadSuccess retry={() => setIsUploadSuccess(null)} />
   }
-
   if (isUploadSuccess === false) {
     return <UploadFail retry={() => setIsUploadSuccess(null)} />
   }
@@ -101,6 +129,7 @@ export default function BusinessDocUpload() {
       <input
         type="file"
         accept="image/*"
+        capture="environment"
         ref={fileInputRef}
         onChange={handleImgUpload}
         style={{ display: 'none' }}
