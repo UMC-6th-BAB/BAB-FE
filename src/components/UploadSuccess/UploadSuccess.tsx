@@ -71,7 +71,7 @@ export default function UploadSuccess({ retry }: UploadSuccessProps) {
         </StyledInfoRow>
         <StyledInfoRow>
           <StyledLabel>사업장 주소</StyledLabel>
-          <StyledValue type="text" value={registrationData.address} readOnly />
+          <StyledValue type="text" value={registrationData.address} />
         </StyledInfoRow>
         <StyledInfoRow>
           <StyledLabel>업태</StyledLabel>
