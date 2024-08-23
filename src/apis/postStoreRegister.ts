@@ -35,7 +35,7 @@ export const postStoreRegister = async (
 
     if (bannerFiles) {
       bannerFiles.forEach((file) => {
-        formData.append('bannerFiles', file)
+        formData.append('bannerFile', file)
       })
     }
 
