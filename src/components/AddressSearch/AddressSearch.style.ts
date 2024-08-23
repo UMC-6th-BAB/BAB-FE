@@ -14,12 +14,12 @@ export const StyledModalBackground = styled.div<ModalBackgroundProps>`
   background-color: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: 999;
 `
 
 export const StyledModalContent = styled.div`
-  width: 90%;
-  height: 60%;
+  width: 100%;
+  height: 80%;
   background-color: #fff;
   padding: 20px;
   /* position: relative; */
