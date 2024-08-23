@@ -101,7 +101,6 @@ export default function BusinessDocUpload() {
       <input
         type="file"
         accept="image/*"
-        capture="environment"
         ref={fileInputRef}
         onChange={handleImgUpload}
         style={{ display: 'none' }}
