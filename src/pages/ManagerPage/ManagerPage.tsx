@@ -24,16 +24,19 @@ export default function ManagerPage() {
   const { updateFromApi } = managerRegisterInfoStore()
   const { user, kakao_token, kakaoEmail } = LoginStore((state) => state)
   const [isStoreExist, setIsStoreExist] = useState(false)
+  const [isRegistered, setIsRegistered] = useState(false)
 
-  const isRegistered = useState(() => {
+  useEffect(() => {
     const storedData = localStorage.getItem('manager-info')
     if (storedData) {
       const parsedData = JSON.parse(storedData)
-      console.log(parsedData.state.isRegistered)
-      return parsedData.state.isRegistered || false
+      console.log(parsedData)
+      console.log('사업자등록증여부:', parsedData.state.isRegistered)
+      setIsRegistered(parsedData.state.isRegistered || false)
+    } else {
+      console.log('로컬 스토리지에서 데이터를 찾을 수 없습니다.')
     }
-    return false
-  })
+  }, [])
 
   const fetchOwnerData = async () => {
     try {
