@@ -57,5 +57,5 @@ export const StyledAddressInput = styled(StyledFormInput)`
 export const StyledRowDiv = styled.div`
   display: flex;
   flex-direction: row;
-  width: 95%;
+  width: 98%;
 `
