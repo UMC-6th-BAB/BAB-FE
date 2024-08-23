@@ -11,7 +11,6 @@ export const StyledContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin-bottom: 80px;
 `
 
 export const StyledText = styled.p`
@@ -24,7 +23,7 @@ export const StyledInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin-top: 20px;
+  margin-bottom: 80px;
   text-align: left;
   width: 90%;
 `
