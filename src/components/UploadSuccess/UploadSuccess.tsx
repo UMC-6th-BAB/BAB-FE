@@ -38,6 +38,14 @@ export default function UploadSuccess({ retry }: UploadSuccessProps) {
     }
   }, [location.state])
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    setRegistrationData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }))
+  }
+
   const handleNextClick = () => {
     saveStoreName(registrationData.storeName)
     setIsRegistered(true)
@@ -61,25 +69,47 @@ export default function UploadSuccess({ retry }: UploadSuccessProps) {
         <StyledInfoRow>
           <StyledLabel>등록번호</StyledLabel>
           <StyledValue
+            name="registrationNumber"
             type="text"
             value={registrationData.registrationNumber}
+            onChange={handleInputChange}
           />
         </StyledInfoRow>
         <StyledInfoRow>
           <StyledLabel>상호(법인명)</StyledLabel>
-          <StyledValue type="text" value={registrationData.storeName} />
+          <StyledValue
+            name="storeName"
+            type="text"
+            value={registrationData.storeName}
+            onChange={handleInputChange}
+          />
         </StyledInfoRow>
         <StyledInfoRow>
           <StyledLabel>사업장 주소</StyledLabel>
-          <StyledValue type="text" value={registrationData.address} />
+          <StyledValue
+            name="address"
+            type="text"
+            value={registrationData.address}
+            onChange={handleInputChange}
+          />
         </StyledInfoRow>
         <StyledInfoRow>
           <StyledLabel>업태</StyledLabel>
-          <StyledValue type="text" value={registrationData.businessTypes} />
+          <StyledValue
+            name="businessTypes"
+            type="text"
+            value={registrationData.businessTypes}
+            onChange={handleInputChange}
+          />
         </StyledInfoRow>
         <StyledInfoRow>
           <StyledLabel>종목</StyledLabel>
-          <StyledValue type="text" value={registrationData.categories} />
+          <StyledValue
+            name="categories"
+            type="text"
+            value={registrationData.categories}
+            onChange={handleInputChange}
+          />
         </StyledInfoRow>
       </StyledInfoContainer>
 
