@@ -9,11 +9,11 @@ import {
 import { Option } from 'src/types/ButtonOpionTypes'
 import { useNavigate } from 'react-router-dom'
 import HeaderTitle from '@components/HeaderTitle/HeaderTitle'
-import managerRegisterInfoStore from '@stores/managerRegisterInfoStore'
+import { LoginStore } from '@stores/loginStore'
 
 export default function StoreInfoEditPage() {
+  const user = LoginStore((state) => state.user)
   const navigate = useNavigate()
-  const { ownerNickname } = managerRegisterInfoStore()
 
   const [selectedOption, setSelectedOption] = useState<string | null>(null)
 
@@ -55,7 +55,7 @@ export default function StoreInfoEditPage() {
         onClick={() => navigate('/manager')}
       />
       <SubTitle>
-        {ownerNickname} 사장님! <br />
+        {user} 사장님! <br />
         어떤 정보를 수정할까요?
       </SubTitle>
       <EditOptions>
