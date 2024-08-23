@@ -66,7 +66,7 @@ export default function BusinessDocUpload() {
     setIsLoading(true)
 
     try {
-      const response = await postCertificates(selectedImage)
+      const response = await postCertificates(selectedImage, kakao_token)
       console.log('업로드 성공', response)
       setIsUploadSuccess(true)
       navigate('/uploadSuccess', {
