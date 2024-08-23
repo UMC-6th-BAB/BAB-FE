@@ -21,8 +21,9 @@ import { ManagerPageContainer } from './ManagerPage.style'
 
 export default function ManagerPage() {
   const navigate = useNavigate()
-  const { isStoreRegistered, updateFromApi } = managerRegisterInfoStore()
+  const { updateFromApi } = managerRegisterInfoStore()
   const { user, kakao_token, kakaoEmail } = LoginStore((state) => state)
+  const [isStoreExist, setIsStoreExist] = useState(false)
 
   const isRegistered = useState(() => {
     const storedData = localStorage.getItem('manager-info')
@@ -37,16 +38,25 @@ export default function ManagerPage() {
   const fetchOwnerData = async () => {
     try {
       const response = await getOwnerMypage(kakao_token)
-      console.log(response)
 
       if (response.isSuccess) {
-        const { ownerId, ownerNickname, storeId, storeName } = response.result
+        const {
+          ownerId,
+          ownerNickname,
+          storeId,
+          storeName,
+          isUniversitySetting,
+          isStoreExist: isStoreExist,
+        } = response.result
         updateFromApi({
           ownerId,
           ownerNickname,
           storeId,
           storeName,
         })
+        setIsStoreExist(isStoreExist)
+        console.log(isStoreExist)
+        console.log(isUniversitySetting)
       } else {
         console.error('Failed to fetch owner mypage data:', response.message)
       }
@@ -106,7 +116,7 @@ export default function ManagerPage() {
   return (
     <ManagerPageContainer>
       <HeaderTitle title="마이페이지" $icon="notification" />
-      {isStoreRegistered ? (
+      {isStoreExist ? (
         <ManagerCompletedCard />
       ) : (
         <StyledCard $paddingtop="35px" $paddingbottom="26px">
@@ -116,7 +126,7 @@ export default function ManagerPage() {
         </StyledCard>
       )}
       <MyPageCardAccount accountID={kakaoEmail} />
-      {isStoreRegistered && <DiscountModal />}
+      {isStoreExist && <DiscountModal />}
     </ManagerPageContainer>
   )
 }
