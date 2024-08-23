@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import HeaderTitle from '@components/HeaderTitle/HeaderTitle'
 import { LoginStore } from '@stores/loginStore'
+import managerRegisterInfoStore from '@stores/managerRegisterInfoStore'
 
 export default function StoreInfoDeletePage() {
   const navigate = useNavigate()
@@ -21,6 +22,7 @@ export default function StoreInfoDeletePage() {
   const storeInfos = storeInfoStore((state) => state.storeInfos)
   const removeStoreInfo = storeInfoStore((state) => state.removeStoreInfo)
   const user = LoginStore((state) => state.user)
+  const { setIsRegistered } = managerRegisterInfoStore()
 
   // 현재 등록된 가게 정보가 없을 경우에 대한 처리
   const storeId = storeInfos.length > 0 ? storeInfos[0].id : null
@@ -44,6 +46,7 @@ export default function StoreInfoDeletePage() {
         const updatedStoreInfos = storeInfoStore.getState().storeInfos
         console.log(`Store with ID ${storeId} deleted successfully`)
         console.log('Updated Store Infos:', updatedStoreInfos)
+        setIsRegistered(false)
         navigate('/manager')
       } catch (error) {
         console.error('Error deleting store:', error)
