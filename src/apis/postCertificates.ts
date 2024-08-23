@@ -17,7 +17,6 @@ interface CertificateResponse {
 
 export const postCertificates = async (
   file: File,
-  token: string,
 ): Promise<CertificateResponse> => {
   try {
     const formData = new FormData()
@@ -29,7 +28,7 @@ export const postCertificates = async (
       {
         headers: {
           'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MjMsInJvbGUiOiJvd25lciIsImlhdCI6MTcyNDQzMDYzNSwiZXhwIjoxNzI1NjQwMjM1fQ.r3RLWiALl_FVGSBem2nw02uSlXaG6go7cm35dBlBAgs`,
         },
       },
     )
