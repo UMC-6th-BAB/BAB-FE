@@ -15,15 +15,24 @@ import {
 import RegistrationPrompt from '@components/RegistrationPrompt'
 import { LoginStore } from '@stores/loginStore'
 import managerRegisterInfoStore from '@stores/managerRegisterInfoStore'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ManagerPageContainer } from './ManagerPage.style'
 
 export default function ManagerPage() {
   const navigate = useNavigate()
-  const { isRegistered, isStoreRegistered, ownerNickname, updateFromApi } =
-    managerRegisterInfoStore()
+  const { isStoreRegistered, updateFromApi } = managerRegisterInfoStore()
   const { user, kakao_token, kakaoEmail } = LoginStore((state) => state)
+
+  const isRegistered = useState(() => {
+    const storedData = localStorage.getItem('manager-info')
+    if (storedData) {
+      const parsedData = JSON.parse(storedData)
+      console.log(parsedData.state.isRegistered)
+      return parsedData.state.isRegistered || false
+    }
+    return false
+  })
 
   const fetchOwnerData = async () => {
     try {
