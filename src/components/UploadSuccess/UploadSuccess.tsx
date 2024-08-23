@@ -63,16 +63,11 @@ export default function UploadSuccess({ retry }: UploadSuccessProps) {
           <StyledValue
             type="text"
             value={registrationData.registrationNumber}
-            readOnly
           />
         </StyledInfoRow>
         <StyledInfoRow>
           <StyledLabel>상호(법인명)</StyledLabel>
-          <StyledValue
-            type="text"
-            value={registrationData.storeName}
-            readOnly
-          />
+          <StyledValue type="text" value={registrationData.storeName} />
         </StyledInfoRow>
         <StyledInfoRow>
           <StyledLabel>사업장 주소</StyledLabel>
@@ -80,19 +75,11 @@ export default function UploadSuccess({ retry }: UploadSuccessProps) {
         </StyledInfoRow>
         <StyledInfoRow>
           <StyledLabel>업태</StyledLabel>
-          <StyledValue
-            type="text"
-            value={registrationData.businessTypes}
-            readOnly
-          />
+          <StyledValue type="text" value={registrationData.businessTypes} />
         </StyledInfoRow>
         <StyledInfoRow>
           <StyledLabel>종목</StyledLabel>
-          <StyledValue
-            type="text"
-            value={registrationData.categories}
-            readOnly
-          />
+          <StyledValue type="text" value={registrationData.categories} />
         </StyledInfoRow>
       </StyledInfoContainer>
 
