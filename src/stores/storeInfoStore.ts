@@ -1,5 +1,6 @@
 import { produce } from 'immer'
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
 interface StoreName {
   storeName: string
@@ -66,126 +67,126 @@ interface StoreInfoState {
   removeStoreInfo: (storeId: number) => void // 추가
 }
 
-const storeInfoStore = create<StoreInfoState>((set) => ({
-  storeInfos: [], // 초기값을 설정
-  isStoreRegistered: false,
-  setStoreInfo: (info) =>
-    set((state) => ({
-      storeInfos: state.storeInfos.map((store) =>
-        store.id === info.id ? info : store,
-      ),
-    })),
-  // 새로운 가게 추가 기능
-  tempAddStoreInfo: (storeId, name, lat, lng) =>
-    set((state) => ({
-      storeInfos: [
-        ...state.storeInfos,
-        {
-          name,
-          id: storeId,
-          lat,
-          lng,
-          isStoreRegistered: false,
-          storeLink: '',
-          storeType: '',
-          image: '',
-          university: '',
-          businessHours: [],
-          breakTime: [],
-          menu: [],
-        },
-      ],
-    })),
-  // 준영님 가게 추가 기능
-  addStoreInfo: (info) =>
-    set((state) => {
-      const updatedStoreInfos = [...state.storeInfos, info]
-      console.log('Updated Store Infos:', updatedStoreInfos) // 추가된 가게 정보 확인용 콘솔 로그
-      return {
-        storeInfos: updatedStoreInfos,
-        isStoreRegistered: true,
-      }
-    }),
-  //초기 가게 등록 상태 false로 지정
-  //isStoreRegistered: false,
-  //준영님 가게 등록 or 등록 해제 기능
-  setStoreRegistered: (registered) => set({ isStoreRegistered: registered }),
-  //가게 ID로 가게 탐색 후 등록 기능
-  registerStore: (storeId) =>
-    set(
-      produce((state: StoreInfoState) => {
-        const store = state.storeInfos.find((info) => info.id === storeId)
-        if (store) {
-          store.isStoreRegistered = true
-        }
-      }),
-    ),
-  //가게 삭제 기능
-  removeStoreInfo: (storeId) => {
-    set((state) => {
-      const updatedStores = state.storeInfos.filter(
-        (store) => store.id !== storeId,
-      )
-      console.log('Updated Stores:', updatedStores)
-      return {
-        storeInfos: updatedStores,
-        isStoreRegistered: updatedStores.length > 0,
-      }
-    })
-  },
-  //메뉴 할인 등록 기능
-  updateMenuDiscount: (storeId, menuId, discountPrice, isDiscounted) =>
-    set((state) => ({
-      storeInfos: state.storeInfos.map((store) =>
-        store.id === storeId
-          ? {
-              ...store,
-              menu: store.menu.map((item) =>
-                item.menuId === menuId
-                  ? {
-                      ...item,
-                      price: isDiscounted
-                        ? item.price - (discountPrice || 0)
-                        : item.price,
-                      isDiscounted: isDiscounted,
-                    }
-                  : item,
-              ),
+const storeInfoStore = create(
+  persist<StoreInfoState>(
+    (set) => ({
+      storeInfos: [],
+      isStoreRegistered: false,
+      setStoreInfo: (info) =>
+        set((state) => ({
+          storeInfos: state.storeInfos.map((store) =>
+            store.id === info.id ? info : store,
+          ),
+        })),
+      tempAddStoreInfo: (storeId, name, lat, lng) =>
+        set((state) => ({
+          storeInfos: [
+            ...state.storeInfos,
+            {
+              name,
+              id: storeId,
+              lat,
+              lng,
+              isStoreRegistered: false,
+              storeLink: '',
+              image: '',
+              university: '',
+              businessHours: [],
+              breakTime: [],
+              menu: [],
+            },
+          ],
+        })),
+      addStoreInfo: (info) =>
+        set((state) => {
+          const updatedStoreInfos = [...state.storeInfos, info]
+          console.log('Updated Store Infos:', updatedStoreInfos)
+          return {
+            storeInfos: updatedStoreInfos,
+            isStoreRegistered: true,
+          }
+        }),
+      setStoreRegistered: (registered) =>
+        set({ isStoreRegistered: registered }),
+      registerStore: (storeId) =>
+        set(
+          produce((state: StoreInfoState) => {
+            const store = state.storeInfos.find((info) => info.id === storeId)
+            if (store) {
+              store.isStoreRegistered = true
             }
-          : store,
-      ),
-    })),
-
-  //메뉴 추가 기능
-  addMenu: (storeId, name) =>
-    set(
-      produce((state: StoreInfoState) => {
-        const store = state.storeInfos.find((store) => store.id === storeId)
-        if (store) {
-          store.menu.push({
-            name,
-            menuId: store.menu.length + 1,
-            image: '',
-            price: Math.floor(Math.random() * 7000),
-            discountPrice: 0,
-            isDiscounted: false,
-          })
-        }
-      }),
-    ),
-  // 가게 ID 메뉴 ID 받아 해당 메뉴 삭제
-  deleteMenu: (storeId, menuId) =>
-    set(
-      produce((state: StoreInfoState) => {
-        const store = state.storeInfos.find((store) => store.id === storeId)
-        if (store) {
-          const filteredMenu = store.menu.filter(
-            (info) => info.menuId !== menuId,
+          }),
+        ),
+      removeStoreInfo: (storeId) => {
+        set((state) => {
+          const updatedStores = state.storeInfos.filter(
+            (store) => store.id !== storeId,
           )
-          store.menu = filteredMenu
-        }
-      }),
-    ),
-}))
+          console.log('Updated Stores:', updatedStores)
+          return {
+            storeInfos: updatedStores,
+            isStoreRegistered: updatedStores.length > 0,
+          }
+        })
+      },
+      updateMenuDiscount: (storeId, menuId, discountPrice, isDiscounted) =>
+        set((state) => ({
+          storeInfos: state.storeInfos.map((store) =>
+            store.id === storeId
+              ? {
+                  ...store,
+                  menu: store.menu.map((item) =>
+                    item.menuId === menuId
+                      ? {
+                          ...item,
+                          price: isDiscounted
+                            ? item.price - (discountPrice || 0)
+                            : item.price,
+                          isDiscounted: isDiscounted,
+                        }
+                      : item,
+                  ),
+                }
+              : store,
+          ),
+        })),
+      //메뉴 추가 기능
+
+      addMenu: (storeId, name) =>
+        set(
+          produce((state: StoreInfoState) => {
+            const store = state.storeInfos.find((store) => store.id === storeId)
+            if (store) {
+              store.menu.push({
+                name,
+                menuId: store.menu.length + 1,
+                image: '',
+                price: Math.floor(Math.random() * 7000),
+                discountPrice: 0,
+                isDiscounted: false,
+              })
+            }
+          }),
+        ),
+      // 가게 ID 메뉴 ID 받아 해당 메뉴 삭제
+      deleteMenu: (storeId, menuId) =>
+        set(
+          produce((state: StoreInfoState) => {
+            const store = state.storeInfos.find((store) => store.id === storeId)
+            if (store) {
+              const filteredMenu = store.menu.filter(
+                (info) => info.menuId !== menuId,
+              )
+              store.menu = filteredMenu
+            }
+          }),
+        ),
+    }),
+    {
+      name: 'store-info',
+      getStorage: () => localStorage,
+    },
+  ),
+)
 
 export default storeInfoStore
