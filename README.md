@@ -12,7 +12,6 @@
     <td><img src="https://github.com/user-attachments/assets/08ae1017-d260-4a00-98a9-54062c4c8766" alt="Project Image" height="600px"/></td>
     <td><img src="https://github.com/user-attachments/assets/fd227c75-8f20-4b76-8451-9ac986201e3a" alt="Project Image" height="600px"/></td>
     <td><img src="https://github.com/user-attachments/assets/c92df2f0-2576-43d5-bf8e-7313cd1d0ee5" alt="Project Image" height="600px"/></td>
-    <td><img src="https://github.com/user-attachments/assets/fbd1b773-e58a-494b-aa44-c6c1fc48e00b" alt="Project Image" height="600px"/></td>
   </tr>
 </table>
 
